@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "paths": {
+    "/create": {
+      "name": "/create",
+      "lambdaFunction": "createHotelProd",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/update": {
+      "name": "/update",
+      "lambdaFunction": "createHotelProd",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+version: 1
+backend:
+  phases:
+    build:
+      commands:
+        # Install .NET 6 SDK
+        - curl -sSL https://dot.net/v1/dotnet-install.sh > dotnet-install.sh
+        - chmod +x *.sh
+        - ./dotnet-install.sh -c 6.0 -InstallDir ./dotnet6
+        - ./dotnet6/dotnet --version
+        - export PATH="$(pwd)/dotnet6:$PATH"
+        - echo $PATH
+        # Install Amazon.Lambda.TestTool-6.0 global tool
+        - ./dotnet6/dotnet tool install -g Amazon.Lambda.TestTool-6.0
+        - '# Execute Amplify CLI with the helper script'
+        - amplifyPush --simple
+
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+    build:
+      commands:
+        - npm run build
+
+  artifacts:
+    baseDirectory: build
+    files:
+      - '**/*'
+
+  cache:
+    paths:
+      - node_modules/**/*

@@ -10,6 +10,25 @@
       "StackName": "amplify-tuvarnamasterwinterc-prod-214653",
       "StackId": "arn:aws:cloudformation:eu-west-1:512617552494:stack/amplify-tuvarnamasterwinterc-prod-214653/e4901200-84b8-11ee-a7ee-06cef7a6d0c1",
       "AmplifyAppId": "d5izymva5csp3"
+    },
+    "categories": {
+      "auth": {
+        "TuVarnaMasterWinterC": {}
+      },
+      "function": {
+        "AuthHotelUsersProd": {
+          "deploymentBucketName": "amplify-tuvarnamasterwinterc-prod-214653-deployment",
+          "s3Key": "amplify-builds/AuthHotelUsersProd-796a4739496b75437461-build.zip"
+        },
+        "createHotelProd": {
+          "deploymentBucketName": "amplify-tuvarnamasterwinterc-prod-214653-deployment",
+          "s3Key": "amplify-builds/createHotelProd-76663371647674324f44-build.zip"
+        }
+      },
+      "api": {
+        "TuVarnaMasterWinterC": {},
+        "apiHotelProd": {}
+      }
     }
   }
 }

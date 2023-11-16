@@ -1,0 +1,29 @@
+type Registration @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  dateCreation: AWSDate
+  dateStart: AWSDate
+  dateEnd: AWSDate
+  registrationNumber: Int
+  untitledfield: String
+  FKClients: [Client] @hasMany(indexName: "byRegistration", fields: ["id"])
+  FKRooms: [Room] @hasMany(indexName: "byRegistration", fields: ["id"])
+}
+
+type Room @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  roomNumber: Int
+  category: String
+  floor: Int
+  beds: Int
+  price: Float
+  PKRegistration: ID! @index(name: "byRegistration")
+}
+
+type Client @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  ssn: String
+  address: String
+  passport: String
+  PKRegistration: ID! @index(name: "byRegistration")
+}
