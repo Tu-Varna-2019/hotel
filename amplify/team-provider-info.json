@@ -1,0 +1,15 @@
+{
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-tuvarnamasterwinterc-prod-214653-authRole",
+      "UnauthRoleArn": "arn:aws:iam::512617552494:role/amplify-tuvarnamasterwinterc-prod-214653-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::512617552494:role/amplify-tuvarnamasterwinterc-prod-214653-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-tuvarnamasterwinterc-prod-214653-deployment",
+      "UnauthRoleName": "amplify-tuvarnamasterwinterc-prod-214653-unauthRole",
+      "StackName": "amplify-tuvarnamasterwinterc-prod-214653",
+      "StackId": "arn:aws:cloudformation:eu-west-1:512617552494:stack/amplify-tuvarnamasterwinterc-prod-214653/e4901200-84b8-11ee-a7ee-06cef7a6d0c1",
+      "AmplifyAppId": "d5izymva5csp3"
+    }
+  }
+}
