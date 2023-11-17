@@ -229,6 +229,7 @@ export default function FigHome(props) {
             borderRadius="160px"
             padding="0px 0px 0px 0px"
             objectFit="cover"
+            src="https://tuv-hotel-public-hosting.s3.eu-west-1.amazonaws.com/man.png"
             {...getOverrideProps(overrides, "img_User")}
           ></Image>
         </Flex>
@@ -282,6 +283,7 @@ export default function FigHome(props) {
         left="calc(50% - 155.5px - -0.5px)"
         padding="0px 0px 0px 0px"
         objectFit="cover"
+        src="https://tuv-hotel-public-hosting.s3.eu-west-1.amazonaws.com/495.jpg"
         {...getOverrideProps(overrides, "img_hotel_logo")}
       ></Image>
       <Image
@@ -296,6 +298,7 @@ export default function FigHome(props) {
         left="548px"
         padding="0px 0px 0px 0px"
         objectFit="cover"
+        src="https://tuv-hotel-public-hosting.s3.eu-west-1.amazonaws.com/bed.png"
         {...getOverrideProps(overrides, "img_bed")}
       ></Image>
       <Image
@@ -310,6 +313,7 @@ export default function FigHome(props) {
         left="767px"
         padding="0px 0px 0px 0px"
         objectFit="cover"
+        src="https://tuv-hotel-public-hosting.s3.eu-west-1.amazonaws.com/glass.png"
         {...getOverrideProps(overrides, "img_inquery")}
       ></Image>
       <Image
@@ -324,6 +328,7 @@ export default function FigHome(props) {
         left="937px"
         padding="0px 0px 0px 0px"
         objectFit="cover"
+        src="https://tuv-hotel-public-hosting.s3.eu-west-1.amazonaws.com/add.png"
         {...getOverrideProps(overrides, "img_create")}
       ></Image>
       <Rating
@@ -400,6 +405,7 @@ export default function FigHome(props) {
         left="184px"
         padding="0px 0px 0px 0px"
         objectFit="cover"
+        src="https://tuv-hotel-public-hosting.s3.eu-west-1.amazonaws.com/twitter.png"
         {...getOverrideProps(overrides, "img_twitter")}
       ></Image>
       <Image
@@ -414,6 +420,7 @@ export default function FigHome(props) {
         left="240px"
         padding="0px 0px 0px 0px"
         objectFit="cover"
+        src="https://tuv-hotel-public-hosting.s3.eu-west-1.amazonaws.com/facebook.png"
         {...getOverrideProps(overrides, "img_facebook")}
       ></Image>
       <Image
@@ -428,6 +435,7 @@ export default function FigHome(props) {
         left="296px"
         padding="0px 0px 0px 0px"
         objectFit="cover"
+        src="https://tuv-hotel-public-hosting.s3.eu-west-1.amazonaws.com/youtube.png"
         {...getOverrideProps(overrides, "img_youtube")}
       ></Image>
       <SelectField
