@@ -12,7 +12,7 @@ backend:
         - echo $PATH
         # Install Amazon.Lambda.TestTool-6.0 global tool
         - ./dotnet6/dotnet tool install -g Amazon.Lambda.TestTool-6.0
-        - '# Execute Amplify CLI with the helper script'
+        - "# Execute Amplify CLI with the helper script"
         - amplifyPush --simple
 
 frontend:
@@ -25,9 +25,9 @@ frontend:
         - npm run build
 
   artifacts:
-    baseDirectory: build
+    baseDirectory: dist
     files:
-      - '**/*'
+      - "**/*"
 
   cache:
     paths:
