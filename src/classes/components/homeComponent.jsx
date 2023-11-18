@@ -1,6 +1,9 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { ComponentStateContext } from "../../contexts/data_models/context";
 
 export function HomeComponent() {
+  const { ComponentStateObject } = React.useContext(ComponentStateContext);
+
   const selectFieldBookARoomOptions = ["Book", "Edit", "Cancel"];
   const selectFieldInquery = [
     "all available rooms at the current date and time, sorted by room category",
@@ -47,6 +50,7 @@ export function HomeComponent() {
       case "Client":
         break;
       case "Room":
+        ComponentStateObject.setShowCreateRoomPage(true);
         break;
       case "Registration":
         break;

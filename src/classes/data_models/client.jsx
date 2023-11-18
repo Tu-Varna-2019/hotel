@@ -23,4 +23,17 @@ export function Client() {
   const handlePhoneChange = (event) => {
     setPhone(event.target.value);
   };
+
+  return {
+    name,
+    address,
+    ssn,
+    passport,
+    phone,
+    handleNameChange,
+    handleAddressChange,
+    handleSsnChange,
+    handlePassportChange,
+    handlePhoneChange,
+  };
 }

@@ -81,6 +81,7 @@ export default function FigCreateRoom(props) {
         isDisabled={false}
         labelHidden={false}
         variation="default"
+        color="white"
         {...getOverrideProps(overrides, "textfield_category")}
       ></TextField>
       <TextField

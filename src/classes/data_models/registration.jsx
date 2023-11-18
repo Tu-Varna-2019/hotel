@@ -14,4 +14,13 @@ export function Registration() {
   const handleDateEndChange = (event) => {
     setDateEnd(event.target.value);
   };
+
+  return {
+    dateOfCreation,
+    dateStart,
+    dateEnd,
+    handleDateOfCreationChange,
+    handleDateStartChange,
+    handleDateEndChange,
+  };
 }
