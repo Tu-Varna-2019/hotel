@@ -68,36 +68,6 @@ export default function FigUpdateRoom(props) {
         children="Update Room"
         {...getOverrideProps(overrides, "Update Room")}
       ></Text>
-      <TextField
-        width="316px"
-        height="unset"
-        label="Category"
-        placeholder="Add..."
-        gap="10px"
-        position="absolute"
-        top="294px"
-        left="591px"
-        size="default"
-        isDisabled={false}
-        labelHidden={false}
-        variation="default"
-        {...getOverrideProps(overrides, "textfield_category")}
-      ></TextField>
-      <TextField
-        width="316px"
-        height="unset"
-        label="Price"
-        placeholder="Add..."
-        gap="10px"
-        position="absolute"
-        top="533px"
-        left="calc(50% - 158px - 0px)"
-        size="default"
-        isDisabled={false}
-        labelHidden={false}
-        variation="default"
-        {...getOverrideProps(overrides, "textfield_price")}
-      ></TextField>
       <View
         width="851px"
         height="795px"
@@ -193,6 +163,34 @@ export default function FigUpdateRoom(props) {
         variation="default"
         {...getOverrideProps(overrides, "selectfield_rooms")}
       ></SelectField>
+      <SelectField
+        width="300px"
+        height="unset"
+        label="Category"
+        placeholder=" "
+        position="absolute"
+        top="299px"
+        left="607px"
+        size="default"
+        isDisabled={false}
+        labelHidden={false}
+        variation="default"
+        {...getOverrideProps(overrides, "selectfield_category")}
+      ></SelectField>
+      <TextField
+        width="300px"
+        height="unset"
+        label="Price"
+        placeholder="Add"
+        position="absolute"
+        top="550px"
+        left="805px"
+        size="default"
+        isDisabled={false}
+        labelHidden={false}
+        variation="default"
+        {...getOverrideProps(overrides, "textfield_price")}
+      ></TextField>
     </View>
   );
 }

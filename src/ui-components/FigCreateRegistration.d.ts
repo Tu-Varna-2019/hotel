@@ -21,13 +21,13 @@ export declare type FigCreateRegistrationOverridesProps = {
     FigCreateRegistration?: PrimitiveOverrideProps<ViewProps>;
     rectangle_child_grey?: PrimitiveOverrideProps<ViewProps>;
     "Create User"?: PrimitiveOverrideProps<TextProps>;
-    textfield_datestart?: PrimitiveOverrideProps<TextFieldProps>;
-    textfield_dateend?: PrimitiveOverrideProps<TextFieldProps>;
     "Rectangle 1"?: PrimitiveOverrideProps<ViewProps>;
     button_submit?: PrimitiveOverrideProps<ButtonProps>;
     button_cancel?: PrimitiveOverrideProps<ButtonProps>;
     select_field_client?: PrimitiveOverrideProps<SelectFieldProps>;
     select_field_room?: PrimitiveOverrideProps<SelectFieldProps>;
+    textfield_datestart?: PrimitiveOverrideProps<TextFieldProps>;
+    textfield_dateend?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type FigCreateRegistrationProps = React.PropsWithChildren<Partial<ViewProps> & {
     overrides?: FigCreateRegistrationOverridesProps | undefined | null;

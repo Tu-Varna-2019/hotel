@@ -21,8 +21,6 @@ export declare type FigUpdateRoomOverridesProps = {
     FigUpdateRoom?: PrimitiveOverrideProps<ViewProps>;
     rectangle_child_grey?: PrimitiveOverrideProps<ViewProps>;
     "Update Room"?: PrimitiveOverrideProps<TextProps>;
-    textfield_category?: PrimitiveOverrideProps<TextFieldProps>;
-    textfield_price?: PrimitiveOverrideProps<TextFieldProps>;
     "Rectangle 1"?: PrimitiveOverrideProps<ViewProps>;
     button_submit?: PrimitiveOverrideProps<ButtonProps>;
     button_cancel?: PrimitiveOverrideProps<ButtonProps>;
@@ -30,6 +28,8 @@ export declare type FigUpdateRoomOverridesProps = {
     stepperfield_floor?: PrimitiveOverrideProps<StepperFieldProps>;
     stepperfield_beds?: PrimitiveOverrideProps<StepperFieldProps>;
     selectfield_rooms?: PrimitiveOverrideProps<SelectFieldProps>;
+    selectfield_category?: PrimitiveOverrideProps<SelectFieldProps>;
+    textfield_price?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type FigUpdateRoomProps = React.PropsWithChildren<Partial<ViewProps> & {
     overrides?: FigUpdateRoomOverridesProps | undefined | null;

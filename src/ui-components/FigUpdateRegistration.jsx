@@ -67,36 +67,6 @@ export default function FigUpdateRegistration(props) {
         children="Update  Registration"
         {...getOverrideProps(overrides, "Update Registration")}
       ></Text>
-      <TextField
-        width="316px"
-        height="unset"
-        label="Date Start"
-        placeholder="Add..."
-        gap="10px"
-        position="absolute"
-        top="358px"
-        left="621px"
-        size="default"
-        isDisabled={false}
-        labelHidden={false}
-        variation="default"
-        {...getOverrideProps(overrides, "textfield_datestart")}
-      ></TextField>
-      <TextField
-        width="316px"
-        height="unset"
-        label="Date End"
-        placeholder="Add..."
-        gap="10px"
-        position="absolute"
-        top="353px"
-        left="988px"
-        size="default"
-        isDisabled={false}
-        labelHidden={false}
-        variation="default"
-        {...getOverrideProps(overrides, "textfield_dateend")}
-      ></TextField>
       <View
         width="766px"
         height="713px"
@@ -181,6 +151,34 @@ export default function FigUpdateRegistration(props) {
         variation="default"
         {...getOverrideProps(overrides, "selectfield_rooms")}
       ></SelectField>
+      <TextField
+        width="300px"
+        height="unset"
+        label="Date Start"
+        placeholder="Add"
+        position="absolute"
+        top="355px"
+        left="617px"
+        size="default"
+        isDisabled={false}
+        labelHidden={false}
+        variation="default"
+        {...getOverrideProps(overrides, "textfield_datestart")}
+      ></TextField>
+      <TextField
+        width="300px"
+        height="unset"
+        label="Date End"
+        placeholder="Add"
+        position="absolute"
+        top="347px"
+        left="984px"
+        size="default"
+        isDisabled={false}
+        labelHidden={false}
+        variation="default"
+        {...getOverrideProps(overrides, "textfield_dateend")}
+      ></TextField>
     </View>
   );
 }

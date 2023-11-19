@@ -18,7 +18,7 @@ export default function HomeLayout() {
       <FigHome overrides={homeOverride} />
       {ComponentStateObject.showCreateRoomPage && (
         <View position="absolute" display="block" top="0">
-          <RegistrationCreateForm />
+          <FigCreateRoom overrides={createRoomOverride} />
         </View>
       )}
     </View>

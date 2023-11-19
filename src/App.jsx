@@ -9,7 +9,7 @@ import { DataModelProvider } from "./providers/data_models/provider";
 import HomeLayout from "./pages/layouts/home_layout";
 import { ComponentStateProvider } from "./providers/component_provider/provider";
 
-Amplify.configure(awsExports);
+//Amplify.configure(awsExports);
 
 const signUpFields = {
   signUp: {

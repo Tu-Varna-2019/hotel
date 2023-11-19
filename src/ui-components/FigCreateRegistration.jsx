@@ -67,36 +67,6 @@ export default function FigCreateRegistration(props) {
         children="Registration"
         {...getOverrideProps(overrides, "Create User")}
       ></Text>
-      <TextField
-        width="316px"
-        height="unset"
-        label="Date Start"
-        placeholder="Add..."
-        gap="10px"
-        position="absolute"
-        top="198px"
-        left="792px"
-        size="default"
-        isDisabled={false}
-        labelHidden={false}
-        variation="default"
-        {...getOverrideProps(overrides, "textfield_datestart")}
-      ></TextField>
-      <TextField
-        width="316px"
-        height="unset"
-        label="Date End"
-        placeholder="Add..."
-        gap="10px"
-        position="absolute"
-        top="313px"
-        left="792px"
-        size="default"
-        isDisabled={false}
-        labelHidden={false}
-        variation="default"
-        {...getOverrideProps(overrides, "textfield_dateend")}
-      ></TextField>
       <View
         width="729px"
         height="819px"
@@ -167,6 +137,34 @@ export default function FigCreateRegistration(props) {
         variation="default"
         {...getOverrideProps(overrides, "select_field_room")}
       ></SelectField>
+      <TextField
+        width="300px"
+        height="unset"
+        label="Date Start"
+        placeholder="Add"
+        position="absolute"
+        top="201px"
+        left="792px"
+        size="default"
+        isDisabled={false}
+        labelHidden={false}
+        variation="default"
+        {...getOverrideProps(overrides, "textfield_datestart")}
+      ></TextField>
+      <TextField
+        width="300px"
+        height="unset"
+        label="Date End"
+        placeholder="Add"
+        position="absolute"
+        top="325px"
+        left="792px"
+        size="default"
+        isDisabled={false}
+        labelHidden={false}
+        variation="default"
+        {...getOverrideProps(overrides, "textfield_dateend")}
+      ></TextField>
     </View>
   );
 }

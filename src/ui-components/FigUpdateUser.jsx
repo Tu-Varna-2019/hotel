@@ -67,36 +67,6 @@ export default function FigUpdateUser(props) {
         children="Update User"
         {...getOverrideProps(overrides, "Update User")}
       ></Text>
-      <TextField
-        width="316px"
-        height="unset"
-        label="Name"
-        placeholder="Add..."
-        gap="10px"
-        position="absolute"
-        top="226px"
-        left="786px"
-        size="default"
-        isDisabled={false}
-        labelHidden={false}
-        variation="default"
-        {...getOverrideProps(overrides, "textfield_name")}
-      ></TextField>
-      <TextField
-        width="316px"
-        height="unset"
-        label="Address"
-        placeholder="Add..."
-        gap="10px"
-        position="absolute"
-        top="349px"
-        left="786px"
-        size="default"
-        isDisabled={false}
-        labelHidden={false}
-        variation="default"
-        {...getOverrideProps(overrides, "textfield_address")}
-      ></TextField>
       <View
         width="580px"
         height="751px"
@@ -152,6 +122,34 @@ export default function FigUpdateUser(props) {
         variation="default"
         {...getOverrideProps(overrides, "select_field_registration")}
       ></SelectField>
+      <TextField
+        width="300px"
+        height="unset"
+        label="Name"
+        placeholder="Add"
+        position="absolute"
+        top="220px"
+        left="794px"
+        size="default"
+        isDisabled={false}
+        labelHidden={false}
+        variation="default"
+        {...getOverrideProps(overrides, "textfield_name")}
+      ></TextField>
+      <TextField
+        width="300px"
+        height="unset"
+        label="Address"
+        placeholder="Add"
+        position="absolute"
+        top="344px"
+        left="794px"
+        size="default"
+        isDisabled={false}
+        labelHidden={false}
+        variation="default"
+        {...getOverrideProps(overrides, "textfield_address")}
+      ></TextField>
     </View>
   );
 }

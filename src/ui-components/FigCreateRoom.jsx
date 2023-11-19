@@ -68,37 +68,6 @@ export default function FigCreateRoom(props) {
         children="Room"
         {...getOverrideProps(overrides, "Room")}
       ></Text>
-      <TextField
-        width="316px"
-        height="unset"
-        label="Category"
-        placeholder="Add..."
-        gap="10px"
-        position="absolute"
-        top="161px"
-        left="792px"
-        size="default"
-        isDisabled={false}
-        labelHidden={false}
-        variation="default"
-        color="white"
-        {...getOverrideProps(overrides, "textfield_category")}
-      ></TextField>
-      <TextField
-        width="316px"
-        height="unset"
-        label="Price"
-        placeholder="Add..."
-        gap="10px"
-        position="absolute"
-        top="604px"
-        left="792px"
-        size="default"
-        isDisabled={false}
-        labelHidden={false}
-        variation="default"
-        {...getOverrideProps(overrides, "textfield_price")}
-      ></TextField>
       <View
         width="729px"
         height="819px"
@@ -154,6 +123,21 @@ export default function FigCreateRoom(props) {
         variation="default"
         {...getOverrideProps(overrides, "select_field_client")}
       ></SelectField>
+      <SelectField
+        width="323px"
+        height="unset"
+        label="Category"
+        placeholder=" "
+        position="absolute"
+        top="174px"
+        left="794px"
+        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+        size="default"
+        isDisabled={false}
+        labelHidden={false}
+        variation="default"
+        {...getOverrideProps(overrides, "selectfield_category")}
+      ></SelectField>
       <StepperField
         width="unset"
         height="unset"
@@ -180,6 +164,20 @@ export default function FigCreateRoom(props) {
         variation="default"
         {...getOverrideProps(overrides, "stepperfield_beds")}
       ></StepperField>
+      <TextField
+        width="300px"
+        height="unset"
+        label="Price"
+        placeholder="Add"
+        position="absolute"
+        top="610px"
+        left="794px"
+        size="default"
+        isDisabled={false}
+        labelHidden={false}
+        variation="default"
+        {...getOverrideProps(overrides, "textfield_price")}
+      ></TextField>
     </View>
   );
 }

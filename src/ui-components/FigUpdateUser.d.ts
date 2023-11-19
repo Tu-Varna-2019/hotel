@@ -21,12 +21,12 @@ export declare type FigUpdateUserOverridesProps = {
     FigUpdateUser?: PrimitiveOverrideProps<ViewProps>;
     rectangle_child_grey?: PrimitiveOverrideProps<ViewProps>;
     "Update User"?: PrimitiveOverrideProps<TextProps>;
-    textfield_name?: PrimitiveOverrideProps<TextFieldProps>;
-    textfield_address?: PrimitiveOverrideProps<TextFieldProps>;
     "Rectangle 1"?: PrimitiveOverrideProps<ViewProps>;
     button_submit?: PrimitiveOverrideProps<ButtonProps>;
     button_cancel?: PrimitiveOverrideProps<ButtonProps>;
     select_field_registration?: PrimitiveOverrideProps<SelectFieldProps>;
+    textfield_name?: PrimitiveOverrideProps<TextFieldProps>;
+    textfield_address?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type FigUpdateUserProps = React.PropsWithChildren<Partial<ViewProps> & {
     overrides?: FigUpdateUserOverridesProps | undefined | null;

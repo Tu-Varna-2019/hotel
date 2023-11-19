@@ -1,30 +1,29 @@
 import { useState } from "react";
 
 export function Room() {
+  const AVAILABLE_CATEGORIES = ["Single", "Double", "Triple"];
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState(0.0);
   const [floor, setFloor] = useState(0);
   const [beds, setBeds] = useState(0);
+  const isRoomAttributesEmpty =
+    category === "" || price === 0 || floor === 0 || beds === 0;
 
   const handleCategoryChange = (event) => {
-    console.log(event.target.value);
     setCategory(event.target.value);
   };
   const handlePriceChange = (event) => {
     setPrice(event.target.value);
   };
-  const handleFloorChange = (event) => {
-    setFloor(event.target.value);
+  const handleFloorChange = (newValue) => {
+    setFloor(newValue);
   };
-  const handleBedsChange = (event) => {
-    setBeds(event.target.value);
-  };
-
-  const isRoomAttributesEmpty = () => {
-    return category === "" && price === 0.0 && floor === 0 && beds === 0;
+  const handleBedsChange = (newValue) => {
+    setBeds(newValue);
   };
 
   return {
+    AVAILABLE_CATEGORIES,
     category,
     price,
     floor,

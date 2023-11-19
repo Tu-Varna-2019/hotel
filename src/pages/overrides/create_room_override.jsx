@@ -5,16 +5,15 @@ import { Room } from "../../classes/data_models/room";
 
 export function FuncCreateRoomOverride() {
   const { RoomObject } = React.useContext(DataModelContext);
-  const { handleCategoryChange } = RoomObject;
 
   const { handleCancelClick, handleSubmitClick } = RoomCreateComponent();
-
   const createRoomOverride = {
-    textfield_category: {
+    selectfield_category: {
       isRequired: true,
-      hasError: RoomObject.category === "" ? true : false,
       value: RoomObject.category,
+      options: RoomObject.AVAILABLE_CATEGORIES,
       errorMessage: "Category must not be empty!",
+      type: "number",
       onChange: (event) => RoomObject.handleCategoryChange(event),
     },
 
@@ -40,12 +39,13 @@ export function FuncCreateRoomOverride() {
       isRequired: true,
       hasError: RoomObject.price === 0 ? true : false,
       value: RoomObject.price,
-      errorMessage: "Pricemust not be empty!",
+      type: "number",
+      errorMessage: "Price must not be empty!",
       onChange: (event) => RoomObject.handlePriceChange(event),
     },
     button_submit: {
       onClick: (event) => handleSubmitClick(event),
-      //isDisabled: Room.isRoomAttributesEmpty(),
+      isDisabled: Room.isRoomAttributesEmpty,
     },
     button_cancel: {
       onClick: (event) => handleCancelClick(event),
