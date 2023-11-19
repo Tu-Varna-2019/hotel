@@ -8,8 +8,6 @@ export const getRegistration = /* GraphQL */ `
       dateCreation
       dateStart
       dateEnd
-      registrationNumber
-      untitledfield
       FKClients {
         items {
           id
@@ -59,8 +57,6 @@ export const listRegistrations = /* GraphQL */ `
         dateCreation
         dateStart
         dateEnd
-        registrationNumber
-        untitledfield
         FKClients {
           nextToken
           __typename

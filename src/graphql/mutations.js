@@ -11,8 +11,6 @@ export const createRegistration = /* GraphQL */ `
       dateCreation
       dateStart
       dateEnd
-      registrationNumber
-      untitledfield
       FKClients {
         items {
           id
@@ -60,8 +58,6 @@ export const updateRegistration = /* GraphQL */ `
       dateCreation
       dateStart
       dateEnd
-      registrationNumber
-      untitledfield
       FKClients {
         items {
           id
@@ -109,8 +105,6 @@ export const deleteRegistration = /* GraphQL */ `
       dateCreation
       dateStart
       dateEnd
-      registrationNumber
-      untitledfield
       FKClients {
         items {
           id

@@ -232,8 +232,7 @@ export default function RoomCreateForm(props) {
     React.useState(undefined);
   const PKRegistrationRef = React.createRef();
   const getDisplayValue = {
-    PKRegistration: (r) =>
-      `${r?.registrationNumber ? r?.registrationNumber + " - " : ""}${r?.id}`,
+    PKRegistration: (r) => r?.id,
   };
   const validations = {
     roomNumber: [],
@@ -267,12 +266,7 @@ export default function RoomCreateForm(props) {
     while (newOptions.length < autocompleteLength && newNext != null) {
       const variables = {
         limit: autocompleteLength * 5,
-        filter: {
-          or: [
-            { registrationNumber: { contains: value } },
-            { id: { contains: value } },
-          ],
-        },
+        filter: { or: [{ id: { contains: value } }] },
       };
       if (newNext) {
         variables["nextToken"] = newNext;

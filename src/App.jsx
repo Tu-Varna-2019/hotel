@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { DataModelProvider } from "./providers/data_models/provider";
 import HomeLayout from "./pages/layouts/home_layout";
 import { ComponentStateProvider } from "./providers/component_provider/provider";
+import { HelpersProvider } from "./providers/helpers_provider/provider";
 
 //Amplify.configure(awsExports);
 
@@ -38,13 +39,15 @@ export default function App() {
   return (
     <Authenticator formFields={signUpFields}>
       <BrowserRouter>
-        <DataModelProvider>
-          <ComponentStateProvider>
-            <Routes>
-              <Route path="/" element={<HomeLayout />} />
-            </Routes>
-          </ComponentStateProvider>
-        </DataModelProvider>
+        <HelpersProvider>
+          <DataModelProvider>
+            <ComponentStateProvider>
+              <Routes>
+                <Route path="/" element={<HomeLayout />} />
+              </Routes>
+            </ComponentStateProvider>
+          </DataModelProvider>
+        </HelpersProvider>
       </BrowserRouter>
     </Authenticator>
   );

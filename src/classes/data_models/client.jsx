@@ -1,25 +1,89 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Auth } from "@aws-amplify/auth";
+import React, { useEffect, useState } from "react";
 
-import { getCurrentUser, fetchAuthSession } from "aws-amplify/auth";
+import {
+  getCurrentUser,
+  fetchAuthSession,
+  fetchUserAttributes,
+} from "aws-amplify/auth";
+
+import { listClients, getClient } from "../../graphql/queries";
+import { createClient } from "../../graphql/mutations";
+import { HelpersContext } from "../../contexts/data_models/context";
 
 export function Client() {
   const [name, setName] = useState([]);
   const [address, setAddress] = useState([]);
   const [ssn, setSsn] = useState([]);
   const [passport, setPassport] = useState([]);
+  const [allClientIDNames, setAllClientIDNames] = useState({});
 
-  const navigate = useNavigate();
+  const { UtilsObject } = React.useContext(HelpersContext);
+  const { logger, client } = UtilsObject;
 
+  // Fetch user attributes
   useEffect(() => {
     async function fetchData() {
-      //const authenticatedUser = await getCurrentUser();
-      const authenticatedUser = "test";
-      console.log(authenticatedUser);
+      try {
+        const userAttributes = await fetchUserAttributes();
+        setName(userAttributes.name);
+        setAddress(userAttributes.address);
+        setSsn(userAttributes["custom:SocialSecurityNumber"]);
+        setPassport(userAttributes["custom:Passport"]);
+
+        // Fetch all clients with the specified SSN
+        const response = await client.graphql({
+          query: listClients,
+          variables: {
+            filter: {
+              ssn: { eq: userAttributes["custom:SocialSecurityNumber"] },
+            },
+          },
+        });
+
+        if (response.data.listClients.items.length === 0) {
+          // No existing clients found, create a new client
+          logger.info(
+            "No existing clients found, creating a new client. Creating new client..."
+          );
+          await client.graphql({
+            query: createClient,
+            variables: {
+              input: {
+                name: userAttributes.name,
+                address: userAttributes.address,
+                ssn: userAttributes["custom:SocialSecurityNumber"],
+                passport: userAttributes["custom:Passport"],
+                // Dummy value for now
+                PKRegistration: "d9ad2f90-a6c9-4132-b46c-5ee4227ef101",
+              },
+            },
+          });
+        } else logger.info("Existing client found, not creating a new client.");
+      } catch (error) {
+        console.error("Error in fetching/creating client:", error);
+      }
     }
     fetchData();
   }, []);
+
+  useEffect(() => {
+    async function getAllCLients() {
+      try {
+        const response = await client.graphql({
+          query: listClients,
+        });
+        response.data.listClients.items.forEach((client) => {
+          setAllClientIDNames((prevState) => ({
+            ...prevState,
+            [client.id]: client.name,
+          }));
+        });
+      } catch (error) {
+        logger.error(error);
+      }
+    }
+    getAllCLients();
+  }, [client, logger]);
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -35,7 +99,6 @@ export function Client() {
   };
 
   return {
-    navigate,
     name,
     address,
     ssn,
@@ -44,5 +107,7 @@ export function Client() {
     handleAddressChange,
     handleSsnChange,
     handlePassportChange,
+    allClientIDNames,
+    setAllClientIDNames,
   };
 }

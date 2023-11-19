@@ -111,7 +111,7 @@ export default function FigUpdateRoom(props) {
       <SelectField
         width="323px"
         height="unset"
-        label="Client"
+        label="Registration"
         placeholder=" "
         position="absolute"
         top="420px"
@@ -121,7 +121,7 @@ export default function FigUpdateRoom(props) {
         isDisabled={false}
         labelHidden={false}
         variation="default"
-        {...getOverrideProps(overrides, "select_field_client")}
+        {...getOverrideProps(overrides, "select_field_registration")}
       ></SelectField>
       <StepperField
         width="unset"

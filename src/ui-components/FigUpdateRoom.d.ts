@@ -24,7 +24,7 @@ export declare type FigUpdateRoomOverridesProps = {
     "Rectangle 1"?: PrimitiveOverrideProps<ViewProps>;
     button_submit?: PrimitiveOverrideProps<ButtonProps>;
     button_cancel?: PrimitiveOverrideProps<ButtonProps>;
-    select_field_client?: PrimitiveOverrideProps<SelectFieldProps>;
+    select_field_registration?: PrimitiveOverrideProps<SelectFieldProps>;
     stepperfield_floor?: PrimitiveOverrideProps<StepperFieldProps>;
     stepperfield_beds?: PrimitiveOverrideProps<StepperFieldProps>;
     selectfield_rooms?: PrimitiveOverrideProps<SelectFieldProps>;

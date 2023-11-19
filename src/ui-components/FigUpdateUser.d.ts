@@ -25,6 +25,7 @@ export declare type FigUpdateUserOverridesProps = {
     button_submit?: PrimitiveOverrideProps<ButtonProps>;
     button_cancel?: PrimitiveOverrideProps<ButtonProps>;
     select_field_registration?: PrimitiveOverrideProps<SelectFieldProps>;
+    select_field_user?: PrimitiveOverrideProps<SelectFieldProps>;
     textfield_name?: PrimitiveOverrideProps<TextFieldProps>;
     textfield_address?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;

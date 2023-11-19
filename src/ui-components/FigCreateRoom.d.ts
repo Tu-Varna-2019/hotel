@@ -24,7 +24,7 @@ export declare type FigCreateRoomOverridesProps = {
     "Rectangle 1"?: PrimitiveOverrideProps<ViewProps>;
     button_submit?: PrimitiveOverrideProps<ButtonProps>;
     button_cancel?: PrimitiveOverrideProps<ButtonProps>;
-    select_field_client?: PrimitiveOverrideProps<SelectFieldProps>;
+    select_field_registration?: PrimitiveOverrideProps<SelectFieldProps>;
     selectfield_category?: PrimitiveOverrideProps<SelectFieldProps>;
     stepperfield_floor?: PrimitiveOverrideProps<StepperFieldProps>;
     stepperfield_beds?: PrimitiveOverrideProps<StepperFieldProps>;

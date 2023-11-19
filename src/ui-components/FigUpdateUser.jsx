@@ -113,7 +113,7 @@ export default function FigUpdateUser(props) {
         label="Registration"
         placeholder=" "
         position="absolute"
-        top="467px"
+        top="516px"
         left="786px"
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         size="default"
@@ -122,13 +122,28 @@ export default function FigUpdateUser(props) {
         variation="default"
         {...getOverrideProps(overrides, "select_field_registration")}
       ></SelectField>
+      <SelectField
+        width="323px"
+        height="unset"
+        label="User"
+        placeholder=" "
+        position="absolute"
+        top="197px"
+        left="794px"
+        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+        size="default"
+        isDisabled={false}
+        labelHidden={false}
+        variation="default"
+        {...getOverrideProps(overrides, "select_field_user")}
+      ></SelectField>
       <TextField
         width="300px"
         height="unset"
         label="Name"
         placeholder="Add"
         position="absolute"
-        top="220px"
+        top="308px"
         left="794px"
         size="default"
         isDisabled={false}
@@ -142,7 +157,7 @@ export default function FigUpdateUser(props) {
         label="Address"
         placeholder="Add"
         position="absolute"
-        top="344px"
+        top="406px"
         left="794px"
         size="default"
         isDisabled={false}

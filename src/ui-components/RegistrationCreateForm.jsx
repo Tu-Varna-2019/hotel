@@ -198,8 +198,6 @@ export default function RegistrationCreateForm(props) {
     dateCreation: "",
     dateStart: "",
     dateEnd: "",
-    registrationNumber: "",
-    untitledfield: "",
     FKClients: [],
     FKRooms: [],
   };
@@ -208,12 +206,6 @@ export default function RegistrationCreateForm(props) {
   );
   const [dateStart, setDateStart] = React.useState(initialValues.dateStart);
   const [dateEnd, setDateEnd] = React.useState(initialValues.dateEnd);
-  const [registrationNumber, setRegistrationNumber] = React.useState(
-    initialValues.registrationNumber
-  );
-  const [untitledfield, setUntitledfield] = React.useState(
-    initialValues.untitledfield
-  );
   const [FKClients, setFKClients] = React.useState(initialValues.FKClients);
   const [FKClientsLoading, setFKClientsLoading] = React.useState(false);
   const [FKClientsRecords, setFKClientsRecords] = React.useState([]);
@@ -226,8 +218,6 @@ export default function RegistrationCreateForm(props) {
     setDateCreation(initialValues.dateCreation);
     setDateStart(initialValues.dateStart);
     setDateEnd(initialValues.dateEnd);
-    setRegistrationNumber(initialValues.registrationNumber);
-    setUntitledfield(initialValues.untitledfield);
     setFKClients(initialValues.FKClients);
     setCurrentFKClientsValue(undefined);
     setCurrentFKClientsDisplayValue("");
@@ -268,8 +258,6 @@ export default function RegistrationCreateForm(props) {
     dateCreation: [],
     dateStart: [],
     dateEnd: [],
-    registrationNumber: [],
-    untitledfield: [],
     FKClients: [],
     FKRooms: [],
   };
@@ -367,8 +355,6 @@ export default function RegistrationCreateForm(props) {
           dateCreation,
           dateStart,
           dateEnd,
-          registrationNumber,
-          untitledfield,
           FKClients,
           FKRooms,
         };
@@ -412,8 +398,6 @@ export default function RegistrationCreateForm(props) {
             dateCreation: modelFields.dateCreation,
             dateStart: modelFields.dateStart,
             dateEnd: modelFields.dateEnd,
-            registrationNumber: modelFields.registrationNumber,
-            untitledfield: modelFields.untitledfield,
           };
           const registration = (
             await client.graphql({
@@ -488,8 +472,6 @@ export default function RegistrationCreateForm(props) {
               dateCreation: value,
               dateStart,
               dateEnd,
-              registrationNumber,
-              untitledfield,
               FKClients,
               FKRooms,
             };
@@ -519,8 +501,6 @@ export default function RegistrationCreateForm(props) {
               dateCreation,
               dateStart: value,
               dateEnd,
-              registrationNumber,
-              untitledfield,
               FKClients,
               FKRooms,
             };
@@ -550,8 +530,6 @@ export default function RegistrationCreateForm(props) {
               dateCreation,
               dateStart,
               dateEnd: value,
-              registrationNumber,
-              untitledfield,
               FKClients,
               FKRooms,
             };
@@ -568,72 +546,6 @@ export default function RegistrationCreateForm(props) {
         hasError={errors.dateEnd?.hasError}
         {...getOverrideProps(overrides, "dateEnd")}
       ></TextField>
-      <TextField
-        label="Registration number"
-        isRequired={false}
-        isReadOnly={false}
-        type="number"
-        step="any"
-        value={registrationNumber}
-        onChange={(e) => {
-          let value = isNaN(parseInt(e.target.value))
-            ? e.target.value
-            : parseInt(e.target.value);
-          if (onChange) {
-            const modelFields = {
-              dateCreation,
-              dateStart,
-              dateEnd,
-              registrationNumber: value,
-              untitledfield,
-              FKClients,
-              FKRooms,
-            };
-            const result = onChange(modelFields);
-            value = result?.registrationNumber ?? value;
-          }
-          if (errors.registrationNumber?.hasError) {
-            runValidationTasks("registrationNumber", value);
-          }
-          setRegistrationNumber(value);
-        }}
-        onBlur={() =>
-          runValidationTasks("registrationNumber", registrationNumber)
-        }
-        errorMessage={errors.registrationNumber?.errorMessage}
-        hasError={errors.registrationNumber?.hasError}
-        {...getOverrideProps(overrides, "registrationNumber")}
-      ></TextField>
-      <TextField
-        label="Untitledfield"
-        isRequired={false}
-        isReadOnly={false}
-        value={untitledfield}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              dateCreation,
-              dateStart,
-              dateEnd,
-              registrationNumber,
-              untitledfield: value,
-              FKClients,
-              FKRooms,
-            };
-            const result = onChange(modelFields);
-            value = result?.untitledfield ?? value;
-          }
-          if (errors.untitledfield?.hasError) {
-            runValidationTasks("untitledfield", value);
-          }
-          setUntitledfield(value);
-        }}
-        onBlur={() => runValidationTasks("untitledfield", untitledfield)}
-        errorMessage={errors.untitledfield?.errorMessage}
-        hasError={errors.untitledfield?.hasError}
-        {...getOverrideProps(overrides, "untitledfield")}
-      ></TextField>
       <ArrayField
         onChange={async (items) => {
           let values = items;
@@ -642,8 +554,6 @@ export default function RegistrationCreateForm(props) {
               dateCreation,
               dateStart,
               dateEnd,
-              registrationNumber,
-              untitledfield,
               FKClients: values,
               FKRooms,
             };
@@ -726,8 +636,6 @@ export default function RegistrationCreateForm(props) {
               dateCreation,
               dateStart,
               dateEnd,
-              registrationNumber,
-              untitledfield,
               FKClients,
               FKRooms: values,
             };

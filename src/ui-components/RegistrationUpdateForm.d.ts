@@ -25,8 +25,6 @@ export declare type RegistrationUpdateFormInputValues = {
     dateCreation?: string;
     dateStart?: string;
     dateEnd?: string;
-    registrationNumber?: number;
-    untitledfield?: string;
     FKClients?: any[];
     FKRooms?: any[];
 };
@@ -34,8 +32,6 @@ export declare type RegistrationUpdateFormValidationValues = {
     dateCreation?: ValidationFunction<string>;
     dateStart?: ValidationFunction<string>;
     dateEnd?: ValidationFunction<string>;
-    registrationNumber?: ValidationFunction<number>;
-    untitledfield?: ValidationFunction<string>;
     FKClients?: ValidationFunction<any>;
     FKRooms?: ValidationFunction<any>;
 };
@@ -45,8 +41,6 @@ export declare type RegistrationUpdateFormOverridesProps = {
     dateCreation?: PrimitiveOverrideProps<TextFieldProps>;
     dateStart?: PrimitiveOverrideProps<TextFieldProps>;
     dateEnd?: PrimitiveOverrideProps<TextFieldProps>;
-    registrationNumber?: PrimitiveOverrideProps<TextFieldProps>;
-    untitledfield?: PrimitiveOverrideProps<TextFieldProps>;
     FKClients?: PrimitiveOverrideProps<AutocompleteProps>;
     FKRooms?: PrimitiveOverrideProps<AutocompleteProps>;
 } & EscapeHatchProps;
