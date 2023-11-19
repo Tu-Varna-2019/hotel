@@ -20,18 +20,19 @@ export function Registration() {
         const response = await client.graphql({
           query: listRegistrations,
         });
-        logger.info("response:", response);
-        // response.data.listRegistrations.items.forEach((client) => {
-        //   setAllRegistrationIDNames((prevState) => [...prevState, client.id]);
-        // });
+
+        response.data.listRegistrations.items.forEach((client) => {
+          setAllRegistrationIDNames((prevState) => [
+            ...prevState,
+            `${new Date(client.dateStart).toLocaleDateString()} - ${client.id}`,
+          ]);
+        });
       } catch (error) {
         logger.error(error);
       }
     }
     getAllRegistrations();
   }, [client, logger]);
-
-  // `${new Date(client.dateStart).toLocaleDateString()} - ${client.id}`
 
   const getAllRegistrationsKeyByValue = (index) => {
     return allRegistrationIDNames[index];
