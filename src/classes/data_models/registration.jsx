@@ -21,12 +21,15 @@ export function Registration() {
           query: listRegistrations,
         });
 
-        response.data.listRegistrations.items.forEach((client) => {
-          setAllRegistrationIDNames((prevState) => [
-            ...prevState,
-            `${new Date(client.dateStart).toLocaleDateString()} - ${client.id}`,
-          ]);
-        });
+        const newRegistrationIDNames =
+          response.data.listRegistrations.items.map(
+            (client) =>
+              `${new Date(client.dateStart).toLocaleDateString()} - ${
+                client.id
+              }`
+          );
+        // PREVENT FROM useEffect LOOPING 2x TIMES
+        setAllRegistrationIDNames(newRegistrationIDNames);
       } catch (error) {
         logger.error(error);
       }
