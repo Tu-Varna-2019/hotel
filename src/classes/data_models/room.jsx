@@ -7,10 +7,8 @@ export function Room() {
   const [floor, setFloor] = useState(0);
   const [beds, setBeds] = useState(0);
   const [selectedClient, setSelectedClient] = useState("");
-  const isRoomAttributesEmpty =
-    category === "" || price === 0 || floor === 0 || beds === 0;
 
-  let selectedRegistrationIndex = 0;
+  const [selectedRegistrationIndex, setSelectedRegistrationIndex] = useState(0);
 
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
@@ -26,7 +24,7 @@ export function Room() {
   };
 
   const handleRegistrationChange = (event) => {
-    selectedRegistrationIndex = event.target.selectedIndex;
+    setSelectedRegistrationIndex(event.target.selectedIndex);
     setSelectedClient(event.target.value);
   };
 
@@ -43,7 +41,6 @@ export function Room() {
     handleFloorChange,
     handleBedsChange,
     handleRegistrationChange,
-    isRoomAttributesEmpty,
     selectedRegistrationIndex,
   };
 }

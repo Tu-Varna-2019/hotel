@@ -28,6 +28,10 @@ export declare type FigCreateRegistrationOverridesProps = {
     select_field_room?: PrimitiveOverrideProps<SelectFieldProps>;
     textfield_datestart?: PrimitiveOverrideProps<TextFieldProps>;
     textfield_dateend?: PrimitiveOverrideProps<TextFieldProps>;
+    "Date start"?: PrimitiveOverrideProps<TextProps>;
+    "Date End"?: PrimitiveOverrideProps<TextProps>;
+    Client?: PrimitiveOverrideProps<TextProps>;
+    Room?: PrimitiveOverrideProps<TextProps>;
 } & EscapeHatchProps;
 export declare type FigCreateRegistrationProps = React.PropsWithChildren<Partial<ViewProps> & {
     overrides?: FigCreateRegistrationOverridesProps | undefined | null;

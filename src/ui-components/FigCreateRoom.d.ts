@@ -29,6 +29,11 @@ export declare type FigCreateRoomOverridesProps = {
     stepperfield_floor?: PrimitiveOverrideProps<StepperFieldProps>;
     stepperfield_beds?: PrimitiveOverrideProps<StepperFieldProps>;
     textfield_price?: PrimitiveOverrideProps<TextFieldProps>;
+    Category?: PrimitiveOverrideProps<TextProps>;
+    Floor?: PrimitiveOverrideProps<TextProps>;
+    Beds?: PrimitiveOverrideProps<TextProps>;
+    Registration?: PrimitiveOverrideProps<TextProps>;
+    Price?: PrimitiveOverrideProps<TextProps>;
 } & EscapeHatchProps;
 export declare type FigCreateRoomProps = React.PropsWithChildren<Partial<ViewProps> & {
     overrides?: FigCreateRoomOverridesProps | undefined | null;

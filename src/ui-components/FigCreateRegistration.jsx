@@ -118,13 +118,13 @@ export default function FigCreateRegistration(props) {
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         size="default"
         isDisabled={false}
-        labelHidden={false}
+        labelHidden={true}
         variation="default"
         {...getOverrideProps(overrides, "select_field_client")}
       ></SelectField>
       <SelectField
         width="323px"
-        height="unset"
+        height="65px"
         label="Room"
         placeholder=" "
         position="absolute"
@@ -133,7 +133,7 @@ export default function FigCreateRegistration(props) {
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         size="default"
         isDisabled={false}
-        labelHidden={false}
+        labelHidden={true}
         variation="default"
         {...getOverrideProps(overrides, "select_field_room")}
       ></SelectField>
@@ -143,11 +143,11 @@ export default function FigCreateRegistration(props) {
         label="Date Start"
         placeholder="Add"
         position="absolute"
-        top="201px"
-        left="792px"
+        top="228px"
+        left="794px"
         size="default"
         isDisabled={false}
-        labelHidden={false}
+        labelHidden={true}
         variation="default"
         {...getOverrideProps(overrides, "textfield_datestart")}
       ></TextField>
@@ -161,10 +161,98 @@ export default function FigCreateRegistration(props) {
         left="792px"
         size="default"
         isDisabled={false}
-        labelHidden={false}
+        labelHidden={true}
         variation="default"
         {...getOverrideProps(overrides, "textfield_dateend")}
       ></TextField>
+      <Text
+        fontFamily="Inter"
+        fontSize="16px"
+        fontWeight="400"
+        color="rgba(255,255,255,1)"
+        lineHeight="24px"
+        textAlign="left"
+        display="block"
+        direction="column"
+        justifyContent="unset"
+        width="103px"
+        height="51px"
+        gap="unset"
+        alignItems="unset"
+        position="absolute"
+        top="228px"
+        left="649px"
+        padding="0px 0px 0px 0px"
+        whiteSpace="pre-wrap"
+        children="Date start"
+        {...getOverrideProps(overrides, "Date start")}
+      ></Text>
+      <Text
+        fontFamily="Inter"
+        fontSize="16px"
+        fontWeight="400"
+        color="rgba(255,255,255,1)"
+        lineHeight="24px"
+        textAlign="left"
+        display="block"
+        direction="column"
+        justifyContent="unset"
+        width="103px"
+        height="51px"
+        gap="unset"
+        alignItems="unset"
+        position="absolute"
+        top="343px"
+        left="649px"
+        padding="0px 0px 0px 0px"
+        whiteSpace="pre-wrap"
+        children="Date End"
+        {...getOverrideProps(overrides, "Date End")}
+      ></Text>
+      <Text
+        fontFamily="Inter"
+        fontSize="16px"
+        fontWeight="400"
+        color="rgba(255,255,255,1)"
+        lineHeight="24px"
+        textAlign="left"
+        display="block"
+        direction="column"
+        justifyContent="unset"
+        width="103px"
+        height="51px"
+        gap="unset"
+        alignItems="unset"
+        position="absolute"
+        top="443px"
+        left="649px"
+        padding="0px 0px 0px 0px"
+        whiteSpace="pre-wrap"
+        children="Client"
+        {...getOverrideProps(overrides, "Client")}
+      ></Text>
+      <Text
+        fontFamily="Inter"
+        fontSize="16px"
+        fontWeight="400"
+        color="rgba(255,255,255,1)"
+        lineHeight="24px"
+        textAlign="left"
+        display="block"
+        direction="column"
+        justifyContent="unset"
+        width="103px"
+        height="51px"
+        gap="unset"
+        alignItems="unset"
+        position="absolute"
+        top="574px"
+        left="649px"
+        padding="0px 0px 0px 0px"
+        whiteSpace="pre-wrap"
+        children="Room"
+        {...getOverrideProps(overrides, "Room")}
+      ></Text>
     </View>
   );
 }

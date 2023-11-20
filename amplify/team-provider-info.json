@@ -22,7 +22,7 @@
         },
         "createHotelProd": {
           "deploymentBucketName": "amplify-tuvarnamasterwinterc-prod-214653-deployment",
-          "s3Key": "amplify-builds/createHotelProd-6e4c364867375a6d7577-build.zip"
+          "s3Key": "amplify-builds/createHotelProd-2f4454354d4971657056-build.zip"
         }
       },
       "api": {

@@ -113,12 +113,12 @@ export default function FigUpdateUser(props) {
         label="Registration"
         placeholder=" "
         position="absolute"
-        top="516px"
-        left="786px"
+        top="531px"
+        left="823px"
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         size="default"
         isDisabled={false}
-        labelHidden={false}
+        labelHidden={true}
         variation="default"
         {...getOverrideProps(overrides, "select_field_registration")}
       ></SelectField>
@@ -128,12 +128,12 @@ export default function FigUpdateUser(props) {
         label="User"
         placeholder=" "
         position="absolute"
-        top="197px"
-        left="794px"
+        top="245px"
+        left="831px"
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         size="default"
         isDisabled={false}
-        labelHidden={false}
+        labelHidden={true}
         variation="default"
         {...getOverrideProps(overrides, "select_field_user")}
       ></SelectField>
@@ -143,11 +143,11 @@ export default function FigUpdateUser(props) {
         label="Name"
         placeholder="Add"
         position="absolute"
-        top="308px"
-        left="794px"
+        top="339px"
+        left="831px"
         size="default"
         isDisabled={false}
-        labelHidden={false}
+        labelHidden={true}
         variation="default"
         {...getOverrideProps(overrides, "textfield_name")}
       ></TextField>
@@ -157,14 +157,102 @@ export default function FigUpdateUser(props) {
         label="Address"
         placeholder="Add"
         position="absolute"
-        top="406px"
-        left="794px"
+        top="437px"
+        left="831px"
         size="default"
         isDisabled={false}
-        labelHidden={false}
+        labelHidden={true}
         variation="default"
         {...getOverrideProps(overrides, "textfield_address")}
       ></TextField>
+      <Text
+        fontFamily="Inter"
+        fontSize="16px"
+        fontWeight="400"
+        color="rgba(255,255,255,1)"
+        lineHeight="24px"
+        textAlign="left"
+        display="block"
+        direction="column"
+        justifyContent="unset"
+        width="103px"
+        height="51px"
+        gap="unset"
+        alignItems="unset"
+        position="absolute"
+        top="239px"
+        left="683px"
+        padding="0px 0px 0px 0px"
+        whiteSpace="pre-wrap"
+        children="User"
+        {...getOverrideProps(overrides, "User")}
+      ></Text>
+      <Text
+        fontFamily="Inter"
+        fontSize="16px"
+        fontWeight="400"
+        color="rgba(255,255,255,1)"
+        lineHeight="24px"
+        textAlign="left"
+        display="block"
+        direction="column"
+        justifyContent="unset"
+        width="103px"
+        height="51px"
+        gap="unset"
+        alignItems="unset"
+        position="absolute"
+        top="348px"
+        left="683px"
+        padding="0px 0px 0px 0px"
+        whiteSpace="pre-wrap"
+        children="Name"
+        {...getOverrideProps(overrides, "Name")}
+      ></Text>
+      <Text
+        fontFamily="Inter"
+        fontSize="16px"
+        fontWeight="400"
+        color="rgba(255,255,255,1)"
+        lineHeight="24px"
+        textAlign="left"
+        display="block"
+        direction="column"
+        justifyContent="unset"
+        width="103px"
+        height="51px"
+        gap="unset"
+        alignItems="unset"
+        position="absolute"
+        top="443px"
+        left="683px"
+        padding="0px 0px 0px 0px"
+        whiteSpace="pre-wrap"
+        children="Address"
+        {...getOverrideProps(overrides, "Address")}
+      ></Text>
+      <Text
+        fontFamily="Inter"
+        fontSize="16px"
+        fontWeight="400"
+        color="rgba(255,255,255,1)"
+        lineHeight="24px"
+        textAlign="left"
+        display="block"
+        direction="column"
+        justifyContent="unset"
+        width="103px"
+        height="51px"
+        gap="unset"
+        alignItems="unset"
+        position="absolute"
+        top="534px"
+        left="683px"
+        padding="0px 0px 0px 0px"
+        whiteSpace="pre-wrap"
+        children="Registration"
+        {...getOverrideProps(overrides, "Registration")}
+      ></Text>
     </View>
   );
 }

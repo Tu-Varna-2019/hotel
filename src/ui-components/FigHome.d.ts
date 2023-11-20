@@ -22,14 +22,11 @@ export declare type FigHomeOverridesProps = {
     FigHome?: PrimitiveOverrideProps<ViewProps>;
     NavBarHeader?: PrimitiveOverrideProps<FlexProps>;
     LogoWithText?: LogoWithTextProps;
-    "Frame 32138621474"?: PrimitiveOverrideProps<FlexProps>;
-    text_book_a_room38621475?: PrimitiveOverrideProps<TextProps>;
+    text_update?: PrimitiveOverrideProps<TextProps>;
     text_inquery?: PrimitiveOverrideProps<TextProps>;
     text_create?: PrimitiveOverrideProps<TextProps>;
-    text_book_a_room3887580?: PrimitiveOverrideProps<TextProps>;
-    select_field_update?: PrimitiveOverrideProps<SelectFieldProps>;
-    "Frame 32138621479"?: PrimitiveOverrideProps<FlexProps>;
-    button_settings?: PrimitiveOverrideProps<ButtonProps>;
+    "Frame 321"?: PrimitiveOverrideProps<FlexProps>;
+    button_logout?: PrimitiveOverrideProps<ButtonProps>;
     text_Username?: PrimitiveOverrideProps<TextProps>;
     img_User?: PrimitiveOverrideProps<ImageProps>;
     rectangle_main_gray?: PrimitiveOverrideProps<ViewProps>;
@@ -37,7 +34,6 @@ export declare type FigHomeOverridesProps = {
     img_hotel_logo?: PrimitiveOverrideProps<ImageProps>;
     img_bed?: PrimitiveOverrideProps<ImageProps>;
     img_inquery?: PrimitiveOverrideProps<ImageProps>;
-    img_create?: PrimitiveOverrideProps<ImageProps>;
     rating_rate_us?: PrimitiveOverrideProps<RatingProps>;
     text_rate_us?: PrimitiveOverrideProps<TextProps>;
     text_follow_us_on?: PrimitiveOverrideProps<TextProps>;
@@ -45,7 +41,7 @@ export declare type FigHomeOverridesProps = {
     img_twitter?: PrimitiveOverrideProps<ImageProps>;
     img_facebook?: PrimitiveOverrideProps<ImageProps>;
     img_youtube?: PrimitiveOverrideProps<ImageProps>;
-    select_field_book_a_room?: PrimitiveOverrideProps<SelectFieldProps>;
+    select_field_update?: PrimitiveOverrideProps<SelectFieldProps>;
     select_field_inquery?: PrimitiveOverrideProps<SelectFieldProps>;
     select_field_create?: PrimitiveOverrideProps<SelectFieldProps>;
 } & EscapeHatchProps;

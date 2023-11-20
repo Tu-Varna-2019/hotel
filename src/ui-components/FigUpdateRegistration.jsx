@@ -113,12 +113,12 @@ export default function FigUpdateRegistration(props) {
         label="Client"
         placeholder=" "
         position="absolute"
-        top="489px"
-        left="984px"
+        top="522px"
+        left="979px"
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         size="default"
         isDisabled={false}
-        labelHidden={false}
+        labelHidden={true}
         variation="default"
         {...getOverrideProps(overrides, "select_field_client")}
       ></SelectField>
@@ -128,12 +128,12 @@ export default function FigUpdateRegistration(props) {
         label="Room"
         placeholder=" "
         position="absolute"
-        top="489px"
-        left="617px"
+        top="522px"
+        left="622px"
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         size="default"
         isDisabled={false}
-        labelHidden={false}
+        labelHidden={true}
         variation="default"
         {...getOverrideProps(overrides, "select_field_room")}
       ></SelectField>
@@ -143,11 +143,11 @@ export default function FigUpdateRegistration(props) {
         label="Rooms"
         placeholder=" "
         position="absolute"
-        top="221px"
+        top="250px"
         left="812px"
         size="default"
         isDisabled={false}
-        labelHidden={false}
+        labelHidden={true}
         variation="default"
         {...getOverrideProps(overrides, "selectfield_rooms")}
       ></SelectField>
@@ -157,11 +157,11 @@ export default function FigUpdateRegistration(props) {
         label="Date Start"
         placeholder="Add"
         position="absolute"
-        top="355px"
-        left="617px"
+        top="379px"
+        left="624px"
         size="default"
         isDisabled={false}
-        labelHidden={false}
+        labelHidden={true}
         variation="default"
         {...getOverrideProps(overrides, "textfield_datestart")}
       ></TextField>
@@ -171,14 +171,124 @@ export default function FigUpdateRegistration(props) {
         label="Date End"
         placeholder="Add"
         position="absolute"
-        top="347px"
+        top="379px"
         left="984px"
         size="default"
         isDisabled={false}
-        labelHidden={false}
+        labelHidden={true}
         variation="default"
         {...getOverrideProps(overrides, "textfield_dateend")}
       ></TextField>
+      <Text
+        fontFamily="Inter"
+        fontSize="16px"
+        fontWeight="400"
+        color="rgba(255,255,255,1)"
+        lineHeight="24px"
+        textAlign="left"
+        display="block"
+        direction="column"
+        justifyContent="unset"
+        width="103px"
+        height="51px"
+        gap="unset"
+        alignItems="unset"
+        position="absolute"
+        top="195px"
+        left="815px"
+        padding="0px 0px 0px 0px"
+        whiteSpace="pre-wrap"
+        children="Rooms"
+        {...getOverrideProps(overrides, "Rooms3930532")}
+      ></Text>
+      <Text
+        fontFamily="Inter"
+        fontSize="16px"
+        fontWeight="400"
+        color="rgba(255,255,255,1)"
+        lineHeight="24px"
+        textAlign="left"
+        display="block"
+        direction="column"
+        justifyContent="unset"
+        width="103px"
+        height="51px"
+        gap="unset"
+        alignItems="unset"
+        position="absolute"
+        top="318px"
+        left="633px"
+        padding="0px 0px 0px 0px"
+        whiteSpace="pre-wrap"
+        children="Date Start"
+        {...getOverrideProps(overrides, "Date Start")}
+      ></Text>
+      <Text
+        fontFamily="Inter"
+        fontSize="16px"
+        fontWeight="400"
+        color="rgba(255,255,255,1)"
+        lineHeight="24px"
+        textAlign="left"
+        display="block"
+        direction="column"
+        justifyContent="unset"
+        width="103px"
+        height="51px"
+        gap="unset"
+        alignItems="unset"
+        position="absolute"
+        top="456px"
+        left="633px"
+        padding="0px 0px 0px 0px"
+        whiteSpace="pre-wrap"
+        children="Rooms"
+        {...getOverrideProps(overrides, "Rooms3930563")}
+      ></Text>
+      <Text
+        fontFamily="Inter"
+        fontSize="16px"
+        fontWeight="400"
+        color="rgba(255,255,255,1)"
+        lineHeight="24px"
+        textAlign="left"
+        display="block"
+        direction="column"
+        justifyContent="unset"
+        width="103px"
+        height="51px"
+        gap="unset"
+        alignItems="unset"
+        position="absolute"
+        top="451px"
+        left="984px"
+        padding="0px 0px 0px 0px"
+        whiteSpace="pre-wrap"
+        children="Client"
+        {...getOverrideProps(overrides, "Client")}
+      ></Text>
+      <Text
+        fontFamily="Inter"
+        fontSize="16px"
+        fontWeight="400"
+        color="rgba(255,255,255,1)"
+        lineHeight="24px"
+        textAlign="left"
+        display="block"
+        direction="column"
+        justifyContent="unset"
+        width="103px"
+        height="51px"
+        gap="unset"
+        alignItems="unset"
+        position="absolute"
+        top="323px"
+        left="987px"
+        padding="0px 0px 0px 0px"
+        whiteSpace="pre-wrap"
+        children="Date End"
+        {...getOverrideProps(overrides, "Date End")}
+      ></Text>
     </View>
   );
 }
