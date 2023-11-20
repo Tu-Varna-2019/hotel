@@ -1,29 +1,29 @@
-import React, { useState } from "react";
+import { signOut } from "aws-amplify/auth";
+import React from "react";
 import { ComponentStateContext } from "../../contexts/data_models/context";
 
 export function HomeComponent() {
   const { ComponentStateObject } = React.useContext(ComponentStateContext);
 
-  const selectFieldBookARoomOptions = ["Book", "Edit", "Cancel"];
+  const selectFieldBookARoomOptions = ["Client", "Room", "Registration"];
   const selectFieldInquery = [
     "all available rooms at the current date and time, sorted by room category",
     "booking turnover derived by setting a time period",
     "displaying all names, TINs of customers who occupied rooms in the last year",
     "to draw a schedule - most frequently booked room: Room-Period by months",
   ];
-  const selectFieldCreate = ["Client", "Room", "Registration"];
+  const selectFieldCreate = ["Room", "Registration"];
 
-  // Select Fields
-  const imgHotelLogo = useState(false);
-  const textWelcomeText = useState(true);
-
-  const handleSelectFieldBookARoomOptions = (event) => {
+  const handleSelectFieldUpdateOptions = (event) => {
     switch (event.target.value) {
-      case "Book":
+      case "Client":
+        ComponentStateObject.setShowUpdateClientPage(true);
         break;
-      case "Edit":
+      case "Room":
+        ComponentStateObject.setShowUpdateRoomPage(true);
         break;
-      case "Cancel":
+      case "Registration":
+        ComponentStateObject.setShowUpdateRegistrationPage(true);
         break;
       default:
         break;
@@ -47,33 +47,30 @@ export function HomeComponent() {
 
   const handleSelectFieldCreateOptions = (event) => {
     switch (event.target.value) {
-      case "Client":
-        break;
       case "Room":
         ComponentStateObject.setShowCreateRoomPage(true);
         break;
       case "Registration":
+        ComponentStateObject.setShowCreateRegistrationPage(true);
         break;
       default:
+        console.log("Error: No option selected");
         break;
     }
   };
 
   // Buttons
-
-  const handleSettingsButton = (event) => {
-    console.log("Settings Button");
+  const handleLogOutClick = (event) => {
+    signOut();
   };
 
   return {
-    imgHotelLogo,
-    textWelcomeText,
     selectFieldBookARoomOptions,
-    handleSelectFieldBookARoomOptions,
+    handleSelectFieldUpdateOptions,
     selectFieldInquery,
     handleSelectFieldInqueryOptions,
     selectFieldCreate,
     handleSelectFieldCreateOptions,
-    handleSettingsButton,
+    handleLogOutClick,
   };
 }

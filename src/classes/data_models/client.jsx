@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-import {
-  getCurrentUser,
-  fetchAuthSession,
-  fetchUserAttributes,
-} from "aws-amplify/auth";
+import { fetchUserAttributes } from "aws-amplify/auth";
 
-import { listClients, getClient } from "../../graphql/queries";
-import { createClient } from "../../graphql/mutations";
 import { HelpersContext } from "../../contexts/data_models/context";
+import { createClient } from "../../graphql/mutations";
+import { listClients, getClient, getRegistration } from "../../graphql/queries";
 
 export function Client() {
   const [name, setName] = useState([]);
@@ -16,6 +12,7 @@ export function Client() {
   const [ssn, setSsn] = useState([]);
   const [passport, setPassport] = useState([]);
   const [allClientIDNames, setAllClientIDNames] = useState({});
+  const [selectedRegistrationName, setSelectedRegistrationName] = useState("");
 
   const { UtilsObject } = React.useContext(HelpersContext);
   const { logger, client } = UtilsObject;
@@ -98,7 +95,36 @@ export function Client() {
     setPassport(event.target.value);
   };
 
+  const setCllientByAllClientIDNames = async () => {
+    const clientID = UtilsObject.dictFindKeyByValue(allClientIDNames, name);
+
+    // Get a specific item
+    const selectedClient = await client.graphql({
+      query: getClient,
+      variables: { id: clientID },
+    });
+
+    setName(selectedClient.data.getClient.name);
+    setAddress(selectedClient.data.getClient.address);
+    setSsn(selectedClient.data.getClient.ssn);
+    setPassport();
+
+    // Get a specific item
+    const oneRegistration = await client.graphql({
+      query: getRegistration,
+      variables: { id: selectedClient.data.getClient.passport },
+    });
+    setSelectedRegistrationName(oneRegistration.data.getRegistration.name);
+  };
+
+  const handleSelectedRegistrationName = (event) => {
+    setSelectedRegistrationName(event.target.value);
+  };
+
   return {
+    selectedRegistrationName,
+    handleSelectedRegistrationName,
+    setCllientByAllClientIDNames,
     name,
     address,
     ssn,

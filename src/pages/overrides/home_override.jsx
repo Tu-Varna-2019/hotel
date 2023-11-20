@@ -3,27 +3,17 @@ import { HomeComponent } from "../../classes/components/homeComponent";
 export function FuncHomeOverride() {
   const {
     selectFieldBookARoomOptions,
-    handleSelectFieldBookARoomOptions,
+    handleSelectFieldUpdateOptions,
     selectFieldInquery,
     handleSelectFieldInqueryOptions,
     selectFieldCreate,
     handleSelectFieldCreateOptions,
-    handleSettingsButton,
-    imgHotelLogo,
-    textWelcomeText,
+    handleLogOutClick,
   } = HomeComponent();
 
   const homeOverride = {
-    // img_hotel_logo: {
-    //   style: { display: imgHotelLogo ? "block" : "none" },
-    // },
-    // text_welcome_text: textWelcomeText
-    //   ? {
-    //       style: { display: "block" },
-    //     }
-    //   : null,
-    select_field_book_a_room: {
-      onChange: (event) => handleSelectFieldBookARoomOptions(event),
+    select_field_update: {
+      onChange: (event) => handleSelectFieldUpdateOptions(event),
       style: { backgroundColor: "transparent" },
       options: selectFieldBookARoomOptions,
     },
@@ -37,11 +27,8 @@ export function FuncHomeOverride() {
       style: { backgroundColor: "transparent" },
       options: selectFieldCreate,
     },
-    button_settings: {
-      onClick: (event) => handleSettingsButton(event),
-      //style: { display: hideConfCanButton },
-      //isDisabled: !regexEmail,
-      //isLoading: isConfirmInfoBtnLoading,
+    button_logout: {
+      onClick: (event) => handleLogOutClick(event),
     },
   };
 

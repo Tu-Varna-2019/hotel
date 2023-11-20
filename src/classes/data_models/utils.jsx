@@ -20,6 +20,19 @@ export function Utils() {
     setShowAlertBox(true);
   };
 
+  // REMOVE: Can be removed ?
+  function dictFindKeyByValue(object, value) {
+    return Object.keys(object).find((key) => object[key] === value);
+  }
+
+  const toAWSDateFormat = (isoDateTime) => {
+    const dateObject = new Date(isoDateTime);
+    const year = dateObject.getFullYear();
+    const month = String(dateObject.getMonth() + 1).padStart(2, "0");
+    const day = String(dateObject.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
   // API calls
   const apiCreateHotel = async (event) => {
     try {
@@ -62,6 +75,8 @@ export function Utils() {
     }
   };
   return {
+    toAWSDateFormat,
+    dictFindKeyByValue,
     showAlertBoxFull,
     showAlertBox,
     setShowAlertBox,

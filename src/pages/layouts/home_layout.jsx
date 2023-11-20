@@ -1,7 +1,11 @@
 import FigHome from "../../ui-components/FigHome";
 import FigCreateRoom from "../../ui-components/FigCreateRoom";
+import FigUpdateUser from "../../ui-components/FigUpdateUser";
+import FigUpdateRegistration from "../../ui-components/FigUpdateRegistration";
+import FigUpdateRoom from "../../ui-components/FigUpdateRoom";
+import FigCreateRegistration from "../../ui-components/FigCreateRegistration";
 import { FuncHomeOverride } from "../overrides/home_override";
-import { Alert, View } from "@aws-amplify/ui-react";
+import { View } from "@aws-amplify/ui-react";
 import { FuncCreateRoomOverride } from "../overrides/create_room_override";
 import {
   ComponentStateContext,
@@ -9,21 +13,52 @@ import {
 } from "../../contexts/data_models/context";
 import React from "react";
 import { AlertBoxHome } from "../../classes/components/alertBoxHome";
+import { FuncCreateRegistrationOverride } from "../overrides/create_registration_override";
+import { FuncUpdateClientOverride } from "../overrides/update_client_override";
 
 export default function HomeLayout() {
   const { ComponentStateObject } = React.useContext(ComponentStateContext);
 
   const { homeOverride } = FuncHomeOverride();
+
+  // Create
   const { createRoomOverride } = FuncCreateRoomOverride();
+  const { createRegistrationOverride } = FuncCreateRegistrationOverride();
+
+  // Update
+  const { updateClientOOverride } = FuncUpdateClientOverride();
+
   const { UtilsObject } = React.useContext(HelpersContext);
 
   return (
     <View position="relative" display="inline-block">
       {UtilsObject.showAlertBox && <AlertBoxHome />}
       <FigHome overrides={homeOverride} />
+
       {ComponentStateObject.showCreateRoomPage && (
         <View position="absolute" display="block" top="0">
           <FigCreateRoom overrides={createRoomOverride} />
+        </View>
+      )}
+      {ComponentStateObject.showCreateRegistrationPage && (
+        <View position="absolute" display="block" top="0">
+          <FigCreateRegistration overrides={createRegistrationOverride} />
+        </View>
+      )}
+
+      {ComponentStateObject.showUpdateClientPage && (
+        <View position="absolute" display="block" top="0">
+          <FigUpdateUser overrides={updateClientOOverride} />
+        </View>
+      )}
+      {ComponentStateObject.showUpdateRoomPage && (
+        <View position="absolute" display="block" top="0">
+          <FigUpdateRoom overrides={createRegistrationOverride} />
+        </View>
+      )}
+      {ComponentStateObject.showUpdateRegistrationPage && (
+        <View position="absolute" display="block" top="0">
+          <FigUpdateRegistration overrides={createRegistrationOverride} />
         </View>
       )}
     </View>
