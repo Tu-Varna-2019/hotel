@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { ButtonProps, SelectFieldProps, TextFieldProps, TextProps, ViewProps } from "@aws-amplify/ui-react";
+import { ButtonProps, TextFieldProps, TextProps, ViewProps } from "@aws-amplify/ui-react";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
 } | null;
@@ -24,14 +24,10 @@ export declare type FigCreateRegistrationOverridesProps = {
     "Rectangle 1"?: PrimitiveOverrideProps<ViewProps>;
     button_submit?: PrimitiveOverrideProps<ButtonProps>;
     button_cancel?: PrimitiveOverrideProps<ButtonProps>;
-    select_field_client?: PrimitiveOverrideProps<SelectFieldProps>;
-    select_field_room?: PrimitiveOverrideProps<SelectFieldProps>;
     textfield_datestart?: PrimitiveOverrideProps<TextFieldProps>;
     textfield_dateend?: PrimitiveOverrideProps<TextFieldProps>;
     "Date start"?: PrimitiveOverrideProps<TextProps>;
     "Date End"?: PrimitiveOverrideProps<TextProps>;
-    Client?: PrimitiveOverrideProps<TextProps>;
-    Room?: PrimitiveOverrideProps<TextProps>;
 } & EscapeHatchProps;
 export declare type FigCreateRegistrationProps = React.PropsWithChildren<Partial<ViewProps> & {
     overrides?: FigCreateRegistrationOverridesProps | undefined | null;

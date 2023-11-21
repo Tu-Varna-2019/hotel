@@ -1,7 +1,6 @@
 import React from "react";
-import { DataModelContext } from "../../contexts/data_models/context";
 import { RoomCreateComponent } from "../../classes/components/roomCreateComponent";
-import { Room } from "../../classes/data_models/room";
+import { DataModelContext } from "../../contexts/data_models/context";
 
 export function FuncCreateRoomOverride() {
   const { RoomObject, RegistrationObject, isSubmitButtonLoading } =

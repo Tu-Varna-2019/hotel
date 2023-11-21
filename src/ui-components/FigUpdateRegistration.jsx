@@ -108,36 +108,6 @@ export default function FigUpdateRegistration(props) {
         {...getOverrideProps(overrides, "button_cancel")}
       ></Button>
       <SelectField
-        width="323px"
-        height="unset"
-        label="Client"
-        placeholder=" "
-        position="absolute"
-        top="522px"
-        left="979px"
-        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-        size="default"
-        isDisabled={false}
-        labelHidden={true}
-        variation="default"
-        {...getOverrideProps(overrides, "select_field_client")}
-      ></SelectField>
-      <SelectField
-        width="323px"
-        height="unset"
-        label="Room"
-        placeholder=" "
-        position="absolute"
-        top="522px"
-        left="622px"
-        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-        size="default"
-        isDisabled={false}
-        labelHidden={true}
-        variation="default"
-        {...getOverrideProps(overrides, "select_field_room")}
-      ></SelectField>
-      <SelectField
         width="300px"
         height="unset"
         label="Rooms"
@@ -149,7 +119,7 @@ export default function FigUpdateRegistration(props) {
         isDisabled={false}
         labelHidden={true}
         variation="default"
-        {...getOverrideProps(overrides, "selectfield_rooms")}
+        {...getOverrideProps(overrides, "selectfield_registrations")}
       ></SelectField>
       <TextField
         width="300px"
@@ -198,8 +168,8 @@ export default function FigUpdateRegistration(props) {
         left="815px"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
-        children="Rooms"
-        {...getOverrideProps(overrides, "Rooms3930532")}
+        children="Registrations"
+        {...getOverrideProps(overrides, "Registrations")}
       ></Text>
       <Text
         fontFamily="Inter"
@@ -222,50 +192,6 @@ export default function FigUpdateRegistration(props) {
         whiteSpace="pre-wrap"
         children="Date Start"
         {...getOverrideProps(overrides, "Date Start")}
-      ></Text>
-      <Text
-        fontFamily="Inter"
-        fontSize="16px"
-        fontWeight="400"
-        color="rgba(255,255,255,1)"
-        lineHeight="24px"
-        textAlign="left"
-        display="block"
-        direction="column"
-        justifyContent="unset"
-        width="103px"
-        height="51px"
-        gap="unset"
-        alignItems="unset"
-        position="absolute"
-        top="456px"
-        left="633px"
-        padding="0px 0px 0px 0px"
-        whiteSpace="pre-wrap"
-        children="Rooms"
-        {...getOverrideProps(overrides, "Rooms3930563")}
-      ></Text>
-      <Text
-        fontFamily="Inter"
-        fontSize="16px"
-        fontWeight="400"
-        color="rgba(255,255,255,1)"
-        lineHeight="24px"
-        textAlign="left"
-        display="block"
-        direction="column"
-        justifyContent="unset"
-        width="103px"
-        height="51px"
-        gap="unset"
-        alignItems="unset"
-        position="absolute"
-        top="451px"
-        left="984px"
-        padding="0px 0px 0px 0px"
-        whiteSpace="pre-wrap"
-        children="Client"
-        {...getOverrideProps(overrides, "Client")}
       ></Text>
       <Text
         fontFamily="Inter"

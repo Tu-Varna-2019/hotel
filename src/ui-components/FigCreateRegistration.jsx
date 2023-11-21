@@ -7,13 +7,7 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "./utils";
-import {
-  Button,
-  SelectField,
-  Text,
-  TextField,
-  View,
-} from "@aws-amplify/ui-react";
+import { Button, Text, TextField, View } from "@aws-amplify/ui-react";
 export default function FigCreateRegistration(props) {
   const { overrides, ...rest } = props;
   return (
@@ -107,36 +101,6 @@ export default function FigCreateRegistration(props) {
         children="Cancel"
         {...getOverrideProps(overrides, "button_cancel")}
       ></Button>
-      <SelectField
-        width="323px"
-        height="unset"
-        label="Client"
-        placeholder=" "
-        position="absolute"
-        top="448px"
-        left="792px"
-        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-        size="default"
-        isDisabled={false}
-        labelHidden={true}
-        variation="default"
-        {...getOverrideProps(overrides, "select_field_client")}
-      ></SelectField>
-      <SelectField
-        width="323px"
-        height="65px"
-        label="Room"
-        placeholder=" "
-        position="absolute"
-        top="571px"
-        left="792px"
-        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-        size="default"
-        isDisabled={false}
-        labelHidden={true}
-        variation="default"
-        {...getOverrideProps(overrides, "select_field_room")}
-      ></SelectField>
       <TextField
         width="300px"
         height="unset"
@@ -208,50 +172,6 @@ export default function FigCreateRegistration(props) {
         whiteSpace="pre-wrap"
         children="Date End"
         {...getOverrideProps(overrides, "Date End")}
-      ></Text>
-      <Text
-        fontFamily="Inter"
-        fontSize="16px"
-        fontWeight="400"
-        color="rgba(255,255,255,1)"
-        lineHeight="24px"
-        textAlign="left"
-        display="block"
-        direction="column"
-        justifyContent="unset"
-        width="103px"
-        height="51px"
-        gap="unset"
-        alignItems="unset"
-        position="absolute"
-        top="443px"
-        left="649px"
-        padding="0px 0px 0px 0px"
-        whiteSpace="pre-wrap"
-        children="Client"
-        {...getOverrideProps(overrides, "Client")}
-      ></Text>
-      <Text
-        fontFamily="Inter"
-        fontSize="16px"
-        fontWeight="400"
-        color="rgba(255,255,255,1)"
-        lineHeight="24px"
-        textAlign="left"
-        display="block"
-        direction="column"
-        justifyContent="unset"
-        width="103px"
-        height="51px"
-        gap="unset"
-        alignItems="unset"
-        position="absolute"
-        top="574px"
-        left="649px"
-        padding="0px 0px 0px 0px"
-        whiteSpace="pre-wrap"
-        children="Room"
-        {...getOverrideProps(overrides, "Room")}
       ></Text>
     </View>
   );

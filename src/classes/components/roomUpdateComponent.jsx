@@ -3,11 +3,11 @@ import {
   ComponentStateContext,
   HelpersContext,
 } from "../../contexts/data_models/context";
-import { updateClient } from "../../graphql/mutations";
-import { Client } from "../data_models/client";
+import { updateRoom } from "../../graphql/mutations";
+import { Room } from "../data_models/room";
 
-export function ClientUpdateComponent() {
-  const clientUpdate = Client();
+export function RoomUpdateComponent() {
+  const roomUpdate = Room();
   const [isSubmitButtonLoading, setIsSubmitButtonLoading] =
     React.useState(false);
 
@@ -16,32 +16,25 @@ export function ClientUpdateComponent() {
   const { logger, client } = UtilsObject;
 
   const handleCancelClick = (event) => {
-    ComponentStateObject.setShowUpdateClientPage(false);
+    ComponentStateObject.setShowUpdateRoomPage(false);
   };
 
   const handleSubmitClick = async (pkregister) => {
     setIsSubmitButtonLoading(true);
 
-    logger.info("Updating client...");
-
-    console.log("Input variables:", {
-      name: clientUpdate.name,
-      ssn: clientUpdate.ssn,
-      address: clientUpdate.address,
-      passport: clientUpdate.passport,
-      PKRegistration: pkregister,
-    });
+    logger.info("Updating room...");
 
     try {
       await client.graphql({
-        query: updateClient,
+        query: updateRoom,
         variables: {
           input: {
-            id: clientUpdate.cID,
-            name: clientUpdate.name,
-            ssn: clientUpdate.ssn,
-            address: clientUpdate.address,
-            passport: clientUpdate.passport,
+            id: roomUpdate.cID,
+            roomNumber: roomUpdate.roomNumber,
+            category: roomUpdate.category,
+            floor: roomUpdate.floor,
+            beds: roomUpdate.beds,
+            price: roomUpdate.price,
             PKRegistration: pkregister,
           },
         },
@@ -49,10 +42,10 @@ export function ClientUpdateComponent() {
       setIsSubmitButtonLoading(false);
       UtilsObject.showAlertBoxFull(
         "success",
-        "Client updated successfully!",
+        "Room updated successfully!",
         "success"
       );
-      ComponentStateObject.setShowUpdateClientPage(false);
+      ComponentStateObject.setShowUpdateRoomPage(false);
     } catch (error) {
       logger.error(error);
       UtilsObject.showAlertBoxFull("error", error.errors[0].message, "error");
@@ -64,6 +57,6 @@ export function ClientUpdateComponent() {
     isSubmitButtonLoading,
     handleCancelClick,
     handleSubmitClick,
-    clientUpdate,
+    roomUpdate,
   };
 }

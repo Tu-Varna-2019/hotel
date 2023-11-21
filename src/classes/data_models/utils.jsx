@@ -25,6 +25,10 @@ export function Utils() {
     return Object.keys(object).find((key) => object[key] === value);
   }
 
+  const allRegistrationIDNamesBySubID = (registerIDNames, subID) => {
+    return registerIDNames.find((element) => element.includes(subID));
+  };
+
   const toAWSDateFormat = (isoDateTime) => {
     const dateObject = new Date(isoDateTime);
     const year = dateObject.getFullYear();
@@ -75,6 +79,7 @@ export function Utils() {
     }
   };
   return {
+    allRegistrationIDNamesBySubID,
     toAWSDateFormat,
     dictFindKeyByValue,
     showAlertBoxFull,

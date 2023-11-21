@@ -15,6 +15,7 @@ import React from "react";
 import { AlertBoxHome } from "../../classes/components/alertBoxHome";
 import { FuncCreateRegistrationOverride } from "../overrides/create_registration_override";
 import { FuncUpdateClientOverride } from "../overrides/update_client_override";
+import { FuncUpdateRoomOverride } from "../overrides/update_room_override";
 
 export default function HomeLayout() {
   const { ComponentStateObject } = React.useContext(ComponentStateContext);
@@ -27,6 +28,7 @@ export default function HomeLayout() {
 
   // Update
   const { updateClientOOverride } = FuncUpdateClientOverride();
+  const { updateRoomOverride } = FuncUpdateRoomOverride();
 
   const { UtilsObject } = React.useContext(HelpersContext);
 
@@ -53,7 +55,7 @@ export default function HomeLayout() {
       )}
       {ComponentStateObject.showUpdateRoomPage && (
         <View position="absolute" display="block" top="0">
-          <FigUpdateRoom overrides={createRegistrationOverride} />
+          <FigUpdateRoom overrides={updateRoomOverride} />
         </View>
       )}
       {ComponentStateObject.showUpdateRegistrationPage && (

@@ -1,59 +1,71 @@
 import React from "react";
+import { RoomUpdateComponent } from "../../classes/components/roomUpdateComponent";
 import { DataModelContext } from "../../contexts/data_models/context";
-import { RoomCreateComponent } from "../../classes/components/roomCreateComponent";
-import { Room } from "../../classes/data_models/room";
 
-export function FuncCreateRoomOverride() {
-  const { RoomObject, RegistrationObject, isSubmitButtonLoading } =
-    React.useContext(DataModelContext);
+export function FuncUpdateRoomOverride() {
+  const { RegistrationObject, RoomObject } = React.useContext(DataModelContext);
 
-  const isRoomAttributesEmpty =
-    RoomObject.category === "" ||
-    RoomObject.price === 0 ||
-    RoomObject.floor === 0 ||
-    RoomObject.beds === 0;
+  const {
+    isSubmitButtonLoading,
+    handleCancelClick,
+    handleSubmitClick,
+    roomUpdate,
+  } = RoomUpdateComponent();
 
-  const { handleCancelClick, handleSubmitClick } = RoomCreateComponent();
-  const createRoomOverride = {
+  const updateRoomOverride = {
+    selectfield_rooms: {
+      isRequired: true,
+      //value: selectedroomUpdate,
+      options: Object.values(roomUpdate.allRoomsIDNumbers),
+      errorMessage: "Room must not be empty!",
+      onChange: (event) =>
+        roomUpdate.setRoomByAllRoomsIDNumbers(
+          event,
+          RegistrationObject.allRegistrationIDNames
+        ),
+    },
     selectfield_category: {
       isRequired: true,
-      value: RoomObject.category,
+      value: roomUpdate.category,
       options: RoomObject.AVAILABLE_CATEGORIES,
-      errorMessage: "Category must not be empty!",
-
-      onChange: (event) => RoomObject.handleCategoryChange(event),
+      onChange: (event) => roomUpdate.handleCategoryChange(event),
     },
-
     stepperfield_floor: {
-      onStepChange: (newValue) => RoomObject.handleFloorChange(newValue),
+      onStepChange: (newValue) => roomUpdate.handleFloorChange(newValue),
       min: 1,
       max: 50,
       step: 1,
-      value: RoomObject.floor,
+      value: roomUpdate.floor,
     },
     stepperfield_beds: {
-      onStepChange: (newValue) => RoomObject.handleBedsChange(newValue),
+      onStepChange: (newValue) => roomUpdate.handleBedsChange(newValue),
       min: 1,
       max: 50,
       step: 1,
-      value: RoomObject.beds,
-    },
-    select_field_registration: {
-      onChange: (event) => RoomObject.handleRegistrationChange(event),
-      options: RegistrationObject.allRegistrationIDNames,
+      value: roomUpdate.beds,
     },
     textfield_price: {
       isRequired: true,
-      hasError: RoomObject.price === 0 ? true : false,
-      value: RoomObject.price,
+      hasError: roomUpdate.price === 0,
+      value: roomUpdate.price,
       type: "number",
       errorMessage: "Price must not be empty!",
-      onChange: (event) => RoomObject.handlePriceChange(event),
+      onChange: (event) => roomUpdate.handlePriceChange(event),
+    },
+    select_field_registration: {
+      isRequired: true,
+      value: roomUpdate.selectedRegistrationName,
+      options: RegistrationObject.allRegistrationIDNames,
+      onChange: (event) => roomUpdate.handleSelectedRegistrationName(event),
     },
     button_submit: {
       onClick: (event) =>
-        handleSubmitClick(RoomObject.selectedRegistrationIndex),
-      isDisabled: isRoomAttributesEmpty,
+        handleSubmitClick(
+          RegistrationObject.getRegistrationIDByIDDate(
+            roomUpdate.selectedRegistrationName
+          )
+        ),
+      //isDisabled: isRoomAttributesEmpty,
       isLoading: isSubmitButtonLoading,
     },
     button_cancel: {
@@ -61,5 +73,5 @@ export function FuncCreateRoomOverride() {
     },
   };
 
-  return { createRoomOverride };
+  return { updateRoomOverride };
 }

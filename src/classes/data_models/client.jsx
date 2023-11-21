@@ -7,6 +7,7 @@ import { createClient } from "../../graphql/mutations";
 import { listClients, getClient, getRegistration } from "../../graphql/queries";
 
 export function Client() {
+  const [cID, setCID] = useState("");
   const [name, setName] = useState([]);
   const [address, setAddress] = useState([]);
   const [ssn, setSsn] = useState([]);
@@ -51,7 +52,7 @@ export function Client() {
                 ssn: userAttributes["custom:SocialSecurityNumber"],
                 passport: userAttributes["custom:Passport"],
                 // Dummy value for now
-                PKRegistration: "d9ad2f90-a6c9-4132-b46c-5ee4227ef101",
+                PKRegistration: "9cbd3d3a-ee43-4cef-936a-6b6097433a7d",
               },
             },
           });
@@ -95,8 +96,14 @@ export function Client() {
     setPassport(event.target.value);
   };
 
-  const setCllientByAllClientIDNames = async () => {
-    const clientID = UtilsObject.dictFindKeyByValue(allClientIDNames, name);
+  const setCllientByAllClientIDNames = async (
+    event,
+    registrationIDNamesArr
+  ) => {
+    const clientID = UtilsObject.dictFindKeyByValue(
+      allClientIDNames,
+      event.target.value
+    );
 
     // Get a specific item
     const selectedClient = await client.graphql({
@@ -104,17 +111,23 @@ export function Client() {
       variables: { id: clientID },
     });
 
+    setCID(selectedClient.data.getClient.id);
     setName(selectedClient.data.getClient.name);
     setAddress(selectedClient.data.getClient.address);
     setSsn(selectedClient.data.getClient.ssn);
-    setPassport();
+    setPassport(selectedClient.data.getClient.passport);
 
     // Get a specific item
     const oneRegistration = await client.graphql({
       query: getRegistration,
-      variables: { id: selectedClient.data.getClient.passport },
+      variables: { id: selectedClient.data.getClient.PKRegistration },
     });
-    setSelectedRegistrationName(oneRegistration.data.getRegistration.name);
+
+    const foundRegistrationNameID = UtilsObject.allRegistrationIDNamesBySubID(
+      registrationIDNamesArr,
+      oneRegistration.data.getRegistration.id
+    );
+    setSelectedRegistrationName(foundRegistrationNameID);
   };
 
   const handleSelectedRegistrationName = (event) => {
@@ -122,6 +135,8 @@ export function Client() {
   };
 
   return {
+    cID,
+    setCID,
     selectedRegistrationName,
     handleSelectedRegistrationName,
     setCllientByAllClientIDNames,

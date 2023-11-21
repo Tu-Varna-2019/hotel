@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { listRooms } from "../../graphql/queries";
+import { listRooms, getRoom, getRegistration } from "../../graphql/queries";
 import { HelpersContext } from "../../contexts/data_models/context";
 
 export function Room() {
   const AVAILABLE_CATEGORIES = ["Single", "Double", "Triple"];
+  const [cID, setCID] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState(0.0);
   const [floor, setFloor] = useState(0);
   const [beds, setBeds] = useState(0);
-  const [selectedClient, setSelectedClient] = useState("");
+  const [roomNumber, setRoomNumber] = useState(0);
+  const [selectedRoom, setselectedRoom] = useState("");
+  const [selectedRegistrationName, setSelectedRegistrationName] = useState("");
 
   const [allRoomsIDNumbers, setAllRoomsIDNumbers] = useState({});
   const [selectedRegistrationIndex, setSelectedRegistrationIndex] = useState(0);
@@ -54,10 +57,50 @@ export function Room() {
 
   const handleRegistrationChange = (event) => {
     setSelectedRegistrationIndex(event.target.selectedIndex);
-    setSelectedClient(event.target.value);
+    setselectedRoom(event.target.value);
+  };
+
+  const setRoomByAllRoomsIDNumbers = async (event, registrationIDNamesArr) => {
+    const roomID = UtilsObject.dictFindKeyByValue(
+      allRoomsIDNumbers,
+      parseInt(event.target.value, 10)
+    );
+
+    // Get a specific item
+    const selectedRoom = await client.graphql({
+      query: getRoom,
+      variables: { id: roomID },
+    });
+    console.log("selectedRoom:", selectedRoom);
+    setCID(selectedRoom.data.getRoom.id);
+    setCategory(selectedRoom.data.getRoom.category);
+    setFloor(selectedRoom.data.getRoom.floor);
+    setBeds(selectedRoom.data.getRoom.beds);
+    setPrice(selectedRoom.data.getRoom.price);
+    setRoomNumber(selectedRoom.data.getRoom.roomNumber);
+
+    // Get a specific item
+    const oneRegistration = await client.graphql({
+      query: getRegistration,
+      variables: { id: selectedRoom.data.getRoom.PKRegistration },
+    });
+
+    const foundRegistrationNameID = UtilsObject.allRegistrationIDNamesBySubID(
+      registrationIDNamesArr,
+      oneRegistration.data.getRegistration.id
+    );
+    setSelectedRegistrationName(foundRegistrationNameID);
+  };
+
+  const handleSelectedRegistrationName = (event) => {
+    setSelectedRegistrationName(event.target.value);
   };
 
   return {
+    handleSelectedRegistrationName,
+    cID,
+    setRoomByAllRoomsIDNumbers,
+    selectedRegistrationName,
     allRoomsIDNumbers,
     setAllRoomsIDNumbers,
     AVAILABLE_CATEGORIES,
@@ -65,8 +108,10 @@ export function Room() {
     price,
     floor,
     beds,
-    selectedClient,
-    setSelectedClient,
+    roomNumber,
+    setRoomNumber,
+    selectedRoom,
+    setselectedRoom,
     handleCategoryChange,
     handlePriceChange,
     handleFloorChange,

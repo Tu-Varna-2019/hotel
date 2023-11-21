@@ -24,15 +24,11 @@ export declare type FigUpdateRegistrationOverridesProps = {
     "Rectangle 1"?: PrimitiveOverrideProps<ViewProps>;
     button_submit?: PrimitiveOverrideProps<ButtonProps>;
     button_cancel?: PrimitiveOverrideProps<ButtonProps>;
-    select_field_client?: PrimitiveOverrideProps<SelectFieldProps>;
-    select_field_room?: PrimitiveOverrideProps<SelectFieldProps>;
-    selectfield_rooms?: PrimitiveOverrideProps<SelectFieldProps>;
+    selectfield_registrations?: PrimitiveOverrideProps<SelectFieldProps>;
     textfield_datestart?: PrimitiveOverrideProps<TextFieldProps>;
     textfield_dateend?: PrimitiveOverrideProps<TextFieldProps>;
-    Rooms3930532?: PrimitiveOverrideProps<TextProps>;
+    Registrations?: PrimitiveOverrideProps<TextProps>;
     "Date Start"?: PrimitiveOverrideProps<TextProps>;
-    Rooms3930563?: PrimitiveOverrideProps<TextProps>;
-    Client?: PrimitiveOverrideProps<TextProps>;
     "Date End"?: PrimitiveOverrideProps<TextProps>;
 } & EscapeHatchProps;
 export declare type FigUpdateRegistrationProps = React.PropsWithChildren<Partial<ViewProps> & {

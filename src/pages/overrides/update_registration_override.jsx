@@ -1,57 +1,57 @@
 import React from "react";
-import { RegistrationCreateComponent } from "../../classes/components/registrationCreateComponent";
+import { ClientUpdateComponent } from "../../classes/components/clientUpdateComponent";
 import { DataModelContext } from "../../contexts/data_models/context";
 
-export function FuncCreateRegistrationOverride() {
+export function FuncUpdateClientOverride() {
+  const { RegistrationObject } = React.useContext(DataModelContext);
+
   const {
-    RoomObject,
-    RegistrationObject,
     isSubmitButtonLoading,
-    ClientObject,
-  } = React.useContext(DataModelContext);
+    handleCancelClick,
+    handleSubmitClick,
+    clientUpdate,
+  } = ClientUpdateComponent();
 
-  const { handleCancelClick, handleSubmitClick } =
-    RegistrationCreateComponent();
-
-  const isRegisterAttributesEmpty =
-    RegistrationObject.dateEnd === "" || RegistrationObject.dateStart === "";
-
-  const createRegistrationOverride = {
-    select_field_client: {
+  const updateClientOOverride = {
+    select_field_user: {
       isRequired: true,
-      value: RegistrationObject.selectedClientName,
-      options: Object.values(ClientObject.allClientIDNames),
+      //value: selectedClientUpdate,
+      options: Object.values(clientUpdate.allClientIDNames),
       errorMessage: "Client must not be empty!",
       onChange: (event) =>
-        RegistrationObject.handleSelectedClientNameChange(event),
+        clientUpdate.setCllientByAllClientIDNames(
+          event,
+          RegistrationObject.allRegistrationIDNames
+        ),
     },
-    select_field_room: {
+    textfield_name: {
       isRequired: true,
-      value: RegistrationObject.selectedRoomNumber,
-      onChange: (event) =>
-        RegistrationObject.handleSelectedRoomNumberChange(event),
-      options: Object.values(RoomObject.allRoomsIDNumbers),
+      hasError: clientUpdate.name === "" ? true : false,
+      value: clientUpdate.name,
+      errorMessage: "Name must not be empty!",
+      onChange: (event) => clientUpdate.handleNameChange(event),
     },
-    textfield_datestart: {
+    textfield_address: {
       isRequired: true,
-      hasError: RegistrationObject.dateStart === "",
-      value: RegistrationObject.dateStart,
-      type: "date",
-      errorMessage: "Date must not be empty!",
-      onChange: (event) => RegistrationObject.handleDateStartChange(event),
+      hasError: clientUpdate.address === "" ? true : false,
+      value: clientUpdate.address,
+      errorMessage: "Address must not be empty!",
+      onChange: (event) => clientUpdate.handleAddressChange(event),
     },
-    textfield_dateend: {
+    select_field_registration: {
       isRequired: true,
-      hasError: RegistrationObject.dateEnd === "",
-      value: RegistrationObject.dateEnd,
-      type: "date",
-      errorMessage: "Date must not be empty!",
-      onChange: (event) => RegistrationObject.handleDateEndChange(event),
+      value: clientUpdate.selectedRegistrationName,
+      options: RegistrationObject.allRegistrationIDNames,
+      onChange: (event) => clientUpdate.handleSelectedRegistrationName(event),
     },
     button_submit: {
       onClick: (event) =>
-        handleSubmitClick(RegistrationObject.selectedRegistrationIndex),
-      isDisabled: isRegisterAttributesEmpty,
+        handleSubmitClick(
+          RegistrationObject.getRegistrationIDByIDDate(
+            clientUpdate.selectedRegistrationName
+          )
+        ),
+      //isDisabled: isRoomAttributesEmpty,
       isLoading: isSubmitButtonLoading,
     },
     button_cancel: {
@@ -59,5 +59,5 @@ export function FuncCreateRegistrationOverride() {
     },
   };
 
-  return { createRegistrationOverride };
+  return { updateClientOOverride };
 }
