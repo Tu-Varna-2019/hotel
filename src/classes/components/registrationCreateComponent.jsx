@@ -12,8 +12,7 @@ export function RegistrationCreateComponent() {
     React.useState(false);
 
   const { ComponentStateObject } = React.useContext(ComponentStateContext);
-  const { ClientObject, RegistrationObject } =
-    React.useContext(DataModelContext);
+  const { RegistrationObject } = React.useContext(DataModelContext);
 
   const { UtilsObject } = React.useContext(HelpersContext);
   const { logger, client } = UtilsObject;

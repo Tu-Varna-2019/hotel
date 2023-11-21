@@ -4,6 +4,7 @@ import FigUpdateUser from "../../ui-components/FigUpdateUser";
 import FigUpdateRegistration from "../../ui-components/FigUpdateRegistration";
 import FigUpdateRoom from "../../ui-components/FigUpdateRoom";
 import FigCreateRegistration from "../../ui-components/FigCreateRegistration";
+import FigBlank from "../../ui-components/FigBlank";
 import { FuncHomeOverride } from "../overrides/home_override";
 import { View } from "@aws-amplify/ui-react";
 import { FuncCreateRoomOverride } from "../overrides/create_room_override";
@@ -16,6 +17,8 @@ import { AlertBoxHome } from "../../classes/components/alertBoxHome";
 import { FuncCreateRegistrationOverride } from "../overrides/create_registration_override";
 import { FuncUpdateClientOverride } from "../overrides/update_client_override";
 import { FuncUpdateRoomOverride } from "../overrides/update_room_override";
+import { FuncOutputTableOverride } from "../overrides/output_table_override";
+import { OutputTableHome } from "../../classes/components/outputTableHome";
 
 export default function HomeLayout() {
   const { ComponentStateObject } = React.useContext(ComponentStateContext);
@@ -29,6 +32,9 @@ export default function HomeLayout() {
   // Update
   const { updateClientOOverride } = FuncUpdateClientOverride();
   const { updateRoomOverride } = FuncUpdateRoomOverride();
+
+  // Output table
+  const { outputTableOverride } = FuncOutputTableOverride();
 
   const { UtilsObject } = React.useContext(HelpersContext);
 
@@ -61,6 +67,22 @@ export default function HomeLayout() {
       {ComponentStateObject.showUpdateRegistrationPage && (
         <View position="absolute" display="block" top="0">
           <FigUpdateRegistration overrides={createRegistrationOverride} />
+        </View>
+      )}
+
+      {ComponentStateObject.showAvailableRooms && (
+        <View position="absolute" display="block" top="0">
+          <FigBlank overrides={outputTableOverride} />
+
+          <View
+            position="absolute"
+            display="block"
+            top="0"
+            justifyContent="center"
+            right="700px"
+          >
+            <OutputTableHome />
+          </View>
         </View>
       )}
     </View>
