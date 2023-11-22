@@ -70,7 +70,8 @@ export default function HomeLayout() {
         </View>
       )}
 
-      {ComponentStateObject.showAvailableRooms && (
+      {(ComponentStateObject.showAvailableRooms ||
+        ComponentStateObject.showAllSSNs) && (
         <View position="absolute" display="block" top="0">
           <FigBlank overrides={outputTableOverride} />
 

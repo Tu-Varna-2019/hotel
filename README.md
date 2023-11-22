@@ -32,3 +32,14 @@ useEffect(() => {
         // PREVENT FROM useEffect LOOPING 2x TIMES
         setAllRegistrationIDNames(newRegistrationIDNames);
 ```
+
+
+## Make the text in the select field not visible (after the text has been chosen)
+
+```
+    select_field_update: {
+      onChange: (event) => handleSelectFieldUpdateOptions(event),
+      style: { backgroundColor: "transparent", color: "transparent" },
+      options: selectFieldBookARoomOptions,
+    },
+```

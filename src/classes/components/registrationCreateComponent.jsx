@@ -12,7 +12,8 @@ export function RegistrationCreateComponent() {
     React.useState(false);
 
   const { ComponentStateObject } = React.useContext(ComponentStateContext);
-  const { RegistrationObject } = React.useContext(DataModelContext);
+  const { RegistrationObject, RoomObject, ClientObject } =
+    React.useContext(DataModelContext);
 
   const { UtilsObject } = React.useContext(HelpersContext);
   const { logger, client } = UtilsObject;
@@ -36,19 +37,14 @@ export function RegistrationCreateComponent() {
               RegistrationObject.dateStart
             ),
             dateEnd: UtilsObject.toAWSDateFormat(RegistrationObject.dateEnd),
-            // FKClients: {
-            //   id: UtilsObject.dictFindKeyByValue(
-            //     ClientObject.allClientIDNames,
-            //     RegistrationObject.selectedClientName
-            //   ),
-            // },
-
-            // FKRooms: {
-            //   id: UtilsObject.dictFindKeyByValue(
-            //     RoomObject.allRoomsIDNumbers,
-            //     RegistrationObject.selectedRoomNumber
-            //   ),
-            // },
+            PKClient: UtilsObject.dictFindKeyByValue(
+              ClientObject.allClientIDNames,
+              RegistrationObject.selectedClientName
+            ),
+            PKRoom: UtilsObject.dictFindKeyByValue(
+              RoomObject.allRoomsIDNumbers,
+              parseInt(RegistrationObject.selectedRoomNumber, 10)
+            ),
           },
         },
       });

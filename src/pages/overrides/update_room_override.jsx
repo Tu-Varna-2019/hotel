@@ -10,6 +10,7 @@ export function FuncUpdateRoomOverride() {
     handleCancelClick,
     handleSubmitClick,
     roomUpdate,
+    handleDeleteClick,
   } = RoomUpdateComponent();
 
   const updateRoomOverride = {
@@ -52,11 +53,15 @@ export function FuncUpdateRoomOverride() {
       errorMessage: "Price must not be empty!",
       onChange: (event) => roomUpdate.handlePriceChange(event),
     },
-    select_field_registration: {
-      isRequired: true,
-      value: roomUpdate.selectedRegistrationName,
-      options: RegistrationObject.allRegistrationIDNames,
-      onChange: (event) => roomUpdate.handleSelectedRegistrationName(event),
+    // select_field_registration: {
+    //   isRequired: true,
+    //   value: roomUpdate.selectedRegistrationName,
+    //   options: RegistrationObject.allRegistrationIDNames,
+    //   onChange: (event) => roomUpdate.handleSelectedRegistrationName(event),
+    // },
+    button_delete: {
+      onClick: (event) => handleDeleteClick(),
+      isDisabled: roomUpdate.cID === 0,
     },
     button_submit: {
       onClick: (event) =>

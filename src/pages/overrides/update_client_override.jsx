@@ -10,6 +10,7 @@ export function FuncUpdateClientOverride() {
     handleCancelClick,
     handleSubmitClick,
     clientUpdate,
+    handleDeleteClick,
   } = ClientUpdateComponent();
 
   const updateClientOOverride = {
@@ -20,8 +21,8 @@ export function FuncUpdateClientOverride() {
       errorMessage: "Client must not be empty!",
       onChange: (event) =>
         clientUpdate.setCllientByAllClientIDNames(
-          event,
-          RegistrationObject.allRegistrationIDNames
+          event
+          // RegistrationObject.allRegistrationIDNames
         ),
     },
     textfield_name: {
@@ -38,21 +39,20 @@ export function FuncUpdateClientOverride() {
       errorMessage: "Address must not be empty!",
       onChange: (event) => clientUpdate.handleAddressChange(event),
     },
-    select_field_registration: {
-      isRequired: true,
-      value: clientUpdate.selectedRegistrationName,
-      options: RegistrationObject.allRegistrationIDNames,
-      onChange: (event) => clientUpdate.handleSelectedRegistrationName(event),
-    },
+    // select_field_registration: {
+    //   isRequired: true,
+    //   value: clientUpdate.selectedRegistrationName,
+    //   options: RegistrationObject.allRegistrationIDNames,
+    //   onChange: (event) => clientUpdate.handleSelectedRegistrationName(event),
+    // },
     button_submit: {
-      onClick: (event) =>
-        handleSubmitClick(
-          RegistrationObject.getRegistrationIDByIDDate(
-            clientUpdate.selectedRegistrationName
-          )
-        ),
+      onClick: (event) => handleSubmitClick(),
       //isDisabled: isRoomAttributesEmpty,
       isLoading: isSubmitButtonLoading,
+    },
+    button_delete: {
+      onClick: (event) => handleDeleteClick(),
+      isDisabled: clientUpdate.cID === 0,
     },
     button_cancel: {
       onClick: (event) => handleCancelClick(event),

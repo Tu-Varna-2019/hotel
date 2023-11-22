@@ -87,7 +87,7 @@ export default function FigUpdateRegistration(props) {
         height="63px"
         position="absolute"
         top="664px"
-        left="1019px"
+        left="1090px"
         size="default"
         isDisabled={false}
         variation="primary"
@@ -99,7 +99,7 @@ export default function FigUpdateRegistration(props) {
         height="63px"
         position="absolute"
         top="664px"
-        left="757px"
+        left="884px"
         backgroundColor="rgba(92,102,112,1)"
         size="default"
         isDisabled={false}
@@ -107,6 +107,36 @@ export default function FigUpdateRegistration(props) {
         children="Cancel"
         {...getOverrideProps(overrides, "button_cancel")}
       ></Button>
+      <SelectField
+        width="323px"
+        height="unset"
+        label="Client"
+        placeholder=" "
+        position="absolute"
+        top="522px"
+        left="979px"
+        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+        size="default"
+        isDisabled={false}
+        labelHidden={true}
+        variation="default"
+        {...getOverrideProps(overrides, "select_field_client")}
+      ></SelectField>
+      <SelectField
+        width="323px"
+        height="unset"
+        label="Room"
+        placeholder=" "
+        position="absolute"
+        top="522px"
+        left="622px"
+        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+        size="default"
+        isDisabled={false}
+        labelHidden={true}
+        variation="default"
+        {...getOverrideProps(overrides, "select_field_room")}
+      ></SelectField>
       <SelectField
         width="300px"
         height="unset"
@@ -127,7 +157,7 @@ export default function FigUpdateRegistration(props) {
         label="Date Start"
         placeholder="Add"
         position="absolute"
-        top="379px"
+        top="393px"
         left="624px"
         size="default"
         isDisabled={false}
@@ -141,7 +171,7 @@ export default function FigUpdateRegistration(props) {
         label="Date End"
         placeholder="Add"
         position="absolute"
-        top="379px"
+        top="393px"
         left="984px"
         size="default"
         isDisabled={false}
@@ -186,12 +216,56 @@ export default function FigUpdateRegistration(props) {
         gap="unset"
         alignItems="unset"
         position="absolute"
-        top="318px"
+        top="328px"
         left="633px"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
         children="Date Start"
         {...getOverrideProps(overrides, "Date Start")}
+      ></Text>
+      <Text
+        fontFamily="Inter"
+        fontSize="16px"
+        fontWeight="400"
+        color="rgba(255,255,255,1)"
+        lineHeight="24px"
+        textAlign="left"
+        display="block"
+        direction="column"
+        justifyContent="unset"
+        width="103px"
+        height="51px"
+        gap="unset"
+        alignItems="unset"
+        position="absolute"
+        top="456px"
+        left="633px"
+        padding="0px 0px 0px 0px"
+        whiteSpace="pre-wrap"
+        children="Rooms"
+        {...getOverrideProps(overrides, "Rooms")}
+      ></Text>
+      <Text
+        fontFamily="Inter"
+        fontSize="16px"
+        fontWeight="400"
+        color="rgba(255,255,255,1)"
+        lineHeight="24px"
+        textAlign="left"
+        display="block"
+        direction="column"
+        justifyContent="unset"
+        width="103px"
+        height="51px"
+        gap="unset"
+        alignItems="unset"
+        position="absolute"
+        top="451px"
+        left="984px"
+        padding="0px 0px 0px 0px"
+        whiteSpace="pre-wrap"
+        children="Client"
+        {...getOverrideProps(overrides, "Client")}
       ></Text>
       <Text
         fontFamily="Inter"
@@ -215,6 +289,18 @@ export default function FigUpdateRegistration(props) {
         children="Date End"
         {...getOverrideProps(overrides, "Date End")}
       ></Text>
+      <Button
+        width="142px"
+        height="63px"
+        position="absolute"
+        top="664px"
+        left="678px"
+        size="default"
+        isDisabled={false}
+        variation="destructive"
+        children="Delete"
+        {...getOverrideProps(overrides, "button_delete")}
+      ></Button>
     </View>
   );
 }

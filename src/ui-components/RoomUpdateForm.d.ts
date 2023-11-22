@@ -27,7 +27,7 @@ export declare type RoomUpdateFormInputValues = {
     floor?: number;
     beds?: number;
     price?: number;
-    PKRegistration?: string;
+    FKRegistrations?: any[];
 };
 export declare type RoomUpdateFormValidationValues = {
     roomNumber?: ValidationFunction<number>;
@@ -35,7 +35,7 @@ export declare type RoomUpdateFormValidationValues = {
     floor?: ValidationFunction<number>;
     beds?: ValidationFunction<number>;
     price?: ValidationFunction<number>;
-    PKRegistration?: ValidationFunction<string>;
+    FKRegistrations?: ValidationFunction<any>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type RoomUpdateFormOverridesProps = {
@@ -45,7 +45,7 @@ export declare type RoomUpdateFormOverridesProps = {
     floor?: PrimitiveOverrideProps<TextFieldProps>;
     beds?: PrimitiveOverrideProps<TextFieldProps>;
     price?: PrimitiveOverrideProps<TextFieldProps>;
-    PKRegistration?: PrimitiveOverrideProps<AutocompleteProps>;
+    FKRegistrations?: PrimitiveOverrideProps<AutocompleteProps>;
 } & EscapeHatchProps;
 export declare type RoomUpdateFormProps = React.PropsWithChildren<{
     overrides?: RoomUpdateFormOverridesProps | undefined | null;

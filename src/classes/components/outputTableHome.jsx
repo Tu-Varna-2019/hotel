@@ -10,7 +10,7 @@ import { HelpersContext } from "../../contexts/data_models/context";
 import React, { useEffect } from "react";
 import { OutputTableComponent } from "./outputTableComponent";
 
-export async function OutputTableHome() {
+export function OutputTableHome() {
   const { UtilsObject } = React.useContext(HelpersContext);
   const { getOutputTableData } = OutputTableComponent();
 
@@ -67,37 +67,6 @@ export async function OutputTableHome() {
       </Table>
     </ThemeProvider>
   );
-
-  // return (
-  //   <ThemeProvider theme={theme} colorMode="light">
-  //     <Table highlightOnHover variation="striped">
-  //       <TableHead>
-  //         <TableRow>
-  //           <TableCell as="th">Citrus</TableCell>
-  //           <TableCell as="th">Stone Fruit</TableCell>
-  //           <TableCell as="th">Berry</TableCell>
-  //         </TableRow>
-  //       </TableHead>
-  //       <TableBody>
-  //         <TableRow>
-  //           <TableCell>Orange</TableCell>
-  //           <TableCell>Nectarine</TableCell>
-  //           <TableCell>Raspberry</TableCell>
-  //         </TableRow>
-  //         <TableRow>
-  //           <TableCell>Grapefruit</TableCell>
-  //           <TableCell>Apricot</TableCell>
-  //           <TableCell>Blueberry</TableCell>
-  //         </TableRow>
-  //         <TableRow>
-  //           <TableCell>Lime</TableCell>
-  //           <TableCell>Peach</TableCell>
-  //           <TableCell>Strawberry</TableCell>
-  //         </TableRow>
-  //       </TableBody>
-  //     </Table>
-  //   </ThemeProvider>
-  // );
 }
 
 export function OutputAvailableRoomsTableHome({ outputColumns }) {
@@ -116,14 +85,60 @@ export function OutputAvailableRoomsTableHome({ outputColumns }) {
   );
 }
 
-export function OutputColumnTablesHome({ names, ssns }) {
+export function OutputAllSSNTableHome({ outputColumns }) {
+  return (
+    <>
+      <TableHead>
+        <TableRow>
+          <TableCell as="th">room Number</TableCell>
+          <TableCell as="th">category</TableCell>
+          <TableCell as="th">floor</TableCell>
+          <TableCell as="th">beds</TableCell>
+          <TableCell as="th">price</TableCell>
+          <TableCell as="th">Date Start</TableCell>
+        </TableRow>
+      </TableHead>
+      {outputColumns}
+    </>
+  );
+}
+
+export function OutputColumnTablesHome({
+  names,
+  ssns,
+  roomNumbers,
+  dateStarts,
+}) {
   return (
     <TableBody>
-      {" "}
       {names.map((name, index) => (
         <TableRow key={index}>
           <TableCell>{name}</TableCell>
           <TableCell>{ssns[index]}</TableCell>
+          <TableCell>{roomNumbers[index]}</TableCell>{" "}
+          {/* Now handling room numbers */}
+          <TableCell>{dateStarts[index]}</TableCell> {/* And date starts */}
+        </TableRow>
+      ))}
+    </TableBody>
+  );
+}
+
+export function OutputColumnTablesSSNHome({
+  names,
+  ssns,
+  roomNumbers,
+  dateStarts,
+}) {
+  return (
+    <TableBody>
+      {names.map((name, index) => (
+        <TableRow key={index}>
+          <TableCell>{name}</TableCell>
+          <TableCell>{ssns[index]}</TableCell>
+          <TableCell>{roomNumbers[index]}</TableCell>{" "}
+          {/* Now handling room numbers */}
+          <TableCell>{dateStarts[index]}</TableCell> {/* And date starts */}
         </TableRow>
       ))}
     </TableBody>

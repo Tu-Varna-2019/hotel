@@ -70,7 +70,7 @@ export default function FigUpdateRoom(props) {
       ></Text>
       <View
         width="851px"
-        height="795px"
+        height="704px"
         display="block"
         gap="unset"
         alignItems="unset"
@@ -87,7 +87,7 @@ export default function FigUpdateRoom(props) {
         width="142px"
         height="63px"
         position="absolute"
-        top="698px"
+        top="598px"
         left="1031px"
         size="default"
         isDisabled={false}
@@ -99,8 +99,8 @@ export default function FigUpdateRoom(props) {
         width="142px"
         height="63px"
         position="absolute"
-        top="710px"
-        left="701px"
+        top="598px"
+        left="843px"
         backgroundColor="rgba(92,102,112,1)"
         size="default"
         isDisabled={false}
@@ -108,21 +108,6 @@ export default function FigUpdateRoom(props) {
         children="Cancel"
         {...getOverrideProps(overrides, "button_cancel")}
       ></Button>
-      <SelectField
-        width="323px"
-        height="unset"
-        label="Registration"
-        placeholder=" "
-        position="absolute"
-        top="452px"
-        left="978px"
-        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-        size="default"
-        isDisabled={false}
-        labelHidden={true}
-        variation="default"
-        {...getOverrideProps(overrides, "select_field_registration")}
-      ></SelectField>
       <StepperField
         height="unset"
         label="Floor"
@@ -181,8 +166,8 @@ export default function FigUpdateRoom(props) {
         label="Price"
         placeholder="Add"
         position="absolute"
-        top="591px"
-        left="802px"
+        top="452px"
+        left="962px"
         size="default"
         isDisabled={false}
         labelHidden={true}
@@ -292,35 +277,25 @@ export default function FigUpdateRoom(props) {
         gap="unset"
         alignItems="unset"
         position="absolute"
-        top="387px"
-        left="983px"
-        padding="0px 0px 0px 0px"
-        whiteSpace="pre-wrap"
-        children="Registration"
-        {...getOverrideProps(overrides, "Registration")}
-      ></Text>
-      <Text
-        fontFamily="Inter"
-        fontSize="16px"
-        fontWeight="400"
-        color="rgba(255,255,255,1)"
-        lineHeight="24px"
-        textAlign="left"
-        display="block"
-        direction="column"
-        justifyContent="unset"
-        width="103px"
-        height="51px"
-        gap="unset"
-        alignItems="unset"
-        position="absolute"
-        top="523px"
-        left="807px"
+        top="384px"
+        left="967px"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
         children="Price"
         {...getOverrideProps(overrides, "Price")}
       ></Text>
+      <Button
+        width="142px"
+        height="63px"
+        position="absolute"
+        top="598px"
+        left="655px"
+        size="default"
+        isDisabled={false}
+        variation="destructive"
+        children="Delete"
+        {...getOverrideProps(overrides, "button_delete")}
+      ></Button>
     </View>
   );
 }

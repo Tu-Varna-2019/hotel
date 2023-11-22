@@ -70,7 +70,7 @@ export default function FigCreateRoom(props) {
       ></Text>
       <View
         width="729px"
-        height="819px"
+        height="755px"
         display="block"
         gap="unset"
         alignItems="unset"
@@ -87,7 +87,7 @@ export default function FigCreateRoom(props) {
         width="142px"
         height="63px"
         position="absolute"
-        top="742px"
+        top="674px"
         left="960px"
         size="default"
         isDisabled={false}
@@ -99,7 +99,7 @@ export default function FigCreateRoom(props) {
         width="142px"
         height="63px"
         position="absolute"
-        top="742px"
+        top="674px"
         left="779px"
         backgroundColor="rgba(92,102,112,1)"
         size="default"
@@ -108,21 +108,6 @@ export default function FigCreateRoom(props) {
         children="Cancel"
         {...getOverrideProps(overrides, "button_cancel")}
       ></Button>
-      <SelectField
-        width="323px"
-        height="unset"
-        label="Registration"
-        placeholder=" "
-        position="absolute"
-        top="542px"
-        left="798px"
-        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-        size="default"
-        isDisabled={false}
-        labelHidden={true}
-        variation="default"
-        {...getOverrideProps(overrides, "select_field_registration")}
-      ></SelectField>
       <SelectField
         width="323px"
         height="unset"
@@ -168,8 +153,8 @@ export default function FigCreateRoom(props) {
         label="Price"
         placeholder="Add"
         position="absolute"
-        top="655px"
-        left="799px"
+        top="533px"
+        left="794px"
         size="default"
         isDisabled={false}
         labelHidden={true}
@@ -257,30 +242,8 @@ export default function FigCreateRoom(props) {
         gap="unset"
         alignItems="unset"
         position="absolute"
-        top="540px"
-        left="676px"
-        padding="0px 0px 0px 0px"
-        whiteSpace="pre-wrap"
-        children="Registration"
-        {...getOverrideProps(overrides, "Registration")}
-      ></Text>
-      <Text
-        fontFamily="Inter"
-        fontSize="16px"
-        fontWeight="400"
-        color="rgba(255,255,255,1)"
-        lineHeight="24px"
-        textAlign="left"
-        display="block"
-        direction="column"
-        justifyContent="unset"
-        width="103px"
-        height="51px"
-        gap="unset"
-        alignItems="unset"
-        position="absolute"
-        top="644px"
-        left="676px"
+        top="522px"
+        left="671px"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
         children="Price"

@@ -37,10 +37,10 @@ export function FuncCreateRoomOverride() {
       step: 1,
       value: RoomObject.beds,
     },
-    select_field_registration: {
-      onChange: (event) => RoomObject.handleRegistrationChange(event),
-      options: RegistrationObject.allRegistrationIDNames,
-    },
+    // select_field_registration: {
+    //   onChange: (event) => RoomObject.handleRegistrationChange(event),
+    //   options: RegistrationObject.allRegistrationIDNames,
+    // },
     textfield_price: {
       isRequired: true,
       hasError: RoomObject.price === 0 ? true : false,

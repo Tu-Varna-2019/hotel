@@ -48,15 +48,15 @@ export function RoomCreateComponent() {
 
   const handleSubmitClick = async (index) => {
     setIsSubmitButtonLoading(true);
-    let extractedPKRegistration = "";
-    if (index !== 0) {
-      // Regular expression to match the pattern
-      const regex = /\d{1,2}\/\d{1,2}\/\d{4} - (.+)/;
-      // Extract the substring
-      const match =
-        RegistrationObject.allRegistrationIDNames[index - 1].match(regex);
-      extractedPKRegistration = match ? match[1] : null;
-    }
+    // let extractedPKRegistration = "";
+    // if (index !== 0) {
+    //   // Regular expression to match the pattern
+    //   const regex = /\d{1,2}\/\d{1,2}\/\d{4} - (.+)/;
+    //   // Extract the substring
+    //   const match =
+    //     RegistrationObject.allRegistrationIDNames[index - 1].match(regex);
+    //   extractedPKRegistration = match ? match[1] : null;
+    // }
 
     logger.info("Submitting room...");
     const highestRoomNumber = await getRoomWithHighestNumber();
@@ -70,7 +70,7 @@ export function RoomCreateComponent() {
             floor: RoomObject.floor,
             beds: RoomObject.beds,
             price: RoomObject.price,
-            PKRegistration: extractedPKRegistration,
+            // PKRegistration: extractedPKRegistration,
           },
         },
       });

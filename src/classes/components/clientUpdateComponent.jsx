@@ -3,8 +3,9 @@ import {
   ComponentStateContext,
   HelpersContext,
 } from "../../contexts/data_models/context";
-import { updateClient } from "../../graphql/mutations";
+import { updateClient, deleteClient } from "../../graphql/mutations";
 import { Client } from "../data_models/client";
+import { deleteUser, updateUserAttribute } from "aws-amplify/auth";
 
 export function ClientUpdateComponent() {
   const clientUpdate = Client();
@@ -19,18 +20,25 @@ export function ClientUpdateComponent() {
     ComponentStateObject.setShowUpdateClientPage(false);
   };
 
-  const handleSubmitClick = async (pkregister) => {
+  const handleDeleteClick = async () => {
+    if (window.confirm("Are you sure you want to delete this client?")) {
+      await client.graphql({
+        query: deleteClient,
+        variables: {
+          input: {
+            id: clientUpdate.cID,
+          },
+        },
+      });
+
+      await deleteUser();
+    }
+  };
+
+  const handleSubmitClick = async () => {
     setIsSubmitButtonLoading(true);
 
     logger.info("Updating client...");
-
-    console.log("Input variables:", {
-      name: clientUpdate.name,
-      ssn: clientUpdate.ssn,
-      address: clientUpdate.address,
-      passport: clientUpdate.passport,
-      PKRegistration: pkregister,
-    });
 
     try {
       await client.graphql({
@@ -42,10 +50,18 @@ export function ClientUpdateComponent() {
             ssn: clientUpdate.ssn,
             address: clientUpdate.address,
             passport: clientUpdate.passport,
-            PKRegistration: pkregister,
+            //PKRegistration: pkregister,
           },
         },
       });
+
+      await updateUserAttribute({
+        userAttribute: {
+          attributeKey: "name", // the attribute you want to update
+          value: clientUpdate.name, // the new value for the attribute
+        },
+      });
+
       setIsSubmitButtonLoading(false);
       UtilsObject.showAlertBoxFull(
         "success",
@@ -61,6 +77,7 @@ export function ClientUpdateComponent() {
   };
 
   return {
+    handleDeleteClick,
     isSubmitButtonLoading,
     handleCancelClick,
     handleSubmitClick,

@@ -3,7 +3,7 @@ import {
   ComponentStateContext,
   HelpersContext,
 } from "../../contexts/data_models/context";
-import { updateRoom } from "../../graphql/mutations";
+import { updateRoom, deleteRoom } from "../../graphql/mutations";
 import { Room } from "../data_models/room";
 
 export function RoomUpdateComponent() {
@@ -17,6 +17,26 @@ export function RoomUpdateComponent() {
 
   const handleCancelClick = (event) => {
     ComponentStateObject.setShowUpdateRoomPage(false);
+  };
+
+  const handleDeleteClick = async () => {
+    if (window.confirm("Are you sure you want to delete this room?")) {
+      await client.graphql({
+        query: deleteRoom,
+        variables: {
+          input: {
+            id: roomUpdate.cID,
+          },
+        },
+      });
+      setIsSubmitButtonLoading(false);
+      UtilsObject.showAlertBoxFull(
+        "success",
+        "Room deleted successfully!",
+        "success"
+      );
+      ComponentStateObject.setShowUpdateRoomPage(false);
+    }
   };
 
   const handleSubmitClick = async (pkregister) => {
@@ -35,7 +55,7 @@ export function RoomUpdateComponent() {
             floor: roomUpdate.floor,
             beds: roomUpdate.beds,
             price: roomUpdate.price,
-            PKRegistration: pkregister,
+            // PKRegistration: pkregister,
           },
         },
       });
@@ -54,6 +74,7 @@ export function RoomUpdateComponent() {
   };
 
   return {
+    handleDeleteClick,
     isSubmitButtonLoading,
     handleCancelClick,
     handleSubmitClick,

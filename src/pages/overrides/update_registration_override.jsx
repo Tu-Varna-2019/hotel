@@ -3,7 +3,7 @@ import { ClientUpdateComponent } from "../../classes/components/clientUpdateComp
 import { DataModelContext } from "../../contexts/data_models/context";
 
 export function FuncUpdateClientOverride() {
-  const { RegistrationObject } = React.useContext(DataModelContext);
+  const { RegistrationObject, RoomObject } = React.useContext(DataModelContext);
 
   const {
     isSubmitButtonLoading,
@@ -13,7 +13,7 @@ export function FuncUpdateClientOverride() {
   } = ClientUpdateComponent();
 
   const updateClientOOverride = {
-    select_field_user: {
+    select_field_client: {
       isRequired: true,
       //value: selectedClientUpdate,
       options: Object.values(clientUpdate.allClientIDNames),
@@ -23,6 +23,13 @@ export function FuncUpdateClientOverride() {
           event,
           RegistrationObject.allRegistrationIDNames
         ),
+    },
+    select_field_room: {
+      isRequired: true,
+      value: RegistrationObject.selectedRoomNumber,
+      onChange: (event) =>
+        RegistrationObject.handleSelectedRoomNumberChange(event),
+      options: Object.values(RoomObject.allRoomsIDNumbers),
     },
     textfield_name: {
       isRequired: true,

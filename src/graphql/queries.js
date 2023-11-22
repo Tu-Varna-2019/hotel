@@ -8,37 +8,8 @@ export const getRegistration = /* GraphQL */ `
       dateCreation
       dateStart
       dateEnd
-      FKClients {
-        items {
-          id
-          name
-          ssn
-          address
-          passport
-          PKRegistration
-          createdAt
-          updatedAt
-          __typename
-        }
-        nextToken
-        __typename
-      }
-      FKRooms {
-        items {
-          id
-          roomNumber
-          category
-          floor
-          beds
-          price
-          PKRegistration
-          createdAt
-          updatedAt
-          __typename
-        }
-        nextToken
-        __typename
-      }
+      PKClient
+      PKRoom
       createdAt
       updatedAt
       __typename
@@ -57,14 +28,70 @@ export const listRegistrations = /* GraphQL */ `
         dateCreation
         dateStart
         dateEnd
-        FKClients {
-          nextToken
-          __typename
-        }
-        FKRooms {
-          nextToken
-          __typename
-        }
+        PKClient
+        PKRoom
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const registrationsByPKClient = /* GraphQL */ `
+  query RegistrationsByPKClient(
+    $PKClient: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelRegistrationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    registrationsByPKClient(
+      PKClient: $PKClient
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        dateCreation
+        dateStart
+        dateEnd
+        PKClient
+        PKRoom
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const registrationsByPKRoom = /* GraphQL */ `
+  query RegistrationsByPKRoom(
+    $PKRoom: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelRegistrationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    registrationsByPKRoom(
+      PKRoom: $PKRoom
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        dateCreation
+        dateStart
+        dateEnd
+        PKClient
+        PKRoom
         createdAt
         updatedAt
         __typename
@@ -83,7 +110,21 @@ export const getRoom = /* GraphQL */ `
       floor
       beds
       price
-      PKRegistration
+      FKRegistrations {
+        items {
+          id
+          dateCreation
+          dateStart
+          dateEnd
+          PKClient
+          PKRoom
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -104,39 +145,10 @@ export const listRooms = /* GraphQL */ `
         floor
         beds
         price
-        PKRegistration
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const roomsByPKRegistration = /* GraphQL */ `
-  query RoomsByPKRegistration(
-    $PKRegistration: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelRoomFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    roomsByPKRegistration(
-      PKRegistration: $PKRegistration
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        roomNumber
-        category
-        floor
-        beds
-        price
-        PKRegistration
+        FKRegistrations {
+          nextToken
+          __typename
+        }
         createdAt
         updatedAt
         __typename
@@ -154,7 +166,21 @@ export const getClient = /* GraphQL */ `
       ssn
       address
       passport
-      PKRegistration
+      FKRegistrations {
+        items {
+          id
+          dateCreation
+          dateStart
+          dateEnd
+          PKClient
+          PKRoom
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -174,38 +200,10 @@ export const listClients = /* GraphQL */ `
         ssn
         address
         passport
-        PKRegistration
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const clientsByPKRegistration = /* GraphQL */ `
-  query ClientsByPKRegistration(
-    $PKRegistration: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelClientFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    clientsByPKRegistration(
-      PKRegistration: $PKRegistration
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        name
-        ssn
-        address
-        passport
-        PKRegistration
+        FKRegistrations {
+          nextToken
+          __typename
+        }
         createdAt
         updatedAt
         __typename

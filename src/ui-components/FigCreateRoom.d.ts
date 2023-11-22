@@ -24,7 +24,6 @@ export declare type FigCreateRoomOverridesProps = {
     "Rectangle 1"?: PrimitiveOverrideProps<ViewProps>;
     button_submit?: PrimitiveOverrideProps<ButtonProps>;
     button_cancel?: PrimitiveOverrideProps<ButtonProps>;
-    select_field_registration?: PrimitiveOverrideProps<SelectFieldProps>;
     selectfield_category?: PrimitiveOverrideProps<SelectFieldProps>;
     stepperfield_floor?: PrimitiveOverrideProps<StepperFieldProps>;
     stepperfield_beds?: PrimitiveOverrideProps<StepperFieldProps>;
@@ -32,7 +31,6 @@ export declare type FigCreateRoomOverridesProps = {
     Category?: PrimitiveOverrideProps<TextProps>;
     Floor?: PrimitiveOverrideProps<TextProps>;
     Beds?: PrimitiveOverrideProps<TextProps>;
-    Registration?: PrimitiveOverrideProps<TextProps>;
     Price?: PrimitiveOverrideProps<TextProps>;
 } & EscapeHatchProps;
 export declare type FigCreateRoomProps = React.PropsWithChildren<Partial<ViewProps> & {

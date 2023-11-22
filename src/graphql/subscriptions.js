@@ -10,37 +10,8 @@ export const onCreateRegistration = /* GraphQL */ `
       dateCreation
       dateStart
       dateEnd
-      FKClients {
-        items {
-          id
-          name
-          ssn
-          address
-          passport
-          PKRegistration
-          createdAt
-          updatedAt
-          __typename
-        }
-        nextToken
-        __typename
-      }
-      FKRooms {
-        items {
-          id
-          roomNumber
-          category
-          floor
-          beds
-          price
-          PKRegistration
-          createdAt
-          updatedAt
-          __typename
-        }
-        nextToken
-        __typename
-      }
+      PKClient
+      PKRoom
       createdAt
       updatedAt
       __typename
@@ -56,37 +27,8 @@ export const onUpdateRegistration = /* GraphQL */ `
       dateCreation
       dateStart
       dateEnd
-      FKClients {
-        items {
-          id
-          name
-          ssn
-          address
-          passport
-          PKRegistration
-          createdAt
-          updatedAt
-          __typename
-        }
-        nextToken
-        __typename
-      }
-      FKRooms {
-        items {
-          id
-          roomNumber
-          category
-          floor
-          beds
-          price
-          PKRegistration
-          createdAt
-          updatedAt
-          __typename
-        }
-        nextToken
-        __typename
-      }
+      PKClient
+      PKRoom
       createdAt
       updatedAt
       __typename
@@ -102,37 +44,8 @@ export const onDeleteRegistration = /* GraphQL */ `
       dateCreation
       dateStart
       dateEnd
-      FKClients {
-        items {
-          id
-          name
-          ssn
-          address
-          passport
-          PKRegistration
-          createdAt
-          updatedAt
-          __typename
-        }
-        nextToken
-        __typename
-      }
-      FKRooms {
-        items {
-          id
-          roomNumber
-          category
-          floor
-          beds
-          price
-          PKRegistration
-          createdAt
-          updatedAt
-          __typename
-        }
-        nextToken
-        __typename
-      }
+      PKClient
+      PKRoom
       createdAt
       updatedAt
       __typename
@@ -148,7 +61,21 @@ export const onCreateRoom = /* GraphQL */ `
       floor
       beds
       price
-      PKRegistration
+      FKRegistrations {
+        items {
+          id
+          dateCreation
+          dateStart
+          dateEnd
+          PKClient
+          PKRoom
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -164,7 +91,21 @@ export const onUpdateRoom = /* GraphQL */ `
       floor
       beds
       price
-      PKRegistration
+      FKRegistrations {
+        items {
+          id
+          dateCreation
+          dateStart
+          dateEnd
+          PKClient
+          PKRoom
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -180,7 +121,21 @@ export const onDeleteRoom = /* GraphQL */ `
       floor
       beds
       price
-      PKRegistration
+      FKRegistrations {
+        items {
+          id
+          dateCreation
+          dateStart
+          dateEnd
+          PKClient
+          PKRoom
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -195,7 +150,21 @@ export const onCreateClient = /* GraphQL */ `
       ssn
       address
       passport
-      PKRegistration
+      FKRegistrations {
+        items {
+          id
+          dateCreation
+          dateStart
+          dateEnd
+          PKClient
+          PKRoom
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -210,7 +179,21 @@ export const onUpdateClient = /* GraphQL */ `
       ssn
       address
       passport
-      PKRegistration
+      FKRegistrations {
+        items {
+          id
+          dateCreation
+          dateStart
+          dateEnd
+          PKClient
+          PKRoom
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -225,7 +208,21 @@ export const onDeleteClient = /* GraphQL */ `
       ssn
       address
       passport
-      PKRegistration
+      FKRegistrations {
+        items {
+          id
+          dateCreation
+          dateStart
+          dateEnd
+          PKClient
+          PKRoom
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename

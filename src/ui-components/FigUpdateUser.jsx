@@ -61,14 +61,14 @@ export default function FigUpdateUser(props) {
         alignItems="unset"
         position="absolute"
         top="115px"
-        left="calc(50% - 174.5px - 6.5px)"
+        left="calc(50% - 174.5px - 43.5px)"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
         children="Update User"
         {...getOverrideProps(overrides, "Update User")}
       ></Text>
       <View
-        width="580px"
+        width="678px"
         height="751px"
         display="block"
         gap="unset"
@@ -76,7 +76,7 @@ export default function FigUpdateUser(props) {
         justifyContent="unset"
         position="absolute"
         top="25px"
-        left="652px"
+        left="554px"
         border="3px SOLID rgba(255,255,255,1)"
         borderRadius="219px"
         padding="0px 0px 0px 0px"
@@ -87,7 +87,7 @@ export default function FigUpdateUser(props) {
         height="63px"
         position="absolute"
         top="646px"
-        left="960px"
+        left="996px"
         size="default"
         isDisabled={false}
         variation="primary"
@@ -99,7 +99,7 @@ export default function FigUpdateUser(props) {
         height="63px"
         position="absolute"
         top="646px"
-        left="779px"
+        left="831px"
         backgroundColor="rgba(92,102,112,1)"
         size="default"
         isDisabled={false}
@@ -107,29 +107,26 @@ export default function FigUpdateUser(props) {
         children="Cancel"
         {...getOverrideProps(overrides, "button_cancel")}
       ></Button>
-      <SelectField
-        width="323px"
-        height="unset"
-        label="Registration"
-        placeholder=" "
+      <Button
+        width="142px"
+        height="63px"
         position="absolute"
-        top="531px"
-        left="823px"
-        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+        top="646px"
+        left="664px"
         size="default"
         isDisabled={false}
-        labelHidden={true}
-        variation="default"
-        {...getOverrideProps(overrides, "select_field_registration")}
-      ></SelectField>
+        variation="destructive"
+        children="Delete"
+        {...getOverrideProps(overrides, "button_delete")}
+      ></Button>
       <SelectField
         width="323px"
         height="unset"
         label="User"
         placeholder=" "
         position="absolute"
-        top="245px"
-        left="831px"
+        top="279px"
+        left="805px"
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         size="default"
         isDisabled={false}
@@ -143,8 +140,8 @@ export default function FigUpdateUser(props) {
         label="Name"
         placeholder="Add"
         position="absolute"
-        top="339px"
-        left="831px"
+        top="373px"
+        left="805px"
         size="default"
         isDisabled={false}
         labelHidden={true}
@@ -157,8 +154,8 @@ export default function FigUpdateUser(props) {
         label="Address"
         placeholder="Add"
         position="absolute"
-        top="437px"
-        left="831px"
+        top="471px"
+        left="805px"
         size="default"
         isDisabled={false}
         labelHidden={true}
@@ -180,8 +177,8 @@ export default function FigUpdateUser(props) {
         gap="unset"
         alignItems="unset"
         position="absolute"
-        top="239px"
-        left="683px"
+        top="273px"
+        left="657px"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
         children="User"
@@ -202,8 +199,8 @@ export default function FigUpdateUser(props) {
         gap="unset"
         alignItems="unset"
         position="absolute"
-        top="348px"
-        left="683px"
+        top="382px"
+        left="657px"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
         children="Name"
@@ -224,34 +221,12 @@ export default function FigUpdateUser(props) {
         gap="unset"
         alignItems="unset"
         position="absolute"
-        top="443px"
-        left="683px"
+        top="477px"
+        left="657px"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
         children="Address"
         {...getOverrideProps(overrides, "Address")}
-      ></Text>
-      <Text
-        fontFamily="Inter"
-        fontSize="16px"
-        fontWeight="400"
-        color="rgba(255,255,255,1)"
-        lineHeight="24px"
-        textAlign="left"
-        display="block"
-        direction="column"
-        justifyContent="unset"
-        width="103px"
-        height="51px"
-        gap="unset"
-        alignItems="unset"
-        position="absolute"
-        top="534px"
-        left="683px"
-        padding="0px 0px 0px 0px"
-        whiteSpace="pre-wrap"
-        children="Registration"
-        {...getOverrideProps(overrides, "Registration")}
       ></Text>
     </View>
   );

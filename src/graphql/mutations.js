@@ -11,37 +11,8 @@ export const createRegistration = /* GraphQL */ `
       dateCreation
       dateStart
       dateEnd
-      FKClients {
-        items {
-          id
-          name
-          ssn
-          address
-          passport
-          PKRegistration
-          createdAt
-          updatedAt
-          __typename
-        }
-        nextToken
-        __typename
-      }
-      FKRooms {
-        items {
-          id
-          roomNumber
-          category
-          floor
-          beds
-          price
-          PKRegistration
-          createdAt
-          updatedAt
-          __typename
-        }
-        nextToken
-        __typename
-      }
+      PKClient
+      PKRoom
       createdAt
       updatedAt
       __typename
@@ -58,37 +29,8 @@ export const updateRegistration = /* GraphQL */ `
       dateCreation
       dateStart
       dateEnd
-      FKClients {
-        items {
-          id
-          name
-          ssn
-          address
-          passport
-          PKRegistration
-          createdAt
-          updatedAt
-          __typename
-        }
-        nextToken
-        __typename
-      }
-      FKRooms {
-        items {
-          id
-          roomNumber
-          category
-          floor
-          beds
-          price
-          PKRegistration
-          createdAt
-          updatedAt
-          __typename
-        }
-        nextToken
-        __typename
-      }
+      PKClient
+      PKRoom
       createdAt
       updatedAt
       __typename
@@ -105,37 +47,8 @@ export const deleteRegistration = /* GraphQL */ `
       dateCreation
       dateStart
       dateEnd
-      FKClients {
-        items {
-          id
-          name
-          ssn
-          address
-          passport
-          PKRegistration
-          createdAt
-          updatedAt
-          __typename
-        }
-        nextToken
-        __typename
-      }
-      FKRooms {
-        items {
-          id
-          roomNumber
-          category
-          floor
-          beds
-          price
-          PKRegistration
-          createdAt
-          updatedAt
-          __typename
-        }
-        nextToken
-        __typename
-      }
+      PKClient
+      PKRoom
       createdAt
       updatedAt
       __typename
@@ -154,7 +67,21 @@ export const createRoom = /* GraphQL */ `
       floor
       beds
       price
-      PKRegistration
+      FKRegistrations {
+        items {
+          id
+          dateCreation
+          dateStart
+          dateEnd
+          PKClient
+          PKRoom
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -173,7 +100,21 @@ export const updateRoom = /* GraphQL */ `
       floor
       beds
       price
-      PKRegistration
+      FKRegistrations {
+        items {
+          id
+          dateCreation
+          dateStart
+          dateEnd
+          PKClient
+          PKRoom
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -192,7 +133,21 @@ export const deleteRoom = /* GraphQL */ `
       floor
       beds
       price
-      PKRegistration
+      FKRegistrations {
+        items {
+          id
+          dateCreation
+          dateStart
+          dateEnd
+          PKClient
+          PKRoom
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -210,7 +165,21 @@ export const createClient = /* GraphQL */ `
       ssn
       address
       passport
-      PKRegistration
+      FKRegistrations {
+        items {
+          id
+          dateCreation
+          dateStart
+          dateEnd
+          PKClient
+          PKRoom
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -228,7 +197,21 @@ export const updateClient = /* GraphQL */ `
       ssn
       address
       passport
-      PKRegistration
+      FKRegistrations {
+        items {
+          id
+          dateCreation
+          dateStart
+          dateEnd
+          PKClient
+          PKRoom
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -246,7 +229,21 @@ export const deleteClient = /* GraphQL */ `
       ssn
       address
       passport
-      PKRegistration
+      FKRegistrations {
+        items {
+          id
+          dateCreation
+          dateStart
+          dateEnd
+          PKClient
+          PKRoom
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename

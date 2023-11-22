@@ -51,8 +51,6 @@ export function Client() {
                 address: userAttributes.address,
                 ssn: userAttributes["custom:SocialSecurityNumber"],
                 passport: userAttributes["custom:Passport"],
-                // Dummy value for now
-                PKRegistration: "9cbd3d3a-ee43-4cef-936a-6b6097433a7d",
               },
             },
           });
@@ -97,8 +95,8 @@ export function Client() {
   };
 
   const setCllientByAllClientIDNames = async (
-    event,
-    registrationIDNamesArr
+    event
+    //registrationIDNamesArr
   ) => {
     const clientID = UtilsObject.dictFindKeyByValue(
       allClientIDNames,
@@ -118,16 +116,16 @@ export function Client() {
     setPassport(selectedClient.data.getClient.passport);
 
     // Get a specific item
-    const oneRegistration = await client.graphql({
-      query: getRegistration,
-      variables: { id: selectedClient.data.getClient.PKRegistration },
-    });
+    // const oneRegistration = await client.graphql({
+    //   query: getRegistration,
+    //   variables: { id: selectedClient.data.getClient.PKRegistration },
+    // });
 
-    const foundRegistrationNameID = UtilsObject.allRegistrationIDNamesBySubID(
-      registrationIDNamesArr,
-      oneRegistration.data.getRegistration.id
-    );
-    setSelectedRegistrationName(foundRegistrationNameID);
+    // const foundRegistrationNameID = UtilsObject.allRegistrationIDNamesBySubID(
+    //   registrationIDNamesArr,
+    //   oneRegistration.data.getRegistration.id
+    // );
+    // setSelectedRegistrationName(foundRegistrationNameID);
   };
 
   const handleSelectedRegistrationName = (event) => {

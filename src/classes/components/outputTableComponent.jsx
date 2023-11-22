@@ -11,6 +11,8 @@ import {
   listClients,
   getClient,
   listRegistrations,
+  listRooms,
+  getRoom,
 } from "../../graphql/queries";
 
 export function OutputTableComponent() {
@@ -18,15 +20,15 @@ export function OutputTableComponent() {
   const { UtilsObject } = React.useContext(HelpersContext);
   const { logger, client } = UtilsObject;
 
-  const getClientsByLastYearDate = async () => {
+  const getClientsAndRoomsByLastYearRegistrations = async () => {
     try {
       const dateOneYearAgo = new Date();
       dateOneYearAgo.setFullYear(dateOneYearAgo.getFullYear() - 1);
-      const dateYearAgoString = dateOneYearAgo.toISOString().split("T")[0]; // Format as YYYY-MM-DD
+      const dateYearAgoString = dateOneYearAgo.toISOString().split("T")[0];
 
-      // First, fetch registrations from the last year.
+      // Fetch registrations from the last year, including client and room details
       const registrationData = await client.graphql({
-        query: listRegistrations,
+        query: listRegistrations, // Adjust this query to include client and room details
         variables: {
           filter: {
             dateStart: {
@@ -36,41 +38,48 @@ export function OutputTableComponent() {
         },
       });
 
-      // Extract the IDs of those registrations.
-      const registrationIds = registrationData.data.listRegistrations.items.map(
-        (reg) => reg.id
-      );
+      const registrations = registrationData.data.listRegistrations.items;
 
-      // Now, use those IDs to query for clients associated with those registrations.
-      const clientsDataPromises = registrationIds.map((regId) =>
-        client.graphql({
-          query: listClients,
-          variables: {
-            filter: {
-              PKRegistration: {
-                eq: regId,
-              },
-            },
-          },
-        })
-      );
+      // Prepare arrays to store the results
+      const names = [];
+      const ssns = [];
+      const roomNumbers = [];
+      const dateStarts = [];
 
-      // Await all the client data queries.
-      const clientsResults = await Promise.all(clientsDataPromises);
+      // Loop through each registration
+      for (const registration of registrations) {
+        const clientID = registration.PKClient;
+        const roomID = registration.PKRoom;
 
-      // Flatten the result arrays and extract the client data.
-      const clients = clientsResults.flatMap(
-        (result) => result.data.listClients.items
-      );
+        // Fetch client data
+        // Assuming getClient and getRoom are queries for individual client and room
+        const clientData = await client.graphql({
+          query: getClient,
+          variables: { id: clientID },
+        });
 
-      // Now you have an array of clients which you can map to names and SSNs.
-      const names = clients.map((client) => client.name);
-      const ssns = clients.map((client) => client.ssn);
+        // Fetch room data
+        const roomData = await client.graphql({
+          query: getRoom,
+          variables: { id: roomID },
+        });
 
-      logger.info("Clients fetched successfully.", names, ssns);
-      return { names, ssns };
+        // Add client and room details to arrays
+        if (clientData.data.getClient) {
+          names.push(clientData.data.getClient.name);
+          ssns.push(clientData.data.getClient.ssn);
+          dateStarts.push(registration.dateStart); // Assuming dateStart is part of registration
+        }
+
+        if (roomData.data.getRoom) {
+          roomNumbers.push(roomData.data.getRoom.roomNumber);
+        }
+      }
+
+      return { names, ssns, roomNumbers, dateStarts };
     } catch (err) {
-      console.error("Error fetching customers:", err);
+      console.error("Error fetching data:", err);
+      return { names: [], ssns: [], roomNumbers: [], dateStarts: [] };
     }
   };
 
@@ -86,9 +95,17 @@ export function OutputTableComponent() {
 
   const getOutputTableData = async () => {
     if (ComponentStateObject.showAvailableRooms) {
-      const { names, ssns } = await getClientsByLastYearDate();
+      const { names, ssns, roomNumbers, dateStarts } =
+        await getClientsAndRoomsByLastYearRegistrations();
+
+      // Pass the fetched data to the OutputColumnTablesHome component
       const outputColumns = (
-        <OutputColumnTablesHome names={names} ssns={ssns} />
+        <OutputColumnTablesHome
+          names={names}
+          ssns={ssns}
+          roomNumbers={roomNumbers}
+          dateStarts={dateStarts}
+        />
       );
 
       return <OutputAvailableRoomsTableHome outputColumns={outputColumns} />;

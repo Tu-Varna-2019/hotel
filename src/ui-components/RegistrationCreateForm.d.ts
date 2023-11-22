@@ -25,15 +25,15 @@ export declare type RegistrationCreateFormInputValues = {
     dateCreation?: string;
     dateStart?: string;
     dateEnd?: string;
-    FKClients?: any[];
-    FKRooms?: any[];
+    PKClient?: string;
+    PKRoom?: string;
 };
 export declare type RegistrationCreateFormValidationValues = {
     dateCreation?: ValidationFunction<string>;
     dateStart?: ValidationFunction<string>;
     dateEnd?: ValidationFunction<string>;
-    FKClients?: ValidationFunction<any>;
-    FKRooms?: ValidationFunction<any>;
+    PKClient?: ValidationFunction<string>;
+    PKRoom?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type RegistrationCreateFormOverridesProps = {
@@ -41,8 +41,8 @@ export declare type RegistrationCreateFormOverridesProps = {
     dateCreation?: PrimitiveOverrideProps<TextFieldProps>;
     dateStart?: PrimitiveOverrideProps<TextFieldProps>;
     dateEnd?: PrimitiveOverrideProps<TextFieldProps>;
-    FKClients?: PrimitiveOverrideProps<AutocompleteProps>;
-    FKRooms?: PrimitiveOverrideProps<AutocompleteProps>;
+    PKClient?: PrimitiveOverrideProps<AutocompleteProps>;
+    PKRoom?: PrimitiveOverrideProps<AutocompleteProps>;
 } & EscapeHatchProps;
 export declare type RegistrationCreateFormProps = React.PropsWithChildren<{
     overrides?: RegistrationCreateFormOverridesProps | undefined | null;

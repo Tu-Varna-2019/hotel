@@ -3,8 +3,8 @@ type Registration @model @auth(rules: [{allow: public}]) {
   dateCreation: AWSDate
   dateStart: AWSDate
   dateEnd: AWSDate
-  FKClients: [Client] @hasMany(indexName: "byRegistration", fields: ["id"])
-  FKRooms: [Room] @hasMany(indexName: "byRegistration", fields: ["id"])
+  PKClient: ID! @index(name: "byClient")
+  PKRoom: ID! @index(name: "byRoom")
 }
 
 type Room @model @auth(rules: [{allow: public}]) {
@@ -14,7 +14,7 @@ type Room @model @auth(rules: [{allow: public}]) {
   floor: Int
   beds: Int
   price: Float
-  PKRegistration: ID! @index(name: "byRegistration")
+  FKRegistrations: [Registration] @hasMany(indexName: "byRoom", fields: ["id"])
 }
 
 type Client @model @auth(rules: [{allow: public}]) {
@@ -23,6 +23,6 @@ type Client @model @auth(rules: [{allow: public}]) {
   ssn: String
   address: String
   passport: String
-  PKRegistration: ID! @index(name: "byRegistration")
+  FKRegistrations: [Registration] @hasMany(indexName: "byClient", fields: ["id"])
 }
  

@@ -9,7 +9,7 @@ export function HomeComponent() {
   const selectFieldInquery = [
     "all available rooms at the current date and time, sorted by room category",
     "booking turnover derived by setting a time period",
-    "displaying all names, TINs of customers who occupied rooms in the last year",
+    "displaying all names, EGN of customers who occupied rooms in the last year",
     "to draw a schedule - most frequently booked room: Room-Period by months",
   ];
   const selectFieldCreate = ["Room", "Registration"];
@@ -33,13 +33,13 @@ export function HomeComponent() {
   const handleSelectFieldInqueryOptions = (event) => {
     switch (event.target.value) {
       case "all available rooms at the current date and time, sorted by room category":
-        ComponentStateObject.setShowAvailableRooms(true);
+        ComponentStateObject.setShowAllSSNs(true); // completely wrong
         break;
       case "booking turnover derived by setting a time period":
         ComponentStateObject.setShowBookingTurnover(true);
         break;
-      case "displaying all names, TINs of customers who occupied rooms in the last year":
-        ComponentStateObject.setShowAllSSNs(true);
+      case "displaying all names, EGN of customers who occupied rooms in the last year":
+        ComponentStateObject.setShowAvailableRooms(true);
         break;
       case "to draw a schedule - most frequently booked room: Room-Period by months":
         break;
