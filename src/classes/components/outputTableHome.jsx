@@ -14,7 +14,7 @@ export function OutputTableHome() {
   const { UtilsObject } = React.useContext(HelpersContext);
   const { getOutputTableData } = OutputTableComponent();
 
-  const [tableResult, setTableResult] = React.useState(null);
+  const { tableResultTurnOver } = UtilsObject;
 
   const theme = {
     name: "table-theme",
@@ -49,21 +49,10 @@ export function OutputTableHome() {
     },
   };
 
-  useEffect(() => {
-    // Define the async function inside the effect
-    const fetchData = async () => {
-      const outputData = await getOutputTableData();
-      setTableResult(outputData); // Set the data to state
-    };
-
-    // Call the async function
-    fetchData().catch(console.error);
-  }, [getOutputTableData]);
-
   return (
     <ThemeProvider theme={theme} colorMode="light">
       <Table highlightOnHover variation="striped">
-        {tableResult}
+        {tableResultTurnOver}
       </Table>
     </ThemeProvider>
   );
@@ -96,6 +85,7 @@ export function OutputAllSSNTableHome({ outputColumns }) {
           <TableCell as="th">beds</TableCell>
           <TableCell as="th">price</TableCell>
           <TableCell as="th">Date Start</TableCell>
+          <TableCell as="th">Date End</TableCell>
         </TableRow>
       </TableHead>
       {outputColumns}
@@ -103,28 +93,33 @@ export function OutputAllSSNTableHome({ outputColumns }) {
   );
 }
 
-export function OutputColumnTablesHome({
-  names,
-  ssns,
+export function OutputColumnTablesSSNHome({
   roomNumbers,
+  categories,
+  floors,
+  beds,
+  prices,
   dateStarts,
+  dateEnds,
 }) {
   return (
     <TableBody>
-      {names.map((name, index) => (
+      {roomNumbers.map((roomNumber, index) => (
         <TableRow key={index}>
-          <TableCell>{name}</TableCell>
-          <TableCell>{ssns[index]}</TableCell>
-          <TableCell>{roomNumbers[index]}</TableCell>{" "}
-          {/* Now handling room numbers */}
-          <TableCell>{dateStarts[index]}</TableCell> {/* And date starts */}
+          <TableCell>{roomNumber}</TableCell>
+          <TableCell>{categories[index]}</TableCell>
+          <TableCell>{floors[index]}</TableCell>
+          <TableCell>{beds[index]}</TableCell>
+          <TableCell>{prices[index]}</TableCell>
+          <TableCell>{dateStarts[index]}</TableCell>
+          <TableCell>{dateEnds[index]}</TableCell>
         </TableRow>
       ))}
     </TableBody>
   );
 }
 
-export function OutputColumnTablesSSNHome({
+export function OutputColumnTablesHome({
   names,
   ssns,
   roomNumbers,

@@ -12,6 +12,7 @@ export function Utils() {
   const [alertBoxMessage, setAlertBoxMessage] = React.useState("");
   const [alertBoxHeading, setAlertBoxHeading] = React.useState("");
   const [alertBoxVariation, setAlertBoxVariation] = React.useState("");
+  const [tableResultTurnOver, setTableResultTurnOver] = React.useState(null);
 
   const showAlertBoxFull = (heading, message, variation) => {
     setAlertBoxHeading(heading);
@@ -96,5 +97,7 @@ export function Utils() {
     logger,
     apiCreateHotel,
     apiUpdateHotel,
+    tableResultTurnOver,
+    setTableResultTurnOver,
   };
 }

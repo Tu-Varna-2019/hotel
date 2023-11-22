@@ -43,3 +43,9 @@ useEffect(() => {
       options: selectFieldBookARoomOptions,
     },
 ```
+
+
+
+### TODO
+
+- [] fix date comparison for `getRoomDetailsByLastYearRegistrations`. For some reason it doesn't exclude dateStart and dateEnd if they are in the same day as the currentDate

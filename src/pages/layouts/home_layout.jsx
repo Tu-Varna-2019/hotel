@@ -19,6 +19,7 @@ import { FuncUpdateClientOverride } from "../overrides/update_client_override";
 import { FuncUpdateRoomOverride } from "../overrides/update_room_override";
 import { FuncOutputTableOverride } from "../overrides/output_table_override";
 import { OutputTableHome } from "../../classes/components/outputTableHome";
+import { OutputTableTurnOver } from "../../classes/components/outputTableTurnOver";
 
 export default function HomeLayout() {
   const { ComponentStateObject } = React.useContext(ComponentStateContext);
@@ -83,6 +84,21 @@ export default function HomeLayout() {
             right="700px"
           >
             <OutputTableHome />
+          </View>
+        </View>
+      )}
+      {ComponentStateObject.showBookingTurnover && (
+        <View position="absolute" display="block" top="0">
+          <FigBlank overrides={outputTableOverride} />
+
+          <View
+            position="absolute"
+            display="block"
+            top="0"
+            justifyContent="center"
+            right="700px"
+          >
+            <OutputTableTurnOver />
           </View>
         </View>
       )}
