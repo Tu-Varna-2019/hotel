@@ -1,18 +1,16 @@
 import {
   Table,
+  TableBody,
+  TableCell,
   TableHead,
   TableRow,
-  TableCell,
-  TableBody,
   ThemeProvider,
 } from "@aws-amplify/ui-react";
+import React from "react";
 import { HelpersContext } from "../../contexts/data_models/context";
-import React, { useEffect } from "react";
-import { OutputTableComponent } from "./outputTableComponent";
 
 export function OutputTableHome() {
   const { UtilsObject } = React.useContext(HelpersContext);
-  const { getOutputTableData } = OutputTableComponent();
 
   const { tableResultTurnOver } = UtilsObject;
 

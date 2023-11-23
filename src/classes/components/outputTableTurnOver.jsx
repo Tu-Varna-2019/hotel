@@ -1,29 +1,29 @@
 import {
+  Button,
+  Divider,
+  Flex,
+  Input,
+  Label,
+  Radio,
+  RadioGroupField,
   Table,
+  TableBody,
+  TableCell,
   TableHead,
   TableRow,
-  TableCell,
-  TableBody,
   ThemeProvider,
-  RadioGroupField,
-  Radio,
-  Label,
-  Input,
-  Flex,
   View,
-  Divider,
-  Button,
+  useTheme,
 } from "@aws-amplify/ui-react";
+import React from "react";
 import { HelpersContext } from "../../contexts/data_models/context";
-import React, { useEffect } from "react";
 import { OutputTableComponent } from "./outputTableComponent";
 
 export function OutputTableTurnOver() {
   const { UtilsObject } = React.useContext(HelpersContext);
-  const { tableResultTurnOver, setTableResultTurnOver } = UtilsObject;
+  const { tableResultTurnOver } = UtilsObject;
 
-  const { getOutputTableData, handleRadioTurnOverClick } =
-    OutputTableComponent();
+  const { handleRadioTurnOverClick } = OutputTableComponent();
 
   const [radioValue, setRadioValue] = React.useState("Day");
   const [inputValue, setInputValue] = React.useState("");
@@ -35,17 +35,14 @@ export function OutputTableTurnOver() {
         radiogroup: {
           radio: {
             borderWidth: { value: "{borderWidths.small}" },
-            borderColor: { value: "{colors.blue.60}" },
-            backgroundColor: { value: "{colors.blue.20}" },
-            _checked: {
-              color: { value: "{colors.blue.80}" },
-            },
+            borderColor: { value: "{colors.white.60}" },
+            backgroundColor: { value: "{colors.white.20}" },
             label: {
-              color: { value: "{colors.blue.80}" },
+              color: { value: "{colors.white.80}" },
             },
           },
           legend: {
-            color: { value: "{colors.blue.80}" },
+            color: { value: "{colors.white.80}" },
             fontWeight: { value: "{fontWeights.bold}" },
           },
         },
@@ -53,54 +50,47 @@ export function OutputTableTurnOver() {
     },
   };
 
+  const { tokens } = useTheme();
   return (
-    <>
+    <View borderRadius={tokens.radii.large} fontSize={tokens.fontSizes.xl}>
       <ThemeProvider theme={themeRadio} colorMode="light">
-        <View>
-          <RadioGroupField
-            legend="TurnOver"
-            name="themed"
-            defaultValue="blue"
-            onChange={(e) => setRadioValue(e.target.value)}
+        <RadioGroupField
+          legend="TurnOver"
+          name="themed"
+          onChange={(e) => setRadioValue(e.target.value)}
+          defaultValue="Day"
+        >
+          <Radio value="Day">Day</Radio>
+          <Radio value="Month">Month</Radio>
+          <Radio value="Last_3_months">Last 3 months</Radio>
+          <Radio value="Last_6_months">Last 6 months</Radio>
+          <Radio value="Year">Year</Radio>
+        </RadioGroupField>
+        <Divider />
+        <Flex direction="column" gap="medium">
+          <Label htmlFor="quantity" color={"white"}>
+            Enter date
+          </Label>
+          <Input
+            id="departing"
+            type="date"
+            onChange={(e) => setInputValue(e.currentTarget.value)}
+          />
+          <Button
+            ariaLabel="To the moon!"
+            loadingText=""
+            style={{
+              background: "#ADD8E6",
+            }}
+            onClick={() => handleRadioTurnOverClick(radioValue, inputValue)}
+            isDisabled={inputValue === ""}
           >
-            <Radio value="Day">Day</Radio>
-            <Radio value="Month">Month</Radio>
-            <Radio value="Last_3_months">Last 3 months</Radio>
-            <Radio value="Last_6_months">Last 6 months</Radio>
-            <Radio value="Year">Year</Radio>
-          </RadioGroupField>
-          <Divider />
-          <Flex direction="column" gap="small">
-            <Label htmlFor="quantity">
-              Enter number for calculating TurnOver:{" "}
-            </Label>
-            <Input
-              id="departing"
-              type="date"
-              onChange={(e) => setInputValue(e.currentTarget.value)}
-            />
-            <Button
-              ariaLabel="To the moon!"
-              loadingText=""
-              style={{
-                background: "#ADD8E6",
-              }}
-              onClick={() => handleRadioTurnOverClick(radioValue, inputValue)}
-              isDisabled={inputValue === ""}
-            >
-              Go 🚀
-            </Button>
-          </Flex>
-        </View>
+            Go 🚀
+          </Button>
+        </Flex>
       </ThemeProvider>
       {tableResultTurnOver}
-      {/*
-      <ThemeProvider theme={theme} colorMode="light">
-        <Table highlightOnHover variation="striped">
-          {tableResult}
-        </Table>
-      </ThemeProvider> */}
-    </>
+    </View>
   );
 }
 
@@ -139,21 +129,19 @@ export function OutputTurnOverTableHead({ turnOverPrice }) {
   };
 
   return (
-    <>
-      <ThemeProvider theme={theme} colorMode="light">
-        <Table highlightOnHover variation="striped">
-          <TableHead>
-            <TableRow>
-              <TableCell as="th">TurnOver</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            <TableRow>
-              <TableCell>{turnOverPrice}</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={theme} colorMode="light">
+      <Table highlightOnHover variation="striped">
+        <TableHead>
+          <TableRow>
+            <TableCell as="th">TurnOver</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          <TableRow>
+            <TableCell>{turnOverPrice}</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </ThemeProvider>
   );
 }

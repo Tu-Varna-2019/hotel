@@ -4,7 +4,7 @@ import { fetchUserAttributes } from "aws-amplify/auth";
 
 import { HelpersContext } from "../../contexts/data_models/context";
 import { createClient } from "../../graphql/mutations";
-import { listClients, getClient, getRegistration } from "../../graphql/queries";
+import { getClient, listClients } from "../../graphql/queries";
 
 export function Client() {
   const [cID, setCID] = useState("");
@@ -54,7 +54,7 @@ export function Client() {
               },
             },
           });
-        } else logger.info("Existing client found, not creating a new client.");
+        } //else logger.info("Existing client found, not creating a new client.");
       } catch (error) {
         console.error("Error in fetching/creating client:", error);
       }
@@ -114,18 +114,6 @@ export function Client() {
     setAddress(selectedClient.data.getClient.address);
     setSsn(selectedClient.data.getClient.ssn);
     setPassport(selectedClient.data.getClient.passport);
-
-    // Get a specific item
-    // const oneRegistration = await client.graphql({
-    //   query: getRegistration,
-    //   variables: { id: selectedClient.data.getClient.PKRegistration },
-    // });
-
-    // const foundRegistrationNameID = UtilsObject.allRegistrationIDNamesBySubID(
-    //   registrationIDNamesArr,
-    //   oneRegistration.data.getRegistration.id
-    // );
-    // setSelectedRegistrationName(foundRegistrationNameID);
   };
 
   const handleSelectedRegistrationName = (event) => {

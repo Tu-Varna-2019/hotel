@@ -3,19 +3,13 @@ import {
   ComponentStateContext,
   HelpersContext,
 } from "../../contexts/data_models/context";
+import { getClient, getRoom, listRegistrations } from "../../graphql/queries";
 import {
   OutputAllSSNTableHome,
   OutputAvailableRoomsTableHome,
   OutputColumnTablesHome,
   OutputColumnTablesSSNHome,
 } from "./outputTableHome";
-import {
-  listClients,
-  getClient,
-  listRegistrations,
-  listRooms,
-  getRoom,
-} from "../../graphql/queries";
 import { OutputTurnOverTableHead } from "./outputTableTurnOver";
 
 export function OutputTableComponent() {
@@ -29,9 +23,8 @@ export function OutputTableComponent() {
       dateOneYearAgo.setFullYear(dateOneYearAgo.getFullYear() - 1);
       const dateYearAgoString = dateOneYearAgo.toISOString().split("T")[0];
 
-      // Fetch registrations from the last year, including client and room details
       const registrationData = await client.graphql({
-        query: listRegistrations, // Adjust this query to include client and room details
+        query: listRegistrations,
         variables: {
           filter: {
             dateStart: {
@@ -43,35 +36,29 @@ export function OutputTableComponent() {
 
       const registrations = registrationData.data.listRegistrations.items;
 
-      // Prepare arrays to store the results
       const names = [];
       const ssns = [];
       const roomNumbers = [];
       const dateStarts = [];
 
-      // Loop through each registration
       for (const registration of registrations) {
         const clientID = registration.PKClient;
         const roomID = registration.PKRoom;
 
-        // Fetch client data
-        // Assuming getClient and getRoom are queries for individual client and room
         const clientData = await client.graphql({
           query: getClient,
           variables: { id: clientID },
         });
 
-        // Fetch room data
         const roomData = await client.graphql({
           query: getRoom,
           variables: { id: roomID },
         });
 
-        // Add client and room details to arrays
         if (clientData.data.getClient) {
           names.push(clientData.data.getClient.name);
           ssns.push(clientData.data.getClient.ssn);
-          dateStarts.push(registration.dateStart); // Assuming dateStart is part of registration
+          dateStarts.push(registration.dateStart);
         }
 
         if (roomData.data.getRoom) {
@@ -91,7 +78,6 @@ export function OutputTableComponent() {
       const dateCurrent = new Date();
       dateCurrent.setHours(0, 0, 0, 0);
 
-      // Fetch registrations from the last year, including room details
       const registrationData = await client.graphql({
         query: listRegistrations,
       });
@@ -105,7 +91,6 @@ export function OutputTableComponent() {
         return !(dateCurrent > dateStart && dateCurrent < dateEnd);
       });
 
-      // Prepare arrays to store the results
       const roomNumbers = [];
       const categories = [];
       const floors = [];
@@ -114,17 +99,14 @@ export function OutputTableComponent() {
       const dateStarts = [];
       const dateEnds = [];
 
-      // Loop through each registration
       for (const registration of registrations) {
         const roomID = registration.PKRoom;
 
-        // Fetch room data
         const roomData = await client.graphql({
           query: getRoom,
           variables: { id: roomID },
         });
 
-        // Add room details to arrays
         if (roomData.data.getRoom) {
           const room = roomData.data.getRoom;
           roomNumbers.push(room.roomNumber);
@@ -160,41 +142,31 @@ export function OutputTableComponent() {
     }
   };
 
-  const getDailyTurnover = async (targetDate) => {
+  const calculateTurnover = async (dateStartArg, dateEndArg) => {
     try {
-      const targetDayStart = new Date(targetDate);
-      targetDayStart.setHours(0, 0, 0, 0); // Set to start of the day
+      let totalTurnover = 0;
 
-      const targetDayEnd = new Date(targetDate);
-      targetDayEnd.setHours(23, 59, 59, 999); // Set to end of the day
-
-      // Fetch all registrations
       const registrationData = await client.graphql({
         query: listRegistrations,
       });
 
       let registrations = registrationData.data.listRegistrations.items;
 
-      // Filter registrations active during the target day
       const activeRegistrations = registrations.filter((registration) => {
         const dateStart = new Date(registration.dateStart);
         const dateEnd = new Date(registration.dateEnd);
-        return dateStart <= targetDayEnd && dateEnd >= targetDayStart;
+
+        return dateStart <= dateEndArg && dateEnd >= dateStartArg;
       });
 
-      let totalTurnover = 0;
-
-      // Loop through each active registration to calculate total turnover
       for (const registration of activeRegistrations) {
         const roomID = registration.PKRoom;
 
-        // Fetch room data
         const roomData = await client.graphql({
           query: getRoom,
           variables: { id: roomID },
         });
 
-        // Add room's price to total turnover
         if (roomData.data.getRoom) {
           totalTurnover += roomData.data.getRoom.price;
         }
@@ -202,9 +174,72 @@ export function OutputTableComponent() {
 
       return totalTurnover;
     } catch (err) {
-      console.error("Error calculating turnover:", err);
-      return 0;
+      logger.error(err);
     }
+  };
+
+  const getDailyTurnover = async (targetDate) => {
+    const targetDayStart = new Date(targetDate);
+    targetDayStart.setHours(0, 0, 0, 0);
+    const targetDayEnd = new Date(targetDate);
+    targetDayEnd.setHours(23, 59, 59, 999);
+
+    return await calculateTurnover(targetDayStart, targetDayEnd);
+  };
+
+  const getMonthlyTurnover = async (targetDate) => {
+    const targetMonthStart = new Date(targetDate);
+    targetMonthStart.setDate(1);
+    targetMonthStart.setHours(0, 0, 0, 0);
+
+    const targetMonthEnd = new Date(targetDate);
+    targetMonthEnd.setMonth(targetMonthEnd.getMonth() + 1);
+    targetMonthEnd.setDate(0);
+    targetMonthEnd.setHours(23, 59, 59, 999);
+
+    return await calculateTurnover(targetMonthStart, targetMonthEnd);
+  };
+
+  const getLastThreeMonthsTurnover = async (targetDate) => {
+    const threeMonthsAgo = new Date(targetDate);
+    threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 2);
+    threeMonthsAgo.setDate(1);
+    threeMonthsAgo.setHours(0, 0, 0, 0);
+
+    const endOfCurrentMonth = new Date(targetDate);
+    endOfCurrentMonth.setMonth(endOfCurrentMonth.getMonth() + 1);
+    endOfCurrentMonth.setDate(0);
+    endOfCurrentMonth.setHours(23, 59, 59, 999);
+
+    return await calculateTurnover(threeMonthsAgo, endOfCurrentMonth);
+  };
+
+  const getLastSixMonthsTurnover = async (targetDate) => {
+    const sixMonthsAgo = new Date(targetDate);
+    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 5);
+    sixMonthsAgo.setDate(1);
+    sixMonthsAgo.setHours(0, 0, 0, 0);
+
+    const endOfCurrentMonth = new Date(targetDate);
+    endOfCurrentMonth.setMonth(endOfCurrentMonth.getMonth() + 1);
+    endOfCurrentMonth.setDate(0);
+    endOfCurrentMonth.setHours(23, 59, 59, 999);
+
+    return await calculateTurnover(sixMonthsAgo, endOfCurrentMonth);
+  };
+
+  const getLastYearTurnover = async (targetDate) => {
+    const twelveMonthsAgo = new Date(targetDate);
+    twelveMonthsAgo.setMonth(twelveMonthsAgo.getMonth() - 11);
+    twelveMonthsAgo.setDate(1);
+    twelveMonthsAgo.setHours(0, 0, 0, 0);
+
+    const endOfCurrentMonth = new Date(targetDate);
+    endOfCurrentMonth.setMonth(endOfCurrentMonth.getMonth() + 1);
+    endOfCurrentMonth.setDate(0);
+    endOfCurrentMonth.setHours(23, 59, 59, 999);
+
+    return await calculateTurnover(twelveMonthsAgo, endOfCurrentMonth);
   };
 
   const handleExitClick = (event) => {
@@ -218,26 +253,27 @@ export function OutputTableComponent() {
   };
 
   const handleRadioTurnOverClick = async (radioValue, inputValue) => {
-    let component = null;
+    let turnOver = null;
     switch (radioValue) {
       case "Day":
-        const dailyTurnOver = await getDailyTurnover(inputValue);
-        setTableResultTurnOver(
-          <OutputTurnOverTableHead turnOverPrice={dailyTurnOver} />
-        );
+        turnOver = await getDailyTurnover(inputValue);
         break;
-
       case "Month":
+        turnOver = await getMonthlyTurnover(inputValue);
         break;
       case "Last_3_months":
+        turnOver = await getLastThreeMonthsTurnover(inputValue);
         break;
       case "Last_6_months":
+        turnOver = await getLastSixMonthsTurnover(inputValue);
         break;
       case "Year":
-        break;
-      default:
+        turnOver = await getLastYearTurnover(inputValue);
         break;
     }
+    setTableResultTurnOver(
+      <OutputTurnOverTableHead turnOverPrice={turnOver} />
+    );
   };
 
   const getOutputTableData = async () => {
@@ -245,7 +281,6 @@ export function OutputTableComponent() {
       const { names, ssns, roomNumbers, dateStarts } =
         await getClientsAndRoomsByLastYearRegistrations();
 
-      // Pass the fetched data to the OutputColumnTablesHome component
       const outputColumns = (
         <OutputColumnTablesHome
           names={names}
@@ -266,7 +301,7 @@ export function OutputTableComponent() {
         dateStarts,
         dateEnds,
       } = await getRoomDetailsByLastYearRegistrations();
-      // Pass the fetched data to the OutputColumnTablesHome component
+
       const outputColumns = (
         <OutputColumnTablesSSNHome
           roomNumbers={roomNumbers}

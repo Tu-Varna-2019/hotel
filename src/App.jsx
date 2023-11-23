@@ -1,16 +1,12 @@
-import "./App.css";
 import "@aws-amplify/ui-react/styles.css";
-import awsExports from "./amplifyconfiguration.json";
-import { Amplify } from "aws-amplify";
+import "./App.css";
 
-import { Authenticator, Flex, View } from "@aws-amplify/ui-react";
+import { Authenticator } from "@aws-amplify/ui-react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { DataModelProvider } from "./providers/data_models/provider";
 import HomeLayout from "./pages/layouts/home_layout";
 import { ComponentStateProvider } from "./providers/component_provider/provider";
+import { DataModelProvider } from "./providers/data_models/provider";
 import { HelpersProvider } from "./providers/helpers_provider/provider";
-
-//Amplify.configure(awsExports);
 
 const signUpFields = {
   signUp: {

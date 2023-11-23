@@ -1,11 +1,10 @@
 import React from "react";
-import { Client } from "../data_models/client";
 import {
   ComponentStateContext,
-  DataModelContext,
   HelpersContext,
 } from "../../contexts/data_models/context";
 import { updateClient } from "../../graphql/mutations";
+import { Client } from "../data_models/client";
 
 export function ClientUpdateComponent() {
   const clientUpdate = Client();
@@ -13,7 +12,6 @@ export function ClientUpdateComponent() {
     React.useState(false);
 
   const { ComponentStateObject } = React.useContext(ComponentStateContext);
-  const { RoomObject, RegistrationObject } = React.useContext(DataModelContext);
   const { UtilsObject } = React.useContext(HelpersContext);
   const { logger, client } = UtilsObject;
 

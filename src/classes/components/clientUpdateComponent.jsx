@@ -50,15 +50,14 @@ export function ClientUpdateComponent() {
             ssn: clientUpdate.ssn,
             address: clientUpdate.address,
             passport: clientUpdate.passport,
-            //PKRegistration: pkregister,
           },
         },
       });
 
       await updateUserAttribute({
         userAttribute: {
-          attributeKey: "name", // the attribute you want to update
-          value: clientUpdate.name, // the new value for the attribute
+          attributeKey: "name",
+          value: clientUpdate.name,
         },
       });
 

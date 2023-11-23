@@ -55,7 +55,6 @@ export function RoomUpdateComponent() {
             floor: roomUpdate.floor,
             beds: roomUpdate.beds,
             price: roomUpdate.price,
-            // PKRegistration: pkregister,
           },
         },
       });

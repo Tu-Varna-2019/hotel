@@ -3,7 +3,7 @@ import { RoomCreateComponent } from "../../classes/components/roomCreateComponen
 import { DataModelContext } from "../../contexts/data_models/context";
 
 export function FuncCreateRoomOverride() {
-  const { RoomObject, RegistrationObject, isSubmitButtonLoading } =
+  const { RoomObject, isSubmitButtonLoading } =
     React.useContext(DataModelContext);
 
   const isRoomAttributesEmpty =

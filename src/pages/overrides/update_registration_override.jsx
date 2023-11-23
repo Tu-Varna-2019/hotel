@@ -15,7 +15,6 @@ export function FuncUpdateClientOverride() {
   const updateClientOOverride = {
     select_field_client: {
       isRequired: true,
-      //value: selectedClientUpdate,
       options: Object.values(clientUpdate.allClientIDNames),
       errorMessage: "Client must not be empty!",
       onChange: (event) =>

@@ -1,10 +1,6 @@
-import React from "react";
 import { ClientUpdateComponent } from "../../classes/components/clientUpdateComponent";
-import { DataModelContext } from "../../contexts/data_models/context";
 
 export function FuncUpdateClientOverride() {
-  const { RegistrationObject } = React.useContext(DataModelContext);
-
   const {
     isSubmitButtonLoading,
     handleCancelClick,
@@ -16,7 +12,6 @@ export function FuncUpdateClientOverride() {
   const updateClientOOverride = {
     select_field_user: {
       isRequired: true,
-      //value: selectedClientUpdate,
       options: Object.values(clientUpdate.allClientIDNames),
       errorMessage: "Client must not be empty!",
       onChange: (event) =>

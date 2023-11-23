@@ -49,3 +49,50 @@ useEffect(() => {
 ### TODO
 
 - [] fix date comparison for `getRoomDetailsByLastYearRegistrations`. For some reason it doesn't exclude dateStart and dateEnd if they are in the same day as the currentDate
+
+
+
+### roomCreateComponent -> handleSubmit Click
+
+```
+  let extractedPKRegistration = "";
+  if (index !== 0) {
+    // Regular expression to match the pattern
+    const regex = /\d{1,2}\/\d{1,2}\/\d{4} - (.+)/;
+  // Extract the substring
+    const match =
+      RegistrationObject.allRegistrationIDNames[index - 1].match(regex);
+    extractedPKRegistration = match ? match[1] : null;
+  }
+
+
+  const apiResponse = await UtilsObject.apiCreateHotel({
+    DataModel: "Room",
+    Inputs: {
+      category: RoomObject.category,
+      floor: RoomObject.floor,
+      beds: RoomObject.beds,
+      price: RoomObject.price,
+      PKRegistration: extractedSubstring,
+    },
+  });
+  logger.info("apiResponse:", apiResponse);
+```
+
+
+- `src\classes\data_models\client.jsx` : setCllientByAllClientIDNames
+
+```
+    Get a specific item
+    const oneRegistration = await client.graphql({
+      query: getRegistration,
+      variables: { id: selectedClient.data.getClient.PKRegistration },
+    });
+
+    const foundRegistrationNameID = UtilsObject.allRegistrationIDNamesBySubID(
+      registrationIDNamesArr,
+      oneRegistration.data.getRegistration.id
+    );
+    setSelectedRegistrationName(foundRegistrationNameID);
+
+```

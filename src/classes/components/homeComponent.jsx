@@ -10,7 +10,6 @@ export function HomeComponent() {
     "all available rooms at the current date and time, sorted by room category",
     "booking turnover derived by setting a time period",
     "displaying all names, EGN of customers who occupied rooms in the last year",
-    "to draw a schedule - most frequently booked room: Room-Period by months",
   ];
   const selectFieldCreate = ["Room", "Registration"];
 
@@ -40,8 +39,6 @@ export function HomeComponent() {
         break;
       case "displaying all names, EGN of customers who occupied rooms in the last year":
         ComponentStateObject.setShowAvailableRooms(true);
-        break;
-      case "to draw a schedule - most frequently booked room: Room-Period by months":
         break;
       default:
         break;

@@ -13,7 +13,7 @@ export function RoomCreateComponent() {
     React.useState(false);
 
   const { ComponentStateObject } = React.useContext(ComponentStateContext);
-  const { RoomObject, RegistrationObject } = React.useContext(DataModelContext);
+  const { RoomObject } = React.useContext(DataModelContext);
   const { UtilsObject } = React.useContext(HelpersContext);
   const { logger, client } = UtilsObject;
 
@@ -21,13 +21,10 @@ export function RoomCreateComponent() {
     ComponentStateObject.setShowCreateRoomPage(false);
   };
 
-  // Function to fetch and process rooms
   const getRoomWithHighestNumber = async () => {
     try {
-      // Fetch all rooms
       const response = await client.graphql({
         query: listRooms,
-        // You can add variables here if needed
       });
 
       const allRooms = response.data.listRooms.items;
@@ -39,24 +36,15 @@ export function RoomCreateComponent() {
         }
       });
 
-      return highestRoomNumber; // Return the highest room number as an integer
+      return highestRoomNumber;
     } catch (error) {
       console.error("Error fetching or processing rooms: ", error);
-      return null; // Return null or appropriate error handling
+      return null;
     }
   };
 
   const handleSubmitClick = async (index) => {
     setIsSubmitButtonLoading(true);
-    // let extractedPKRegistration = "";
-    // if (index !== 0) {
-    //   // Regular expression to match the pattern
-    //   const regex = /\d{1,2}\/\d{1,2}\/\d{4} - (.+)/;
-    //   // Extract the substring
-    //   const match =
-    //     RegistrationObject.allRegistrationIDNames[index - 1].match(regex);
-    //   extractedPKRegistration = match ? match[1] : null;
-    // }
 
     logger.info("Submitting room...");
     const highestRoomNumber = await getRoomWithHighestNumber();
@@ -70,7 +58,6 @@ export function RoomCreateComponent() {
             floor: RoomObject.floor,
             beds: RoomObject.beds,
             price: RoomObject.price,
-            // PKRegistration: extractedPKRegistration,
           },
         },
       });
@@ -86,17 +73,6 @@ export function RoomCreateComponent() {
       UtilsObject.showAlertBoxFull("error", error.errors[0].message, "error");
       setIsSubmitButtonLoading(false);
     }
-    // const apiResponse = await UtilsObject.apiCreateHotel({
-    //   DataModel: "Room",
-    //   Inputs: {
-    //     category: RoomObject.category,
-    //     floor: RoomObject.floor,
-    //     beds: RoomObject.beds,
-    //     price: RoomObject.price,
-    //     PKRegistration: extractedSubstring,
-    //   },
-    // });
-    // logger.info("apiResponse:", apiResponse);
   };
 
   return {
