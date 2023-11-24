@@ -14,7 +14,10 @@ export function FuncCreateRegistrationOverride() {
     RegistrationCreateComponent();
 
   const isRegisterAttributesEmpty =
-    RegistrationObject.dateEnd === "" || RegistrationObject.dateStart === "";
+    RegistrationObject.dateEnd === "" ||
+    RegistrationObject.dateStart === "" ||
+    new Date(RegistrationObject.dateEnd).getTime() <=
+      new Date(RegistrationObject.dateStart).getTime();
 
   const createRegistrationOverride = {
     select_field_client: {

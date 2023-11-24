@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { HelpersContext } from "../../contexts/data_models/context";
 
-import { listRegistrations } from "../../graphql/queries";
+import { getRegistration, listRegistrations } from "../../graphql/queries";
 
 export function Registration() {
+  const [cID, setCID] = useState("");
   const [dateOfCreation, setDateOfCreation] = useState("");
   const [dateStart, setDateStart] = useState("");
   const [dateEnd, setDateEnd] = useState("");
+
+  // Reference class objects
   const [selectedClientName, setSelectedClientName] = useState("");
   const [selectedRoomNumber, setSelectedRoomNumber] = useState("");
 
@@ -60,14 +63,51 @@ export function Registration() {
     setDateEnd(event.target.value);
   };
 
-  const getRegistrationIDByIDDate = (idDate) => {
-    const regex = /\d{1,2}\/\d{1,2}\/\d{4} - (.+)/;
-    const match = idDate.match(regex);
-    return match ? match[1] : null;
+  const getRegistrationIDByIDDateString = (index) => {
+    if (index !== 0) {
+      const regex = /\d{1,2}\/\d{1,2}\/\d{4} - (.+)/;
+      const match = allRegistrationIDNames[index - 1].match(regex);
+      return match ? match[1] : null;
+    }
+  };
+
+  const setRegistrationByAllRegistrationIDNames = async (
+    event,
+    allClientIDNames,
+    allRoomsIDNumbers
+  ) => {
+    const registrationID = getRegistrationIDByIDDateString(
+      event.target.selectedIndex
+    );
+
+    // Get a specific item
+    const selectedRegistration = await client.graphql({
+      query: getRegistration,
+      variables: { id: registrationID },
+    });
+
+    setCID(selectedRegistration.data.getRegistration.id);
+    setDateOfCreation(selectedRegistration.data.getRegistration.dateOfCreation);
+    setDateStart(selectedRegistration.data.getRegistration.dateStart);
+    setDateEnd(selectedRegistration.data.getRegistration.dateEnd);
+
+    setSelectedClientName(
+      UtilsObject.dictFindValueByKey(
+        allClientIDNames,
+        selectedRegistration.data.getRegistration.PKClient
+      )
+    );
+    setSelectedRoomNumber(
+      UtilsObject.dictFindValueByKey(
+        allRoomsIDNumbers,
+        selectedRegistration.data.getRegistration.PKRoom
+      )
+    );
   };
 
   return {
-    getRegistrationIDByIDDate,
+    cID,
+    getRegistrationIDByIDDateString,
     handleSelectedRoomNumberChange,
     selectedRoomNumber,
     setSelectedRoomNumber,
@@ -82,5 +122,6 @@ export function Registration() {
     handleDateStartChange,
     handleDateEndChange,
     getAllRegistrationsKeyByValue,
+    setRegistrationByAllRegistrationIDNames,
   };
 }

@@ -3,11 +3,14 @@ import {
   ComponentStateContext,
   HelpersContext,
 } from "../../contexts/data_models/context";
-import { updateClient } from "../../graphql/mutations";
-import { Client } from "../data_models/client";
+import {
+  updateRegistration,
+  deleteRegistration,
+} from "../../graphql/mutations";
+import { Registration } from "../data_models/registration";
 
-export function ClientUpdateComponent() {
-  const clientUpdate = Client();
+export function RegistrationUpdateComponent() {
+  const registrationUpdate = Registration();
   const [isSubmitButtonLoading, setIsSubmitButtonLoading] =
     React.useState(false);
 
@@ -16,43 +19,54 @@ export function ClientUpdateComponent() {
   const { logger, client } = UtilsObject;
 
   const handleCancelClick = (event) => {
-    ComponentStateObject.setShowUpdateClientPage(false);
+    ComponentStateObject.setShowUpdateRegistrationPage(false);
   };
 
-  const handleSubmitClick = async (pkregister) => {
-    setIsSubmitButtonLoading(true);
-
-    logger.info("Updating client...");
-
-    console.log("Input variables:", {
-      name: clientUpdate.name,
-      ssn: clientUpdate.ssn,
-      address: clientUpdate.address,
-      passport: clientUpdate.passport,
-      PKRegistration: pkregister,
-    });
-
-    try {
+  const handleDeleteClick = async () => {
+    if (window.confirm("Are you sure you want to delete this registration?")) {
       await client.graphql({
-        query: updateClient,
+        query: deleteRegistration,
         variables: {
           input: {
-            id: clientUpdate.cID,
-            name: clientUpdate.name,
-            ssn: clientUpdate.ssn,
-            address: clientUpdate.address,
-            passport: clientUpdate.passport,
-            PKRegistration: pkregister,
+            id: registrationUpdate.cID,
           },
         },
       });
+      UtilsObject.showAlertBoxFull(
+        "success",
+        "Registration deleted successfully!",
+        "success"
+      );
+      ComponentStateObject.setShowUpdateRegistrationPage(false);
+    }
+  };
+
+  const handleSubmitClick = async (pkClient, pkRoom) => {
+    setIsSubmitButtonLoading(true);
+    logger.info("Updating registration...");
+
+    try {
+      await client.graphql({
+        query: updateRegistration,
+        variables: {
+          input: {
+            id: registrationUpdate.cID,
+            dateCreation: registrationUpdate.dateOfCreation,
+            dateStart: registrationUpdate.dateStart,
+            dateEnd: registrationUpdate.dateEnd,
+            PKClient: pkClient,
+            PKRoom: pkRoom,
+          },
+        },
+      });
+
       setIsSubmitButtonLoading(false);
       UtilsObject.showAlertBoxFull(
         "success",
-        "Client updated successfully!",
+        "Registration updated successfully!",
         "success"
       );
-      ComponentStateObject.setShowUpdateClientPage(false);
+      ComponentStateObject.setShowUpdateRegistrationPage(false);
     } catch (error) {
       logger.error(error);
       UtilsObject.showAlertBoxFull("error", error.errors[0].message, "error");
@@ -64,6 +78,7 @@ export function ClientUpdateComponent() {
     isSubmitButtonLoading,
     handleCancelClick,
     handleSubmitClick,
-    clientUpdate,
+    registrationUpdate,
+    handleDeleteClick,
   };
 }

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-
 import { fetchUserAttributes } from "aws-amplify/auth";
-
 import { HelpersContext } from "../../contexts/data_models/context";
 import { createClient } from "../../graphql/mutations";
 import { getClient, listClients } from "../../graphql/queries";

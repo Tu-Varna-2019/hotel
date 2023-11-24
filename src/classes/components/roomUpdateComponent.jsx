@@ -15,7 +15,7 @@ export function RoomUpdateComponent() {
   const { UtilsObject } = React.useContext(HelpersContext);
   const { logger, client } = UtilsObject;
 
-  const handleCancelClick = (event) => {
+  const handleCancelClick = () => {
     ComponentStateObject.setShowUpdateRoomPage(false);
   };
 
@@ -39,7 +39,7 @@ export function RoomUpdateComponent() {
     }
   };
 
-  const handleSubmitClick = async (pkregister) => {
+  const handleSubmitClick = async () => {
     setIsSubmitButtonLoading(true);
 
     logger.info("Updating room...");

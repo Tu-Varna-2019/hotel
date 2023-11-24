@@ -1,69 +1,95 @@
 import React from "react";
-import { ClientUpdateComponent } from "../../classes/components/clientUpdateComponent";
-import { DataModelContext } from "../../contexts/data_models/context";
+import { RegistrationUpdateComponent } from "../../classes/components/registrationUpdateComponent";
+import {
+  DataModelContext,
+  HelpersContext,
+} from "../../contexts/data_models/context";
 
-export function FuncUpdateClientOverride() {
-  const { RegistrationObject, RoomObject } = React.useContext(DataModelContext);
+export function FuncUpdateRegistrationOverride() {
+  const { RegistrationObject, RoomObject, ClientObject } =
+    React.useContext(DataModelContext);
+  const { UtilsObject } = React.useContext(HelpersContext);
 
   const {
     isSubmitButtonLoading,
     handleCancelClick,
     handleSubmitClick,
-    clientUpdate,
-  } = ClientUpdateComponent();
+    registrationUpdate,
+    handleDeleteClick,
+  } = RegistrationUpdateComponent();
 
-  const updateClientOOverride = {
+  const isRegisterAttributesEmpty = registrationUpdate.cID == 0;
+  // new Date(registrationUpdate.dateEnd).getTime() <=
+  //   new Date(registrationUpdate.dateStart).getTime();
+
+  const updateRegistrationOOverride = {
+    selectfield_registrations: {
+      isRequired: true,
+      options: RegistrationObject.allRegistrationIDNames,
+      onChange: (event) =>
+        registrationUpdate.setRegistrationByAllRegistrationIDNames(
+          event,
+          ClientObject.allClientIDNames,
+          RoomObject.allRoomsIDNumbers
+        ),
+    },
     select_field_client: {
       isRequired: true,
-      options: Object.values(clientUpdate.allClientIDNames),
+      value: registrationUpdate.selectedClientName,
+      options: Object.values(ClientObject.allClientIDNames),
       errorMessage: "Client must not be empty!",
+      isDisabled: registrationUpdate.cID == 0,
       onChange: (event) =>
-        clientUpdate.setCllientByAllClientIDNames(
-          event,
-          RegistrationObject.allRegistrationIDNames
-        ),
+        registrationUpdate.handleSelectedClientNameChange(event),
     },
     select_field_room: {
       isRequired: true,
-      value: RegistrationObject.selectedRoomNumber,
+      isDisabled: registrationUpdate.cID == 0,
+      errorMessage: "Room must not be empty!",
+      value: registrationUpdate.selectedRoomNumber,
       onChange: (event) =>
-        RegistrationObject.handleSelectedRoomNumberChange(event),
+        registrationUpdate.handleSelectedRoomNumberChange(event),
       options: Object.values(RoomObject.allRoomsIDNumbers),
     },
-    textfield_name: {
+    textfield_datestart: {
       isRequired: true,
-      hasError: clientUpdate.name === "" ? true : false,
-      value: clientUpdate.name,
-      errorMessage: "Name must not be empty!",
-      onChange: (event) => clientUpdate.handleNameChange(event),
+      hasError: registrationUpdate.dateStart === "",
+      value: registrationUpdate.dateStart,
+      type: "date",
+      errorMessage: "Date must not be empty!",
+      onChange: (event) => registrationUpdate.handleDateStartChange(event),
     },
-    textfield_address: {
+    textfield_dateend: {
       isRequired: true,
-      hasError: clientUpdate.address === "" ? true : false,
-      value: clientUpdate.address,
-      errorMessage: "Address must not be empty!",
-      onChange: (event) => clientUpdate.handleAddressChange(event),
-    },
-    select_field_registration: {
-      isRequired: true,
-      value: clientUpdate.selectedRegistrationName,
-      options: RegistrationObject.allRegistrationIDNames,
-      onChange: (event) => clientUpdate.handleSelectedRegistrationName(event),
+      hasError: registrationUpdate.dateEnd === "",
+      value: registrationUpdate.dateEnd,
+      type: "date",
+      errorMessage: "Date must not be empty!",
+      onChange: (event) => registrationUpdate.handleDateEndChange(event),
     },
     button_submit: {
-      onClick: (event) =>
+      onClick: () =>
         handleSubmitClick(
-          RegistrationObject.getRegistrationIDByIDDate(
-            clientUpdate.selectedRegistrationName
+          UtilsObject.dictFindKeyByValue(
+            ClientObject.allClientIDNames,
+            registrationUpdate.selectedClientName
+          ),
+          UtilsObject.dictFindKeyByValue(
+            RoomObject.allRoomsIDNumbers,
+            parseInt(registrationUpdate.selectedRoomNumber, 10)
           )
         ),
-      //isDisabled: isRoomAttributesEmpty,
+      isDisabled: registrationUpdate.cID == 0,
       isLoading: isSubmitButtonLoading,
     },
     button_cancel: {
-      onClick: (event) => handleCancelClick(event),
+      onClick: () => handleCancelClick(),
+    },
+    button_delete: {
+      onClick: () => handleDeleteClick(),
+      isDisabled: isRegisterAttributesEmpty,
     },
   };
 
-  return { updateClientOOverride };
+  return { updateRegistrationOOverride };
 }

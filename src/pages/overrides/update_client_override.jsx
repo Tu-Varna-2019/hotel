@@ -47,7 +47,7 @@ export function FuncUpdateClientOverride() {
     },
     button_delete: {
       onClick: (event) => handleDeleteClick(),
-      isDisabled: clientUpdate.cID === 0,
+      isDisabled: clientUpdate.cID == 0,
     },
     button_cancel: {
       onClick: (event) => handleCancelClick(event),

@@ -27,7 +27,7 @@ export function OutputTableComponent() {
         query: listRegistrations,
         variables: {
           filter: {
-            dateStart: {
+            dateEnd: {
               ge: dateYearAgoString,
             },
           },
@@ -39,7 +39,7 @@ export function OutputTableComponent() {
       const names = [];
       const ssns = [];
       const roomNumbers = [];
-      const dateStarts = [];
+      const dateEnds = [];
 
       for (const registration of registrations) {
         const clientID = registration.PKClient;
@@ -58,7 +58,7 @@ export function OutputTableComponent() {
         if (clientData.data.getClient) {
           names.push(clientData.data.getClient.name);
           ssns.push(clientData.data.getClient.ssn);
-          dateStarts.push(registration.dateStart);
+          dateEnds.push(registration.dateEnd);
         }
 
         if (roomData.data.getRoom) {
@@ -66,7 +66,7 @@ export function OutputTableComponent() {
         }
       }
 
-      return { names, ssns, roomNumbers, dateStarts };
+      return { names, ssns, roomNumbers, dateEnds };
     } catch (err) {
       console.error("Error fetching data:", err);
       return { names: [], ssns: [], roomNumbers: [], dateStarts: [] };
@@ -91,13 +91,7 @@ export function OutputTableComponent() {
         return !(dateCurrent > dateStart && dateCurrent < dateEnd);
       });
 
-      const roomNumbers = [];
-      const categories = [];
-      const floors = [];
-      const beds = [];
-      const prices = [];
-      const dateStarts = [];
-      const dateEnds = [];
+      let roomDetails = [];
 
       for (const registration of registrations) {
         const roomID = registration.PKRoom;
@@ -109,15 +103,29 @@ export function OutputTableComponent() {
 
         if (roomData.data.getRoom) {
           const room = roomData.data.getRoom;
-          roomNumbers.push(room.roomNumber);
-          categories.push(room.category);
-          floors.push(room.floor);
-          beds.push(room.beds);
-          prices.push(room.price);
-          dateStarts.push(registration.dateStart);
-          dateEnds.push(registration.dateEnd);
+          roomDetails.push({
+            roomNumber: room.roomNumber,
+            category: room.category,
+            floor: room.floor,
+            beds: room.beds,
+            price: room.price,
+            dateStart: registration.dateStart,
+            dateEnd: registration.dateEnd,
+          });
         }
       }
+
+      // Sorting the room details array by category
+      roomDetails.sort((a, b) => a.category.localeCompare(b.category));
+
+      // Reconstructing the individual arrays from the sorted room details
+      const roomNumbers = roomDetails.map((room) => room.roomNumber);
+      const categories = roomDetails.map((room) => room.category);
+      const floors = roomDetails.map((room) => room.floor);
+      const beds = roomDetails.map((room) => room.beds);
+      const prices = roomDetails.map((room) => room.price);
+      const dateStarts = roomDetails.map((room) => room.dateStart);
+      const dateEnds = roomDetails.map((room) => room.dateEnd);
 
       return {
         roomNumbers,
@@ -278,7 +286,7 @@ export function OutputTableComponent() {
 
   const getOutputTableData = async () => {
     if (ComponentStateObject.showAvailableRooms) {
-      const { names, ssns, roomNumbers, dateStarts } =
+      const { names, ssns, roomNumbers, dateEnds } =
         await getClientsAndRoomsByLastYearRegistrations();
 
       const outputColumns = (
@@ -286,7 +294,7 @@ export function OutputTableComponent() {
           names={names}
           ssns={ssns}
           roomNumbers={roomNumbers}
-          dateStarts={dateStarts}
+          dateEnds={dateEnds}
         />
       );
 

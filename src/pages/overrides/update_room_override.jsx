@@ -64,12 +64,7 @@ export function FuncUpdateRoomOverride() {
       isDisabled: roomUpdate.cID === 0,
     },
     button_submit: {
-      onClick: (event) =>
-        handleSubmitClick(
-          RegistrationObject.getRegistrationIDByIDDate(
-            roomUpdate.selectedRegistrationName
-          )
-        ),
+      onClick: (event) => handleSubmitClick(event),
       //isDisabled: isRoomAttributesEmpty,
       isLoading: isSubmitButtonLoading,
     },

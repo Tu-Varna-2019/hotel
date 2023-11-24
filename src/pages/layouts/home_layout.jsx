@@ -20,6 +20,7 @@ import { FuncUpdateRoomOverride } from "../overrides/update_room_override";
 import { FuncOutputTableOverride } from "../overrides/output_table_override";
 import { OutputTableHome } from "../../classes/components/outputTableHome";
 import { OutputTableTurnOver } from "../../classes/components/outputTableTurnOver";
+import { FuncUpdateRegistrationOverride } from "../overrides/update_registration_override";
 
 export default function HomeLayout() {
   const { ComponentStateObject } = React.useContext(ComponentStateContext);
@@ -33,6 +34,7 @@ export default function HomeLayout() {
   // Update
   const { updateClientOOverride } = FuncUpdateClientOverride();
   const { updateRoomOverride } = FuncUpdateRoomOverride();
+  const { updateRegistrationOOverride } = FuncUpdateRegistrationOverride();
 
   // Output table
   const { outputTableOverride } = FuncOutputTableOverride();
@@ -67,7 +69,7 @@ export default function HomeLayout() {
       )}
       {ComponentStateObject.showUpdateRegistrationPage && (
         <View position="absolute" display="block" top="0">
-          <FigUpdateRegistration overrides={createRegistrationOverride} />
+          <FigUpdateRegistration overrides={updateRegistrationOOverride} />
         </View>
       )}
 

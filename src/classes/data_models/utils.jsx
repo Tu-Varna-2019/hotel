@@ -25,6 +25,9 @@ export function Utils() {
   function dictFindKeyByValue(object, value) {
     return Object.keys(object).find((key) => object[key] === value);
   }
+  function dictFindValueByKey(object, key) {
+    return object[key];
+  }
 
   const allRegistrationIDNamesBySubID = (registerIDNames, subID) => {
     return registerIDNames.find((element) => element.includes(subID));
@@ -82,6 +85,7 @@ export function Utils() {
   return {
     allRegistrationIDNamesBySubID,
     toAWSDateFormat,
+    dictFindValueByKey,
     dictFindKeyByValue,
     showAlertBoxFull,
     showAlertBox,

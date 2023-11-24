@@ -6,13 +6,13 @@ import {
   TableRow,
   ThemeProvider,
 } from "@aws-amplify/ui-react";
-import React from "react";
-import { HelpersContext } from "../../contexts/data_models/context";
+import React, { useEffect } from "react";
+import { OutputTableComponent } from "./outputTableComponent";
 
 export function OutputTableHome() {
-  const { UtilsObject } = React.useContext(HelpersContext);
+  const { getOutputTableData } = OutputTableComponent();
 
-  const { tableResultTurnOver } = UtilsObject;
+  const [tableResult, setTableResult] = React.useState(null);
 
   const theme = {
     name: "table-theme",
@@ -47,10 +47,21 @@ export function OutputTableHome() {
     },
   };
 
+  useEffect(() => {
+    // Define the async function inside the effect
+    const fetchData = async () => {
+      const outputData = await getOutputTableData();
+      setTableResult(outputData); // Set the data to state
+    };
+
+    // Call the async function
+    fetchData().catch(console.error);
+  }, [getOutputTableData]);
+
   return (
     <ThemeProvider theme={theme} colorMode="light">
       <Table highlightOnHover variation="striped">
-        {tableResultTurnOver}
+        {tableResult}
       </Table>
     </ThemeProvider>
   );
@@ -64,7 +75,7 @@ export function OutputAvailableRoomsTableHome({ outputColumns }) {
           <TableCell as="th">Name</TableCell>
           <TableCell as="th">SSN</TableCell>
           <TableCell as="th">Room number</TableCell>
-          <TableCell as="th">Date</TableCell>
+          <TableCell as="th">Date End</TableCell>
         </TableRow>
       </TableHead>
       {outputColumns}
@@ -117,21 +128,15 @@ export function OutputColumnTablesSSNHome({
   );
 }
 
-export function OutputColumnTablesHome({
-  names,
-  ssns,
-  roomNumbers,
-  dateStarts,
-}) {
+export function OutputColumnTablesHome({ names, ssns, roomNumbers, dateEnds }) {
   return (
     <TableBody>
       {names.map((name, index) => (
         <TableRow key={index}>
           <TableCell>{name}</TableCell>
           <TableCell>{ssns[index]}</TableCell>
-          <TableCell>{roomNumbers[index]}</TableCell>{" "}
-          {/* Now handling room numbers */}
-          <TableCell>{dateStarts[index]}</TableCell> {/* And date starts */}
+          <TableCell>{roomNumbers[index]}</TableCell>
+          <TableCell>{dateEnds[index]}</TableCell>
         </TableRow>
       ))}
     </TableBody>
