@@ -60,15 +60,15 @@ export default function FigCreateRegistration(props) {
         gap="unset"
         alignItems="unset"
         position="absolute"
-        top="64px"
-        left="calc(50% - 174.5px - 6.5px)"
+        top="74px"
+        left="calc(50% - 174.5px - 25.5px)"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
         children="Registration"
         {...getOverrideProps(overrides, "Create User")}
       ></Text>
       <View
-        width="729px"
+        width="664px"
         height="819px"
         display="block"
         gap="unset"
@@ -86,8 +86,8 @@ export default function FigCreateRegistration(props) {
         width="142px"
         height="63px"
         position="absolute"
-        top="742px"
-        left="960px"
+        top="723px"
+        left="954px"
         size="default"
         isDisabled={false}
         variation="primary"
@@ -98,8 +98,8 @@ export default function FigCreateRegistration(props) {
         width="142px"
         height="63px"
         position="absolute"
-        top="742px"
-        left="779px"
+        top="723px"
+        left="752px"
         backgroundColor="rgba(92,102,112,1)"
         size="default"
         isDisabled={false}
@@ -107,47 +107,17 @@ export default function FigCreateRegistration(props) {
         children="Cancel"
         {...getOverrideProps(overrides, "button_cancel")}
       ></Button>
-      <SelectField
-        width="323px"
-        height="unset"
-        label="Client"
-        placeholder=" "
-        position="absolute"
-        top="448px"
-        left="792px"
-        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-        size="default"
-        isDisabled={false}
-        labelHidden={false}
-        variation="default"
-        {...getOverrideProps(overrides, "select_field_client")}
-      ></SelectField>
-      <SelectField
-        width="323px"
-        height="unset"
-        label="Room"
-        placeholder=" "
-        position="absolute"
-        top="571px"
-        left="792px"
-        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-        size="default"
-        isDisabled={false}
-        labelHidden={false}
-        variation="default"
-        {...getOverrideProps(overrides, "select_field_room")}
-      ></SelectField>
       <TextField
         width="300px"
         height="unset"
         label="Date Start"
         placeholder="Add"
         position="absolute"
-        top="201px"
-        left="792px"
+        top="228px"
+        left="794px"
         size="default"
         isDisabled={false}
-        labelHidden={false}
+        labelHidden={true}
         variation="default"
         {...getOverrideProps(overrides, "textfield_datestart")}
       ></TextField>
@@ -157,14 +127,132 @@ export default function FigCreateRegistration(props) {
         label="Date End"
         placeholder="Add"
         position="absolute"
-        top="325px"
-        left="792px"
+        top="338px"
+        left="787px"
         size="default"
         isDisabled={false}
-        labelHidden={false}
+        labelHidden={true}
         variation="default"
         {...getOverrideProps(overrides, "textfield_dateend")}
       ></TextField>
+      <Text
+        fontFamily="Inter"
+        fontSize="16px"
+        fontWeight="400"
+        color="rgba(255,255,255,1)"
+        lineHeight="24px"
+        textAlign="left"
+        display="block"
+        direction="column"
+        justifyContent="unset"
+        width="103px"
+        height="51px"
+        gap="unset"
+        alignItems="unset"
+        position="absolute"
+        top="228px"
+        left="649px"
+        padding="0px 0px 0px 0px"
+        whiteSpace="pre-wrap"
+        children="Date start"
+        {...getOverrideProps(overrides, "Date start")}
+      ></Text>
+      <Text
+        fontFamily="Inter"
+        fontSize="16px"
+        fontWeight="400"
+        color="rgba(255,255,255,1)"
+        lineHeight="24px"
+        textAlign="left"
+        display="block"
+        direction="column"
+        justifyContent="unset"
+        width="103px"
+        height="51px"
+        gap="unset"
+        alignItems="unset"
+        position="absolute"
+        top="327px"
+        left="649px"
+        padding="0px 0px 0px 0px"
+        whiteSpace="pre-wrap"
+        children="Date End"
+        {...getOverrideProps(overrides, "Date End")}
+      ></Text>
+      <SelectField
+        width="323px"
+        height="unset"
+        label="Client"
+        placeholder=" "
+        position="absolute"
+        top="587px"
+        left="769px"
+        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+        size="default"
+        isDisabled={false}
+        labelHidden={true}
+        variation="default"
+        {...getOverrideProps(overrides, "select_field_client")}
+      ></SelectField>
+      <SelectField
+        width="323px"
+        height="unset"
+        label="Room"
+        placeholder=" "
+        position="absolute"
+        top="464px"
+        left="771px"
+        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+        size="default"
+        isDisabled={false}
+        labelHidden={true}
+        variation="default"
+        {...getOverrideProps(overrides, "select_field_room")}
+      ></SelectField>
+      <Text
+        fontFamily="Inter"
+        fontSize="16px"
+        fontWeight="400"
+        color="rgba(255,255,255,1)"
+        lineHeight="24px"
+        textAlign="left"
+        display="block"
+        direction="column"
+        justifyContent="unset"
+        width="103px"
+        height="51px"
+        gap="unset"
+        alignItems="unset"
+        position="absolute"
+        top="455px"
+        left="649px"
+        padding="0px 0px 0px 0px"
+        whiteSpace="pre-wrap"
+        children="Rooms"
+        {...getOverrideProps(overrides, "Rooms")}
+      ></Text>
+      <Text
+        fontFamily="Inter"
+        fontSize="16px"
+        fontWeight="400"
+        color="rgba(255,255,255,1)"
+        lineHeight="24px"
+        textAlign="left"
+        display="block"
+        direction="column"
+        justifyContent="unset"
+        width="103px"
+        height="51px"
+        gap="unset"
+        alignItems="unset"
+        position="absolute"
+        top="578px"
+        left="649px"
+        padding="0px 0px 0px 0px"
+        whiteSpace="pre-wrap"
+        children="Client"
+        {...getOverrideProps(overrides, "Client")}
+      ></Text>
     </View>
   );
 }

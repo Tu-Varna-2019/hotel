@@ -18,11 +18,11 @@
       "function": {
         "AuthHotelUsersProd": {
           "deploymentBucketName": "amplify-tuvarnamasterwinterc-prod-214653-deployment",
-          "s3Key": "amplify-builds/AuthHotelUsersProd-564d7a6b646130723839-build.zip"
+          "s3Key": "amplify-builds/AuthHotelUsersProd-5742667579396d53374f-build.zip"
         },
         "createHotelProd": {
           "deploymentBucketName": "amplify-tuvarnamasterwinterc-prod-214653-deployment",
-          "s3Key": "amplify-builds/createHotelProd-72444d66726a35446d62-build.zip"
+          "s3Key": "amplify-builds/createHotelProd-34514b4a564d70595547-build.zip"
         }
       },
       "api": {

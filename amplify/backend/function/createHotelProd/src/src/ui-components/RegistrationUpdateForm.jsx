@@ -21,12 +21,14 @@ import {
 } from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { generateClient } from "aws-amplify/api";
-import { getRegistration, listClients, listRooms } from "../graphql/queries";
 import {
-  updateClient,
-  updateRegistration,
-  updateRoom,
-} from "../graphql/mutations";
+  getClient,
+  getRegistration,
+  getRoom,
+  listClients,
+  listRooms,
+} from "../graphql/queries";
+import { updateRegistration } from "../graphql/mutations";
 const client = generateClient();
 function ArrayField({
   items = [],
@@ -199,49 +201,44 @@ export default function RegistrationUpdateForm(props) {
     dateCreation: "",
     dateStart: "",
     dateEnd: "",
-    FKClients: [],
-    FKRooms: [],
+    PKClient: undefined,
+    PKRoom: undefined,
   };
   const [dateCreation, setDateCreation] = React.useState(
     initialValues.dateCreation
   );
   const [dateStart, setDateStart] = React.useState(initialValues.dateStart);
   const [dateEnd, setDateEnd] = React.useState(initialValues.dateEnd);
-  const [FKClients, setFKClients] = React.useState(initialValues.FKClients);
-  const [FKClientsLoading, setFKClientsLoading] = React.useState(false);
-  const [FKClientsRecords, setFKClientsRecords] = React.useState([]);
-  const [FKRooms, setFKRooms] = React.useState(initialValues.FKRooms);
-  const [FKRoomsLoading, setFKRoomsLoading] = React.useState(false);
-  const [FKRoomsRecords, setFKRoomsRecords] = React.useState([]);
+  const [PKClient, setPKClient] = React.useState(initialValues.PKClient);
+  const [PKClientLoading, setPKClientLoading] = React.useState(false);
+  const [pKClientRecords, setPKClientRecords] = React.useState([]);
+  const [selectedPKClientRecords, setSelectedPKClientRecords] = React.useState(
+    []
+  );
+  const [PKRoom, setPKRoom] = React.useState(initialValues.PKRoom);
+  const [PKRoomLoading, setPKRoomLoading] = React.useState(false);
+  const [pKRoomRecords, setPKRoomRecords] = React.useState([]);
+  const [selectedPKRoomRecords, setSelectedPKRoomRecords] = React.useState([]);
   const autocompleteLength = 10;
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = registrationRecord
-      ? {
-          ...initialValues,
-          ...registrationRecord,
-          FKClients: linkedFKClients,
-          FKRooms: linkedFKRooms,
-        }
+      ? { ...initialValues, ...registrationRecord, PKClient, PKRoom }
       : initialValues;
     setDateCreation(cleanValues.dateCreation);
     setDateStart(cleanValues.dateStart);
     setDateEnd(cleanValues.dateEnd);
-    setFKClients(cleanValues.FKClients ?? []);
-    setCurrentFKClientsValue(undefined);
-    setCurrentFKClientsDisplayValue("");
-    setFKRooms(cleanValues.FKRooms ?? []);
-    setCurrentFKRoomsValue(undefined);
-    setCurrentFKRoomsDisplayValue("");
+    setPKClient(cleanValues.PKClient);
+    setCurrentPKClientValue(undefined);
+    setCurrentPKClientDisplayValue("");
+    setPKRoom(cleanValues.PKRoom);
+    setCurrentPKRoomValue(undefined);
+    setCurrentPKRoomDisplayValue("");
     setErrors({});
   };
   const [registrationRecord, setRegistrationRecord] = React.useState(
     registrationModelProp
   );
-  const [linkedFKClients, setLinkedFKClients] = React.useState([]);
-  const canUnlinkFKClients = false;
-  const [linkedFKRooms, setLinkedFKRooms] = React.useState([]);
-  const canUnlinkFKRooms = false;
   React.useEffect(() => {
     const queryData = async () => {
       const record = idProp
@@ -252,53 +249,52 @@ export default function RegistrationUpdateForm(props) {
             })
           )?.data?.getRegistration
         : registrationModelProp;
-      const linkedFKClients = record?.FKClients?.items ?? [];
-      setLinkedFKClients(linkedFKClients);
-      const linkedFKRooms = record?.FKRooms?.items ?? [];
-      setLinkedFKRooms(linkedFKRooms);
+      const PKClientRecord = record ? record.PKClient : undefined;
+      const clientRecord = PKClientRecord
+        ? (
+            await client.graphql({
+              query: getClient.replaceAll("__typename", ""),
+              variables: { id: PKClientRecord },
+            })
+          )?.data?.getClient
+        : undefined;
+      setPKClient(PKClientRecord);
+      setSelectedPKClientRecords([clientRecord]);
+      const PKRoomRecord = record ? record.PKRoom : undefined;
+      const roomRecord = PKRoomRecord
+        ? (
+            await client.graphql({
+              query: getRoom.replaceAll("__typename", ""),
+              variables: { id: PKRoomRecord },
+            })
+          )?.data?.getRoom
+        : undefined;
+      setPKRoom(PKRoomRecord);
+      setSelectedPKRoomRecords([roomRecord]);
       setRegistrationRecord(record);
     };
     queryData();
   }, [idProp, registrationModelProp]);
-  React.useEffect(resetStateValues, [
-    registrationRecord,
-    linkedFKClients,
-    linkedFKRooms,
-  ]);
-  const [currentFKClientsDisplayValue, setCurrentFKClientsDisplayValue] =
+  React.useEffect(resetStateValues, [registrationRecord, PKClient, PKRoom]);
+  const [currentPKClientDisplayValue, setCurrentPKClientDisplayValue] =
     React.useState("");
-  const [currentFKClientsValue, setCurrentFKClientsValue] =
+  const [currentPKClientValue, setCurrentPKClientValue] =
     React.useState(undefined);
-  const FKClientsRef = React.createRef();
-  const [currentFKRoomsDisplayValue, setCurrentFKRoomsDisplayValue] =
+  const PKClientRef = React.createRef();
+  const [currentPKRoomDisplayValue, setCurrentPKRoomDisplayValue] =
     React.useState("");
-  const [currentFKRoomsValue, setCurrentFKRoomsValue] =
-    React.useState(undefined);
-  const FKRoomsRef = React.createRef();
-  const getIDValue = {
-    FKClients: (r) => JSON.stringify({ id: r?.id }),
-    FKRooms: (r) => JSON.stringify({ id: r?.id }),
-  };
-  const FKClientsIdSet = new Set(
-    Array.isArray(FKClients)
-      ? FKClients.map((r) => getIDValue.FKClients?.(r))
-      : getIDValue.FKClients?.(FKClients)
-  );
-  const FKRoomsIdSet = new Set(
-    Array.isArray(FKRooms)
-      ? FKRooms.map((r) => getIDValue.FKRooms?.(r))
-      : getIDValue.FKRooms?.(FKRooms)
-  );
+  const [currentPKRoomValue, setCurrentPKRoomValue] = React.useState(undefined);
+  const PKRoomRef = React.createRef();
   const getDisplayValue = {
-    FKClients: (r) => `${r?.name ? r?.name + " - " : ""}${r?.id}`,
-    FKRooms: (r) => `${r?.roomNumber ? r?.roomNumber + " - " : ""}${r?.id}`,
+    PKClient: (r) => `${r?.name ? r?.name + " - " : ""}${r?.id}`,
+    PKRoom: (r) => `${r?.roomNumber ? r?.roomNumber + " - " : ""}${r?.id}`,
   };
   const validations = {
     dateCreation: [],
     dateStart: [],
     dateEnd: [],
-    FKClients: [],
-    FKRooms: [],
+    PKClient: [{ type: "Required" }],
+    PKRoom: [{ type: "Required" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -317,8 +313,8 @@ export default function RegistrationUpdateForm(props) {
     setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
     return validationResponse;
   };
-  const fetchFKClientsRecords = async (value) => {
-    setFKClientsLoading(true);
+  const fetchPKClientRecords = async (value) => {
+    setPKClientLoading(true);
     const newOptions = [];
     let newNext = "";
     while (newOptions.length < autocompleteLength && newNext != null) {
@@ -337,17 +333,15 @@ export default function RegistrationUpdateForm(props) {
           variables,
         })
       )?.data?.listClients?.items;
-      var loaded = result.filter(
-        (item) => !FKClientsIdSet.has(getIDValue.FKClients?.(item))
-      );
+      var loaded = result.filter((item) => PKClient !== item.id);
       newOptions.push(...loaded);
       newNext = result.nextToken;
     }
-    setFKClientsRecords(newOptions.slice(0, autocompleteLength));
-    setFKClientsLoading(false);
+    setPKClientRecords(newOptions.slice(0, autocompleteLength));
+    setPKClientLoading(false);
   };
-  const fetchFKRoomsRecords = async (value) => {
-    setFKRoomsLoading(true);
+  const fetchPKRoomRecords = async (value) => {
+    setPKRoomLoading(true);
     const newOptions = [];
     let newNext = "";
     while (newOptions.length < autocompleteLength && newNext != null) {
@@ -369,18 +363,16 @@ export default function RegistrationUpdateForm(props) {
           variables,
         })
       )?.data?.listRooms?.items;
-      var loaded = result.filter(
-        (item) => !FKRoomsIdSet.has(getIDValue.FKRooms?.(item))
-      );
+      var loaded = result.filter((item) => PKRoom !== item.id);
       newOptions.push(...loaded);
       newNext = result.nextToken;
     }
-    setFKRoomsRecords(newOptions.slice(0, autocompleteLength));
-    setFKRoomsLoading(false);
+    setPKRoomRecords(newOptions.slice(0, autocompleteLength));
+    setPKRoomLoading(false);
   };
   React.useEffect(() => {
-    fetchFKClientsRecords("");
-    fetchFKRoomsRecords("");
+    fetchPKClientRecords("");
+    fetchPKRoomRecords("");
   }, []);
   return (
     <Grid
@@ -394,29 +386,21 @@ export default function RegistrationUpdateForm(props) {
           dateCreation: dateCreation ?? null,
           dateStart: dateStart ?? null,
           dateEnd: dateEnd ?? null,
-          FKClients: FKClients ?? null,
-          FKRooms: FKRooms ?? null,
+          PKClient,
+          PKRoom,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
             if (Array.isArray(modelFields[fieldName])) {
               promises.push(
                 ...modelFields[fieldName].map((item) =>
-                  runValidationTasks(
-                    fieldName,
-                    item,
-                    getDisplayValue[fieldName]
-                  )
+                  runValidationTasks(fieldName, item)
                 )
               );
               return promises;
             }
             promises.push(
-              runValidationTasks(
-                fieldName,
-                modelFields[fieldName],
-                getDisplayValue[fieldName]
-              )
+              runValidationTasks(fieldName, modelFields[fieldName])
             );
             return promises;
           }, [])
@@ -433,122 +417,15 @@ export default function RegistrationUpdateForm(props) {
               modelFields[key] = null;
             }
           });
-          const promises = [];
-          const fKClientsToLink = [];
-          const fKClientsToUnLink = [];
-          const fKClientsSet = new Set();
-          const linkedFKClientsSet = new Set();
-          FKClients.forEach((r) => fKClientsSet.add(getIDValue.FKClients?.(r)));
-          linkedFKClients.forEach((r) =>
-            linkedFKClientsSet.add(getIDValue.FKClients?.(r))
-          );
-          linkedFKClients.forEach((r) => {
-            if (!fKClientsSet.has(getIDValue.FKClients?.(r))) {
-              fKClientsToUnLink.push(r);
-            }
-          });
-          FKClients.forEach((r) => {
-            if (!linkedFKClientsSet.has(getIDValue.FKClients?.(r))) {
-              fKClientsToLink.push(r);
-            }
-          });
-          fKClientsToUnLink.forEach((original) => {
-            if (!canUnlinkFKClients) {
-              throw Error(
-                `Client ${original.id} cannot be unlinked from Registration because PKRegistration is a required field.`
-              );
-            }
-            promises.push(
-              client.graphql({
-                query: updateClient.replaceAll("__typename", ""),
-                variables: {
-                  input: {
-                    id: original.id,
-                    PKRegistration: null,
-                  },
-                },
-              })
-            );
-          });
-          fKClientsToLink.forEach((original) => {
-            promises.push(
-              client.graphql({
-                query: updateClient.replaceAll("__typename", ""),
-                variables: {
-                  input: {
-                    id: original.id,
-                    PKRegistration: registrationRecord.id,
-                  },
-                },
-              })
-            );
-          });
-          const fKRoomsToLink = [];
-          const fKRoomsToUnLink = [];
-          const fKRoomsSet = new Set();
-          const linkedFKRoomsSet = new Set();
-          FKRooms.forEach((r) => fKRoomsSet.add(getIDValue.FKRooms?.(r)));
-          linkedFKRooms.forEach((r) =>
-            linkedFKRoomsSet.add(getIDValue.FKRooms?.(r))
-          );
-          linkedFKRooms.forEach((r) => {
-            if (!fKRoomsSet.has(getIDValue.FKRooms?.(r))) {
-              fKRoomsToUnLink.push(r);
-            }
-          });
-          FKRooms.forEach((r) => {
-            if (!linkedFKRoomsSet.has(getIDValue.FKRooms?.(r))) {
-              fKRoomsToLink.push(r);
-            }
-          });
-          fKRoomsToUnLink.forEach((original) => {
-            if (!canUnlinkFKRooms) {
-              throw Error(
-                `Room ${original.id} cannot be unlinked from Registration because PKRegistration is a required field.`
-              );
-            }
-            promises.push(
-              client.graphql({
-                query: updateRoom.replaceAll("__typename", ""),
-                variables: {
-                  input: {
-                    id: original.id,
-                    PKRegistration: null,
-                  },
-                },
-              })
-            );
-          });
-          fKRoomsToLink.forEach((original) => {
-            promises.push(
-              client.graphql({
-                query: updateRoom.replaceAll("__typename", ""),
-                variables: {
-                  input: {
-                    id: original.id,
-                    PKRegistration: registrationRecord.id,
-                  },
-                },
-              })
-            );
-          });
-          const modelFieldsToSave = {
-            dateCreation: modelFields.dateCreation ?? null,
-            dateStart: modelFields.dateStart ?? null,
-            dateEnd: modelFields.dateEnd ?? null,
-          };
-          promises.push(
-            client.graphql({
-              query: updateRegistration.replaceAll("__typename", ""),
-              variables: {
-                input: {
-                  id: registrationRecord.id,
-                  ...modelFieldsToSave,
-                },
+          await client.graphql({
+            query: updateRegistration.replaceAll("__typename", ""),
+            variables: {
+              input: {
+                id: registrationRecord.id,
+                ...modelFields,
               },
-            })
-          );
-          await Promise.all(promises);
+            },
+          });
           if (onSuccess) {
             onSuccess(modelFields);
           }
@@ -575,8 +452,8 @@ export default function RegistrationUpdateForm(props) {
               dateCreation: value,
               dateStart,
               dateEnd,
-              FKClients,
-              FKRooms,
+              PKClient,
+              PKRoom,
             };
             const result = onChange(modelFields);
             value = result?.dateCreation ?? value;
@@ -604,8 +481,8 @@ export default function RegistrationUpdateForm(props) {
               dateCreation,
               dateStart: value,
               dateEnd,
-              FKClients,
-              FKRooms,
+              PKClient,
+              PKRoom,
             };
             const result = onChange(modelFields);
             value = result?.dateStart ?? value;
@@ -633,8 +510,8 @@ export default function RegistrationUpdateForm(props) {
               dateCreation,
               dateStart,
               dateEnd: value,
-              FKClients,
-              FKRooms,
+              PKClient,
+              PKRoom,
             };
             const result = onChange(modelFields);
             value = result?.dateEnd ?? value;
@@ -650,167 +527,191 @@ export default function RegistrationUpdateForm(props) {
         {...getOverrideProps(overrides, "dateEnd")}
       ></TextField>
       <ArrayField
+        lengthLimit={1}
         onChange={async (items) => {
-          let values = items;
+          let value = items[0];
           if (onChange) {
             const modelFields = {
               dateCreation,
               dateStart,
               dateEnd,
-              FKClients: values,
-              FKRooms,
+              PKClient: value,
+              PKRoom,
             };
             const result = onChange(modelFields);
-            values = result?.FKClients ?? values;
+            value = result?.PKClient ?? value;
           }
-          setFKClients(values);
-          setCurrentFKClientsValue(undefined);
-          setCurrentFKClientsDisplayValue("");
+          setPKClient(value);
+          setCurrentPKClientValue(undefined);
         }}
-        currentFieldValue={currentFKClientsValue}
-        label={"Fk clients"}
-        items={FKClients}
-        hasError={errors?.FKClients?.hasError}
+        currentFieldValue={currentPKClientValue}
+        label={"Pk client"}
+        items={PKClient ? [PKClient] : []}
+        hasError={errors?.PKClient?.hasError}
         runValidationTasks={async () =>
-          await runValidationTasks("FKClients", currentFKClientsValue)
+          await runValidationTasks("PKClient", currentPKClientValue)
         }
-        errorMessage={errors?.FKClients?.errorMessage}
-        getBadgeText={getDisplayValue.FKClients}
-        setFieldValue={(model) => {
-          setCurrentFKClientsDisplayValue(
-            model ? getDisplayValue.FKClients(model) : ""
+        errorMessage={errors?.PKClient?.errorMessage}
+        getBadgeText={(value) =>
+          value
+            ? getDisplayValue.PKClient(
+                pKClientRecords.find((r) => r.id === value) ??
+                  selectedPKClientRecords.find((r) => r.id === value)
+              )
+            : ""
+        }
+        setFieldValue={(value) => {
+          setCurrentPKClientDisplayValue(
+            value
+              ? getDisplayValue.PKClient(
+                  pKClientRecords.find((r) => r.id === value) ??
+                    selectedPKClientRecords.find((r) => r.id === value)
+                )
+              : ""
           );
-          setCurrentFKClientsValue(model);
+          setCurrentPKClientValue(value);
+          const selectedRecord = pKClientRecords.find((r) => r.id === value);
+          if (selectedRecord) {
+            setSelectedPKClientRecords([selectedRecord]);
+          }
         }}
-        inputFieldRef={FKClientsRef}
+        inputFieldRef={PKClientRef}
         defaultFieldValue={""}
       >
         <Autocomplete
-          label="Fk clients"
-          isRequired={false}
+          label="Pk client"
+          isRequired={true}
           isReadOnly={false}
           placeholder="Search Client"
-          value={currentFKClientsDisplayValue}
-          options={FKClientsRecords.filter(
-            (r) => !FKClientsIdSet.has(getIDValue.FKClients?.(r))
-          ).map((r) => ({
-            id: getIDValue.FKClients?.(r),
-            label: getDisplayValue.FKClients?.(r),
-          }))}
-          isLoading={FKClientsLoading}
+          value={currentPKClientDisplayValue}
+          options={pKClientRecords
+            .filter(
+              (r, i, arr) =>
+                arr.findIndex((member) => member?.id === r?.id) === i
+            )
+            .map((r) => ({
+              id: r?.id,
+              label: getDisplayValue.PKClient?.(r),
+            }))}
+          isLoading={PKClientLoading}
           onSelect={({ id, label }) => {
-            setCurrentFKClientsValue(
-              FKClientsRecords.find((r) =>
-                Object.entries(JSON.parse(id)).every(
-                  ([key, value]) => r[key] === value
-                )
-              )
-            );
-            setCurrentFKClientsDisplayValue(label);
-            runValidationTasks("FKClients", label);
+            setCurrentPKClientValue(id);
+            setCurrentPKClientDisplayValue(label);
+            runValidationTasks("PKClient", label);
           }}
           onClear={() => {
-            setCurrentFKClientsDisplayValue("");
+            setCurrentPKClientDisplayValue("");
           }}
+          defaultValue={PKClient}
           onChange={(e) => {
             let { value } = e.target;
-            fetchFKClientsRecords(value);
-            if (errors.FKClients?.hasError) {
-              runValidationTasks("FKClients", value);
+            fetchPKClientRecords(value);
+            if (errors.PKClient?.hasError) {
+              runValidationTasks("PKClient", value);
             }
-            setCurrentFKClientsDisplayValue(value);
-            setCurrentFKClientsValue(undefined);
+            setCurrentPKClientDisplayValue(value);
+            setCurrentPKClientValue(undefined);
           }}
-          onBlur={() =>
-            runValidationTasks("FKClients", currentFKClientsDisplayValue)
-          }
-          errorMessage={errors.FKClients?.errorMessage}
-          hasError={errors.FKClients?.hasError}
-          ref={FKClientsRef}
+          onBlur={() => runValidationTasks("PKClient", currentPKClientValue)}
+          errorMessage={errors.PKClient?.errorMessage}
+          hasError={errors.PKClient?.hasError}
+          ref={PKClientRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, "FKClients")}
+          {...getOverrideProps(overrides, "PKClient")}
         ></Autocomplete>
       </ArrayField>
       <ArrayField
+        lengthLimit={1}
         onChange={async (items) => {
-          let values = items;
+          let value = items[0];
           if (onChange) {
             const modelFields = {
               dateCreation,
               dateStart,
               dateEnd,
-              FKClients,
-              FKRooms: values,
+              PKClient,
+              PKRoom: value,
             };
             const result = onChange(modelFields);
-            values = result?.FKRooms ?? values;
+            value = result?.PKRoom ?? value;
           }
-          setFKRooms(values);
-          setCurrentFKRoomsValue(undefined);
-          setCurrentFKRoomsDisplayValue("");
+          setPKRoom(value);
+          setCurrentPKRoomValue(undefined);
         }}
-        currentFieldValue={currentFKRoomsValue}
-        label={"Fk rooms"}
-        items={FKRooms}
-        hasError={errors?.FKRooms?.hasError}
+        currentFieldValue={currentPKRoomValue}
+        label={"Pk room"}
+        items={PKRoom ? [PKRoom] : []}
+        hasError={errors?.PKRoom?.hasError}
         runValidationTasks={async () =>
-          await runValidationTasks("FKRooms", currentFKRoomsValue)
+          await runValidationTasks("PKRoom", currentPKRoomValue)
         }
-        errorMessage={errors?.FKRooms?.errorMessage}
-        getBadgeText={getDisplayValue.FKRooms}
-        setFieldValue={(model) => {
-          setCurrentFKRoomsDisplayValue(
-            model ? getDisplayValue.FKRooms(model) : ""
+        errorMessage={errors?.PKRoom?.errorMessage}
+        getBadgeText={(value) =>
+          value
+            ? getDisplayValue.PKRoom(
+                pKRoomRecords.find((r) => r.id === value) ??
+                  selectedPKRoomRecords.find((r) => r.id === value)
+              )
+            : ""
+        }
+        setFieldValue={(value) => {
+          setCurrentPKRoomDisplayValue(
+            value
+              ? getDisplayValue.PKRoom(
+                  pKRoomRecords.find((r) => r.id === value) ??
+                    selectedPKRoomRecords.find((r) => r.id === value)
+                )
+              : ""
           );
-          setCurrentFKRoomsValue(model);
+          setCurrentPKRoomValue(value);
+          const selectedRecord = pKRoomRecords.find((r) => r.id === value);
+          if (selectedRecord) {
+            setSelectedPKRoomRecords([selectedRecord]);
+          }
         }}
-        inputFieldRef={FKRoomsRef}
+        inputFieldRef={PKRoomRef}
         defaultFieldValue={""}
       >
         <Autocomplete
-          label="Fk rooms"
-          isRequired={false}
+          label="Pk room"
+          isRequired={true}
           isReadOnly={false}
           placeholder="Search Room"
-          value={currentFKRoomsDisplayValue}
-          options={FKRoomsRecords.filter(
-            (r) => !FKRoomsIdSet.has(getIDValue.FKRooms?.(r))
-          ).map((r) => ({
-            id: getIDValue.FKRooms?.(r),
-            label: getDisplayValue.FKRooms?.(r),
-          }))}
-          isLoading={FKRoomsLoading}
+          value={currentPKRoomDisplayValue}
+          options={pKRoomRecords
+            .filter(
+              (r, i, arr) =>
+                arr.findIndex((member) => member?.id === r?.id) === i
+            )
+            .map((r) => ({
+              id: r?.id,
+              label: getDisplayValue.PKRoom?.(r),
+            }))}
+          isLoading={PKRoomLoading}
           onSelect={({ id, label }) => {
-            setCurrentFKRoomsValue(
-              FKRoomsRecords.find((r) =>
-                Object.entries(JSON.parse(id)).every(
-                  ([key, value]) => r[key] === value
-                )
-              )
-            );
-            setCurrentFKRoomsDisplayValue(label);
-            runValidationTasks("FKRooms", label);
+            setCurrentPKRoomValue(id);
+            setCurrentPKRoomDisplayValue(label);
+            runValidationTasks("PKRoom", label);
           }}
           onClear={() => {
-            setCurrentFKRoomsDisplayValue("");
+            setCurrentPKRoomDisplayValue("");
           }}
+          defaultValue={PKRoom}
           onChange={(e) => {
             let { value } = e.target;
-            fetchFKRoomsRecords(value);
-            if (errors.FKRooms?.hasError) {
-              runValidationTasks("FKRooms", value);
+            fetchPKRoomRecords(value);
+            if (errors.PKRoom?.hasError) {
+              runValidationTasks("PKRoom", value);
             }
-            setCurrentFKRoomsDisplayValue(value);
-            setCurrentFKRoomsValue(undefined);
+            setCurrentPKRoomDisplayValue(value);
+            setCurrentPKRoomValue(undefined);
           }}
-          onBlur={() =>
-            runValidationTasks("FKRooms", currentFKRoomsDisplayValue)
-          }
-          errorMessage={errors.FKRooms?.errorMessage}
-          hasError={errors.FKRooms?.hasError}
-          ref={FKRoomsRef}
+          onBlur={() => runValidationTasks("PKRoom", currentPKRoomValue)}
+          errorMessage={errors.PKRoom?.errorMessage}
+          hasError={errors.PKRoom?.hasError}
+          ref={PKRoomRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, "FKRooms")}
+          {...getOverrideProps(overrides, "PKRoom")}
         ></Autocomplete>
       </ArrayField>
       <Flex

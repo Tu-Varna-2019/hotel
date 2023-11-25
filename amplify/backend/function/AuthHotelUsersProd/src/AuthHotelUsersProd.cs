@@ -41,10 +41,6 @@ namespace AuthHotelUsersProd
             // Access payload
             var userAttributes = input["request"]["userAttributes"].ToObject<Dictionary<string, string>>();
 
-            // PreSignUp_SignUp
-            // var triggerSource = input["triggerSource"].ToString();
-
-            // Access custom:SocialSecurityNumber and custom:Passport
             var socialSecurityNumber = userAttributes["custom:SocialSecurityNumber"];
             var passport = userAttributes["custom:Passport"];
             context.Logger.LogLine($"Social Security Number: {socialSecurityNumber}");
@@ -64,6 +60,10 @@ namespace AuthHotelUsersProd
 
         private void ValidateEGN(string egn, ILambdaContext context)
         {
+            if (egn.Length != 10)
+            {
+                throw new ArgumentException("Invalid EGN. Length is not valid.");
+            }
             // year, month, and day, eg "88-08-25"
             int year = int.Parse(egn.Substring(0, 2));
             int month = int.Parse(egn.Substring(2, 2));
@@ -85,13 +85,11 @@ namespace AuthHotelUsersProd
                 throw new ArgumentException("Invalid EGN. Month is not valid.");
             }
 
-            // Validate date
             if (!IsValidDate(year, month, day))
             {
                 throw new ArgumentException("Invalid EGN. Date is not valid.");
             }
 
-            // Calculate checksum
             int[] weights = { 2, 4, 8, 5, 10, 9, 7, 3, 6 };
             int checksum = egn.Substring(0, 9).Select((digit, index) => weights[index] * int.Parse(digit.ToString())).Sum() % 11;
             checksum = checksum == 10 ? 0 : checksum;
@@ -103,8 +101,6 @@ namespace AuthHotelUsersProd
             }
             context.Logger.LogLine($"EGN is valid: \n Year: {year} \n Month: {month} \n Day: {day}");
         }
-
-        // Helper function to validate the date
         private bool IsValidDate(int year, int month, int day)
         {
             try

@@ -36,7 +36,7 @@ export default function FigHome(props) {
       {...rest}
     >
       <Flex
-        gap="40px"
+        gap="140px"
         direction="row"
         width="1920px"
         height="unset"
@@ -60,122 +60,76 @@ export default function FigHome(props) {
           shrink="0"
           position="relative"
           padding="0px 0px 0px 0px"
-          color="brand"
+          color="neutral"
           {...getOverrideProps(overrides, "LogoWithText")}
         ></LogoWithText>
-        <Flex
-          gap="120px"
-          direction="row"
-          width="851px"
+        <Text
+          fontFamily="Inter"
+          fontSize="16px"
+          fontWeight="400"
+          color="rgba(92,102,112,1)"
+          lineHeight="24px"
+          textAlign="left"
+          display="block"
+          direction="column"
+          justifyContent="unset"
+          width="unset"
           height="unset"
-          justifyContent="flex-end"
-          alignItems="center"
+          gap="unset"
+          alignItems="unset"
           shrink="0"
           position="relative"
-          padding="0px 0px 0px 83px"
-          {...getOverrideProps(overrides, "Frame 32138621474")}
-        >
-          <Text
-            fontFamily="Inter"
-            fontSize="16px"
-            fontWeight="400"
-            color="rgba(92,102,112,1)"
-            lineHeight="24px"
-            textAlign="left"
-            display="block"
-            direction="column"
-            justifyContent="unset"
-            width="unset"
-            height="unset"
-            gap="unset"
-            alignItems="unset"
-            shrink="0"
-            position="relative"
-            padding="0px 0px 0px 0px"
-            whiteSpace="pre-wrap"
-            children="Book a room"
-            {...getOverrideProps(overrides, "text_book_a_room38621475")}
-          ></Text>
-          <Text
-            fontFamily="Inter"
-            fontSize="16px"
-            fontWeight="400"
-            color="rgba(92,102,112,1)"
-            lineHeight="24px"
-            textAlign="left"
-            display="block"
-            direction="column"
-            justifyContent="unset"
-            width="unset"
-            height="unset"
-            gap="unset"
-            alignItems="unset"
-            shrink="0"
-            position="relative"
-            padding="0px 0px 0px 0px"
-            whiteSpace="pre-wrap"
-            children="Inquery"
-            {...getOverrideProps(overrides, "text_inquery")}
-          ></Text>
-          <Text
-            fontFamily="Inter"
-            fontSize="16px"
-            fontWeight="400"
-            color="rgba(92,102,112,1)"
-            lineHeight="24px"
-            textAlign="left"
-            display="block"
-            direction="column"
-            justifyContent="unset"
-            width="unset"
-            height="unset"
-            gap="unset"
-            alignItems="unset"
-            shrink="0"
-            position="relative"
-            padding="0px 0px 0px 0px"
-            whiteSpace="pre-wrap"
-            children="Create"
-            {...getOverrideProps(overrides, "text_create")}
-          ></Text>
-          <Text
-            fontFamily="Inter"
-            fontSize="16px"
-            fontWeight="400"
-            color="rgba(92,102,112,1)"
-            lineHeight="24px"
-            textAlign="left"
-            display="block"
-            direction="column"
-            justifyContent="unset"
-            width="unset"
-            height="unset"
-            gap="unset"
-            alignItems="unset"
-            shrink="0"
-            position="relative"
-            padding="0px 0px 0px 0px"
-            whiteSpace="pre-wrap"
-            children="Update"
-            {...getOverrideProps(overrides, "text_book_a_room3887580")}
-          ></Text>
-        </Flex>
-        <SelectField
-          width="172px"
+          padding="0px 0px 0px 0px"
+          whiteSpace="pre-wrap"
+          children="Update"
+          {...getOverrideProps(overrides, "text_update")}
+        ></Text>
+        <Text
+          fontFamily="Inter"
+          fontSize="16px"
+          fontWeight="400"
+          color="rgba(92,102,112,1)"
+          lineHeight="24px"
+          textAlign="left"
+          display="block"
+          direction="column"
+          justifyContent="unset"
+          width="unset"
           height="unset"
-          placeholder=" "
+          gap="unset"
+          alignItems="unset"
           shrink="0"
-          boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-          size="small"
-          isDisabled={false}
-          labelHidden={true}
-          variation="quiet"
-          {...getOverrideProps(overrides, "select_field_update")}
-        ></SelectField>
+          position="relative"
+          padding="0px 0px 0px 0px"
+          whiteSpace="pre-wrap"
+          children="Inquery"
+          {...getOverrideProps(overrides, "text_inquery")}
+        ></Text>
+        <Text
+          fontFamily="Inter"
+          fontSize="16px"
+          fontWeight="400"
+          color="rgba(92,102,112,1)"
+          lineHeight="24px"
+          textAlign="left"
+          display="block"
+          direction="column"
+          justifyContent="unset"
+          width="unset"
+          height="unset"
+          gap="unset"
+          alignItems="unset"
+          shrink="0"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          whiteSpace="pre-wrap"
+          children="Create"
+          {...getOverrideProps(overrides, "text_create")}
+        ></Text>
         <Flex
           gap="0"
           direction="row"
-          width="613px"
+          width="808px"
           height="unset"
           justifyContent="flex-end"
           alignItems="center"
@@ -183,7 +137,7 @@ export default function FigHome(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Frame 32138621479")}
+          {...getOverrideProps(overrides, "Frame 321")}
         >
           <Button
             width="111px"
@@ -193,8 +147,8 @@ export default function FigHome(props) {
             size="default"
             isDisabled={false}
             variation="primary"
-            children="Settings"
-            {...getOverrideProps(overrides, "button_settings")}
+            children="Log out"
+            {...getOverrideProps(overrides, "button_logout")}
           ></Button>
           <Text
             fontFamily="Itim"
@@ -294,8 +248,8 @@ export default function FigHome(props) {
         alignItems="unset"
         justifyContent="unset"
         position="absolute"
-        top="34px"
-        left="548px"
+        top="36px"
+        left="340px"
         padding="0px 0px 0px 0px"
         objectFit="cover"
         src="https://tuv-hotel-public-hosting.s3.eu-west-1.amazonaws.com/bed.png"
@@ -309,27 +263,12 @@ export default function FigHome(props) {
         alignItems="unset"
         justifyContent="unset"
         position="absolute"
-        top="34px"
-        left="767px"
+        top="37px"
+        left="551px"
         padding="0px 0px 0px 0px"
         objectFit="cover"
         src="https://tuv-hotel-public-hosting.s3.eu-west-1.amazonaws.com/glass.png"
         {...getOverrideProps(overrides, "img_inquery")}
-      ></Image>
-      <Image
-        width="24px"
-        height="24px"
-        display="block"
-        gap="unset"
-        alignItems="unset"
-        justifyContent="unset"
-        position="absolute"
-        top="34px"
-        left="937px"
-        padding="0px 0px 0px 0px"
-        objectFit="cover"
-        src="https://tuv-hotel-public-hosting.s3.eu-west-1.amazonaws.com/add.png"
-        {...getOverrideProps(overrides, "img_create")}
       ></Image>
       <Rating
         width="unset"
@@ -443,22 +382,22 @@ export default function FigHome(props) {
         height="unset"
         placeholder=" "
         position="absolute"
-        top="31px"
-        left="431px"
+        top="33px"
+        left="340px"
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         size="small"
         isDisabled={false}
         labelHidden={true}
         variation="quiet"
-        {...getOverrideProps(overrides, "select_field_book_a_room")}
+        {...getOverrideProps(overrides, "select_field_update")}
       ></SelectField>
       <SelectField
         width="172px"
         height="unset"
         placeholder=" "
         position="absolute"
-        top="30px"
-        left="638px"
+        top="33px"
+        left="545px"
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         size="small"
         isDisabled={false}
@@ -468,11 +407,11 @@ export default function FigHome(props) {
       ></SelectField>
       <SelectField
         width="172px"
-        height="unset"
+        height="32px"
         placeholder=" "
         position="absolute"
-        top="32px"
-        left="822px"
+        top="34px"
+        left="742px"
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         size="small"
         isDisabled={false}

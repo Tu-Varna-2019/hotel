@@ -1,6 +1,8 @@
 [
   {
-    "Action": [],
-    "Resource": []
+    "Action": ["dynamodb:*"],
+    "Resource": [
+      "arn:aws:dynamodb:eu-west-1:512617552494:table/Room-ozikw4dwr5afrcpwu5cimtumhe-prod"
+    ]
   }
 ]

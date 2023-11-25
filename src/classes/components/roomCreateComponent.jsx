@@ -49,6 +49,16 @@ export function RoomCreateComponent() {
     logger.info("Submitting room...");
     const highestRoomNumber = await getRoomWithHighestNumber();
     try {
+      // const apiResponse = await UtilsObject.apiCreateHotel({
+      //   DataModel: "Room",
+      //   Inputs: {
+      //     category: RoomObject.category,
+      //     floor: RoomObject.floor,
+      //     beds: RoomObject.beds,
+      //     price: RoomObject.price,
+      //   },
+      // });
+      // logger.info("apiResponse:", apiResponse);
       await client.graphql({
         query: createRoom,
         variables: {

@@ -26,14 +26,14 @@ export declare type ClientUpdateFormInputValues = {
     ssn?: string;
     address?: string;
     passport?: string;
-    PKRegistration?: string;
+    FKRegistrations?: any[];
 };
 export declare type ClientUpdateFormValidationValues = {
     name?: ValidationFunction<string>;
     ssn?: ValidationFunction<string>;
     address?: ValidationFunction<string>;
     passport?: ValidationFunction<string>;
-    PKRegistration?: ValidationFunction<string>;
+    FKRegistrations?: ValidationFunction<any>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type ClientUpdateFormOverridesProps = {
@@ -42,7 +42,7 @@ export declare type ClientUpdateFormOverridesProps = {
     ssn?: PrimitiveOverrideProps<TextFieldProps>;
     address?: PrimitiveOverrideProps<TextFieldProps>;
     passport?: PrimitiveOverrideProps<TextFieldProps>;
-    PKRegistration?: PrimitiveOverrideProps<AutocompleteProps>;
+    FKRegistrations?: PrimitiveOverrideProps<AutocompleteProps>;
 } & EscapeHatchProps;
 export declare type ClientUpdateFormProps = React.PropsWithChildren<{
     overrides?: ClientUpdateFormOverridesProps | undefined | null;

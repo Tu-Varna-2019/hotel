@@ -1,0 +1,38 @@
+{
+  "__typename": {
+    "Value": "Room",
+    "Type": 0
+  },
+  "updatedAt": {
+    "Value": "2023-11-23T18:54:30.707Z",
+    "Type": 0
+  },
+  "category": {
+    "Value": "Triple",
+    "Type": 0
+  },
+  "createdAt": {
+    "Value": "2023-11-22T19:04:17.961Z",
+    "Type": 0
+  },
+  "roomNumber": {
+    "Value": "4",
+    "Type": 1
+  },
+  "id": {
+    "Value": "ad76f4ad-05c6-4eb6-a90a-44e5d9acd3a0",
+    "Type": 0
+  },
+  "price": {
+    "Value": "2",
+    "Type": 1
+  },
+  "beds": {
+    "Value": "3",
+    "Type": 1
+  },
+  "floor": {
+    "Value": "3",
+    "Type": 1
+  }
+}

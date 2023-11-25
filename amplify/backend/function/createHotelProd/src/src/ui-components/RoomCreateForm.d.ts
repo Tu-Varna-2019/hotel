@@ -27,7 +27,7 @@ export declare type RoomCreateFormInputValues = {
     floor?: number;
     beds?: number;
     price?: number;
-    PKRegistration?: string;
+    FKRegistrations?: any[];
 };
 export declare type RoomCreateFormValidationValues = {
     roomNumber?: ValidationFunction<number>;
@@ -35,7 +35,7 @@ export declare type RoomCreateFormValidationValues = {
     floor?: ValidationFunction<number>;
     beds?: ValidationFunction<number>;
     price?: ValidationFunction<number>;
-    PKRegistration?: ValidationFunction<string>;
+    FKRegistrations?: ValidationFunction<any>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type RoomCreateFormOverridesProps = {
@@ -45,7 +45,7 @@ export declare type RoomCreateFormOverridesProps = {
     floor?: PrimitiveOverrideProps<TextFieldProps>;
     beds?: PrimitiveOverrideProps<TextFieldProps>;
     price?: PrimitiveOverrideProps<TextFieldProps>;
-    PKRegistration?: PrimitiveOverrideProps<AutocompleteProps>;
+    FKRegistrations?: PrimitiveOverrideProps<AutocompleteProps>;
 } & EscapeHatchProps;
 export declare type RoomCreateFormProps = React.PropsWithChildren<{
     overrides?: RoomCreateFormOverridesProps | undefined | null;

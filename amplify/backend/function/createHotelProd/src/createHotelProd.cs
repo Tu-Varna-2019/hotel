@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
+using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.DocumentModel;
 
 using Amazon.Lambda.Core;
 
@@ -22,59 +24,6 @@ namespace createHotelProd
         /// Change this to match whatever event you intend to send, or
         /// use one of the Amazon.Lambda.XXXEvents NuGet packages
         /// </summary>
-        /// 
-
-        public interface IInputs { }
-
-        public class RoomInputs : IInputs
-        {
-            public string category { get; set; }
-            public int floor { get; set; }
-            public int beds { get; set; }
-            public string price { get; set; }
-            public string PKRegistration { get; set; }
-        }
-
-        public class ClientInputs : IInputs
-        {
-            public string name { get; set; }
-            public string ssn { get; set; }
-            public string address { get; set; }
-            public string passport { get; set; }
-            public string PKRegistration { get; set; }
-        }
-
-        public class RegistrationInputs : IInputs
-        {
-            public string dateCreation { get; set; }
-            public string dateStart { get; set; }
-            public string dateEnd { get; set; }
-            public string FKClients { get; set; }
-            public string FKRooms { get; set; }
-        }
-
-        public class Message
-        {
-            public string DataModel { get; set; }
-            public RoomInputs Inputs { get; set; }
-        }
-
-
-
-        public class LambdaEventBody
-        {
-            public string path { get; set; }
-            public string DataModel { get; set; }
-            public JObject Inputs { get; set; } // Temporarily hold the JSON as JObject
-        }
-
-
-        public class LambdaEvent
-        {
-            public string version { get; set; }
-            public string routeKey { get; set; }
-            public string body { get; set; }
-        }
 
 
         // If you rename this function, you will need to update the invocation shim
@@ -84,8 +33,9 @@ namespace createHotelProd
         {
             context.Logger.LogLine($"Received data: {Newtonsoft.Json.JsonConvert.SerializeObject(input)}");
 
-            // Parse the body JSON
+            // Parse body JSON
             LambdaEventBody eventBody = null;
+
             try
             {
                 eventBody = Newtonsoft.Json.JsonConvert.DeserializeObject<LambdaEventBody>(input.body);
@@ -96,54 +46,66 @@ namespace createHotelProd
                 return new { error = "Error parsing body JSON" };
             }
 
-            // Conditional Deserialization
-            dynamic inputs = null; // Use dynamic to hold the deserialized inputs
-            switch (eventBody.DataModel)
+            if (eventBody?.Message == null)
+            {
+                context.Logger.LogLine("Message is null");
+                return new { error = "Message is null" };
+            }
+
+            dynamic inputs = null;
+            switch (eventBody.Message.DataModel)
             {
                 case "Room":
-                    inputs = eventBody.Inputs.ToObject<RoomInputs>();
+                    inputs = eventBody.Message.Inputs.ToObject<RoomInputs>();
                     break;
                 case "Client":
-                    inputs = eventBody.Inputs.ToObject<ClientInputs>();
+                    inputs = eventBody.Message.Inputs.ToObject<ClientInputs>();
                     break;
                 case "Registration":
-                    inputs = eventBody.Inputs.ToObject<RegistrationInputs>();
+                    inputs = eventBody.Message.Inputs.ToObject<RegistrationInputs>();
                     break;
                 default:
                     context.Logger.LogLine("Unknown DataModel");
                     return new { error = "Unknown DataModel" };
             }
 
-            // Now you can access properties from inputs based on its actual type
-            if (inputs != null)
+            try
             {
-                // Example: Logging based on DataModel
-                if (eventBody.DataModel == "Room")
+                AmazonDynamoDBService dynamoDBCLient = new AmazonDynamoDBService();
+                var tableName = "Room-ozikw4dwr5afrcpwu5cimtumhe-prod";
+                var keyName = "id";
+
+                if (inputs != null)
                 {
-                    var roomInputs = inputs as RoomInputs;
-                    context.Logger.LogLine($"Category: {roomInputs.category}");
-                    //... process other RoomInputs data
+                    if (eventBody.Message.DataModel == "Room")
+                    {
+                        var roomInputs = inputs as RoomInputs;
+                        var keyValue = roomInputs.id;
+                        context.Logger.LogLine($"Category: {roomInputs.category} \n ID: {keyValue}");
+
+                        var userDocument = await dynamoDBCLient.GetItemAsync(tableName, keyName, keyValue);
+                        context.Logger.LogLine($"User Document: {userDocument.ToJson()}");
+
+                        return userDocument;
+                    }
+                    else if (eventBody.Message.DataModel == "Client")
+                    {
+                        var clientInputs = inputs as ClientInputs;
+                        context.Logger.LogLine($"SSN: {clientInputs.ssn}");
+                    }
+                    else if (eventBody.Message.DataModel == "Registration")
+                    {
+                        var registrationInputs = inputs as RegistrationInputs;
+                        context.Logger.LogLine($"dateCreation: {registrationInputs.dateCreation}");
+                    }
                 }
-                else if (eventBody.DataModel == "Client")
-                {
-                    var clientInputs = inputs as ClientInputs;
-                    context.Logger.LogLine($"SSN: {clientInputs.ssn}");
-                }
-                else if (eventBody.DataModel == "Registration")
-                {
-                    var registrationInputs = inputs as RegistrationInputs;
-                    context.Logger.LogLine($"dateCreation: {registrationInputs.dateCreation}");
-                }
+                return null;
             }
-
-            return new
+            catch (Exception ex)
             {
-                key1 = "someValue", // Example response, modify as needed
-                                    //...
-            };
+                context.Logger.LogLine($"Error fetching data from DynamoDB: {ex.Message}");
+                throw;
+            }
         }
-
-
-
     }
 }

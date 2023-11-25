@@ -70,7 +70,7 @@ export default function FigCreateRoom(props) {
       ></Text>
       <View
         width="729px"
-        height="819px"
+        height="755px"
         display="block"
         gap="unset"
         alignItems="unset"
@@ -87,7 +87,7 @@ export default function FigCreateRoom(props) {
         width="142px"
         height="63px"
         position="absolute"
-        top="742px"
+        top="674px"
         left="960px"
         size="default"
         isDisabled={false}
@@ -99,7 +99,7 @@ export default function FigCreateRoom(props) {
         width="142px"
         height="63px"
         position="absolute"
-        top="742px"
+        top="674px"
         left="779px"
         backgroundColor="rgba(92,102,112,1)"
         size="default"
@@ -111,56 +111,39 @@ export default function FigCreateRoom(props) {
       <SelectField
         width="323px"
         height="unset"
-        label="Registration"
-        placeholder=" "
-        position="absolute"
-        top="501px"
-        left="792px"
-        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-        size="default"
-        isDisabled={false}
-        labelHidden={false}
-        variation="default"
-        {...getOverrideProps(overrides, "select_field_registration")}
-      ></SelectField>
-      <SelectField
-        width="323px"
-        height="unset"
         label="Category"
         placeholder=" "
         position="absolute"
-        top="174px"
-        left="794px"
+        top="206px"
+        left="799px"
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         size="default"
         isDisabled={false}
-        labelHidden={false}
+        labelHidden={true}
         variation="default"
         {...getOverrideProps(overrides, "selectfield_category")}
       ></SelectField>
       <StepperField
-        width="unset"
         height="unset"
         label="Floor"
         position="absolute"
-        top="283px"
+        top="317px"
         left="799px"
         size="default"
         isDisabled={false}
-        labelHidden={false}
+        labelHidden={true}
         variation="default"
         {...getOverrideProps(overrides, "stepperfield_floor")}
       ></StepperField>
       <StepperField
-        width="unset"
         height="unset"
         label="Beds"
         position="absolute"
-        top="386px"
-        left="802px"
+        top="428px"
+        left="799px"
         size="default"
         isDisabled={false}
-        labelHidden={false}
+        labelHidden={true}
         variation="default"
         {...getOverrideProps(overrides, "stepperfield_beds")}
       ></StepperField>
@@ -170,14 +153,102 @@ export default function FigCreateRoom(props) {
         label="Price"
         placeholder="Add"
         position="absolute"
-        top="610px"
+        top="533px"
         left="794px"
         size="default"
         isDisabled={false}
-        labelHidden={false}
+        labelHidden={true}
         variation="default"
         {...getOverrideProps(overrides, "textfield_price")}
       ></TextField>
+      <Text
+        fontFamily="Inter"
+        fontSize="16px"
+        fontWeight="400"
+        color="rgba(255,255,255,1)"
+        lineHeight="24px"
+        textAlign="left"
+        display="block"
+        direction="column"
+        justifyContent="unset"
+        width="103px"
+        height="51px"
+        gap="unset"
+        alignItems="unset"
+        position="absolute"
+        top="195px"
+        left="682px"
+        padding="0px 0px 0px 0px"
+        whiteSpace="pre-wrap"
+        children="Category"
+        {...getOverrideProps(overrides, "Category")}
+      ></Text>
+      <Text
+        fontFamily="Inter"
+        fontSize="16px"
+        fontWeight="400"
+        color="rgba(255,255,255,1)"
+        lineHeight="24px"
+        textAlign="left"
+        display="block"
+        direction="column"
+        justifyContent="unset"
+        width="103px"
+        height="51px"
+        gap="unset"
+        alignItems="unset"
+        position="absolute"
+        top="303px"
+        left="682px"
+        padding="0px 0px 0px 0px"
+        whiteSpace="pre-wrap"
+        children="Floor"
+        {...getOverrideProps(overrides, "Floor")}
+      ></Text>
+      <Text
+        fontFamily="Inter"
+        fontSize="16px"
+        fontWeight="400"
+        color="rgba(255,255,255,1)"
+        lineHeight="24px"
+        textAlign="left"
+        display="block"
+        direction="column"
+        justifyContent="unset"
+        width="103px"
+        height="51px"
+        gap="unset"
+        alignItems="unset"
+        position="absolute"
+        top="414px"
+        left="682px"
+        padding="0px 0px 0px 0px"
+        whiteSpace="pre-wrap"
+        children="Beds"
+        {...getOverrideProps(overrides, "Beds")}
+      ></Text>
+      <Text
+        fontFamily="Inter"
+        fontSize="16px"
+        fontWeight="400"
+        color="rgba(255,255,255,1)"
+        lineHeight="24px"
+        textAlign="left"
+        display="block"
+        direction="column"
+        justifyContent="unset"
+        width="103px"
+        height="51px"
+        gap="unset"
+        alignItems="unset"
+        position="absolute"
+        top="522px"
+        left="671px"
+        padding="0px 0px 0px 0px"
+        whiteSpace="pre-wrap"
+        children="Price"
+        {...getOverrideProps(overrides, "Price")}
+      ></Text>
     </View>
   );
 }

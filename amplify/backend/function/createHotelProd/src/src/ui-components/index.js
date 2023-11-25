@@ -15,6 +15,7 @@ export { default as ContactUs } from "./ContactUs";
 export { default as DataRow } from "./DataRow";
 export { default as EditProfile } from "./EditProfile";
 export { default as Features2x2 } from "./Features2x2";
+export { default as FigBlank } from "./FigBlank";
 export { default as FigCreateRegistration } from "./FigCreateRegistration";
 export { default as FigCreateRoom } from "./FigCreateRoom";
 export { default as FigCreateUser } from "./FigCreateUser";
